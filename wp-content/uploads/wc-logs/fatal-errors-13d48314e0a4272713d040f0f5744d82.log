@@ -1,0 +1,53 @@
+2017-10-18T12:58:03+00:00 CRITICAL Uncaught Exception: Invalid product. in C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\data-stores\class-wc-product-data-store-cpt.php:136
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-data-store.php(147): WC_Product_Data_Store_CPT->read(Object(WC_Product))
+#1 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\abstracts\abstract-wc-product.php(126): WC_Data_Store->read(Object(WC_Product))
+#2 C:\wamp64\www\shop\wp-content\plugins\advanced-woo-search\includes\class-aws-search.php(273): WC_Product->__construct(884)
+#3 C:\wamp64\www\shop\wp-content\plugins\advanced-woo-search\includes\class-aws-search.php(83): AWS_Search->get_products(Array)
+#4 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): AWS_Search->action_callback('')
+#5 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(323): WP_Hook->apply_filters('', Array)
+#6 C:\wamp64\www\shop\wp-includes\plugin.php(453): WP_Hook->do_action(Array)
+#7 C:\wamp64\www\shop\wp-admin\admin-ajax.php(91): do_action(
+
+2017-10-18T12:58:03+00:00 CRITICAL Uncaught Exception: Invalid product. in C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\data-stores\class-wc-product-data-store-cpt.php:136
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-data-store.php(147): WC_Product_Data_Store_CPT->read(Object(WC_Product))
+#1 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\abstracts\abstract-wc-product.php(126): WC_Data_Store->read(Object(WC_Product))
+#2 C:\wamp64\www\shop\wp-content\plugins\advanced-woo-search\includes\class-aws-search.php(273): WC_Product->__construct(885)
+#3 C:\wamp64\www\shop\wp-content\plugins\advanced-woo-search\includes\class-aws-search.php(83): AWS_Search->get_products(Array)
+#4 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): AWS_Search->action_callback('')
+#5 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(323): WP_Hook->apply_filters('', Array)
+#6 C:\wamp64\www\shop\wp-includes\plugin.php(453): WP_Hook->do_action(Array)
+#7 C:\wamp64\www\shop\wp-admin\admin-ajax.php(91): do_action(
+
+2017-10-18T12:58:04+00:00 CRITICAL Uncaught Exception: Invalid product. in C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\data-stores\class-wc-product-data-store-cpt.php:136
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-data-store.php(147): WC_Product_Data_Store_CPT->read(Object(WC_Product))
+#1 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\abstracts\abstract-wc-product.php(126): WC_Data_Store->read(Object(WC_Product))
+#2 C:\wamp64\www\shop\wp-content\plugins\advanced-woo-search\includes\class-aws-search.php(273): WC_Product->__construct(888)
+#3 C:\wamp64\www\shop\wp-content\plugins\advanced-woo-search\includes\class-aws-search.php(83): AWS_Search->get_products(Array)
+#4 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): AWS_Search->action_callback('')
+#5 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(323): WP_Hook->apply_filters('', Array)
+#6 C:\wamp64\www\shop\wp-includes\plugin.php(453): WP_Hook->do_action(Array)
+#7 C:\wamp64\www\shop\wp-admin\admin-ajax.php(91): do_action(
+
+2017-10-18T13:56:23+00:00 CRITICAL Uncaught Error: Call to undefined function the_brand_image() in C:\wamp64\www\shop\wp-content\themes\toyshop\search-filter\results.php:29
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\search-filter-pro\public\includes\class-search-filter-get-results.php(282): include()
+#1 C:\wamp64\www\shop\wp-content\plugins\search-filter-pro\public\includes\class-search-filter-display-results.php(38): Search_Filter_Get_Results->the_results('1772')
+#2 C:\wamp64\www\shop\wp-content\plugins\search-filter-pro\public\includes\class-search-filter-display-shortcode.php(553): Search_Filter_Display_Results->output_results('1772', Array)
+#3 C:\wamp64\www\shop\wp-includes\shortcodes.php(345): Search_Filter_Display_Shortcode->display_shortcode(Array, '', 'searchandfilter')
+#4 [internal function]: do_shortcode_tag(Array)
+#5 C:\wamp64\www\shop\wp-includes\shortcodes.php(223): preg_replace_callback('/\\[(\\[?)(search...', 'do_shortcode_ta...', '[searchandfilte...')
+#6 C:\wamp64\www\shop\wp-content\themes\toyshop\tpl-filter.php(27)
+
+2017-10-18T14:26:07+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Query as array in C:\wamp64\www\shop\wp-content\themes\toyshop\search-filter\results.php:30
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\search-filter-pro\public\includes\class-search-filter-get-results.php(282): include()
+#1 C:\wamp64\www\shop\wp-content\plugins\search-filter-pro\public\includes\class-search-filter-display-results.php(38): Search_Filter_Get_Results->the_results('1772')
+#2 C:\wamp64\www\shop\wp-content\plugins\search-filter-pro\public\includes\class-search-filter-display-shortcode.php(553): Search_Filter_Display_Results->output_results('1772', Array)
+#3 C:\wamp64\www\shop\wp-includes\shortcodes.php(345): Search_Filter_Display_Shortcode->display_shortcode(Array, '', 'searchandfilter')
+#4 [internal function]: do_shortcode_tag(Array)
+#5 C:\wamp64\www\shop\wp-includes\shortcodes.php(223): preg_replace_callback('/\\[(\\[?)(search...', 'do_shortcode_ta...', '[searchandfilte...')
+#6 C:\wamp64\www\shop\wp-content\themes\toyshop\tpl-filter.php(30):
+

@@ -1,0 +1,15 @@
+# Env Config
+wp-config.php
+xxx.php
+.htaccess
+.idea
+.idea/*
+
+#DESIGN
+design
+
+
+wp-admin/google-web-fonts.txt
+
+#W3TC
+wp-content/cache/*
