@@ -162,22 +162,22 @@ function starter_widgets_init() {
 		'after_title'   => '</h4>',
 	) );
 	register_sidebar( array(
-			'name'          => esc_html__( 'Footer 4', 'starter' ),
-			'id'            => 'footer-4',
-			'description'   => '',
-			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</aside>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-	) )
-	;register_sidebar( array(
-			'name'          => esc_html__( 'Shop Sidebar', 'starter' ),
-			'id'            => 'shop-sidebar',
-			'description'   => '',
-			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</aside>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
+		'name'          => esc_html__( 'Footer 4', 'starter' ),
+		'id'            => 'footer-4',
+		'description'   => '',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => '</h4>',
+	) );
+	register_sidebar( array(
+		'name'          => esc_html__( 'Shop Sidebar', 'starter' ),
+		'id'            => 'shop-sidebar',
+		'description'   => '',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => '</h4>',
 	) );
 
 
@@ -277,7 +277,10 @@ require get_template_directory() . '/inc/theme_functions.php';
  * Include slick
  */
 require get_template_directory() . '/inc/slick/slick.php';
-
+/**
+ * Include Custom WooCommerce stuff
+ */
+require get_template_directory() . '/inc/lf-woocommerce.php';
 
 
 if( function_exists('acf_add_options_page') ) {

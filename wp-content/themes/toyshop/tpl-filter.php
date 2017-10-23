@@ -21,13 +21,13 @@ get_header( 'shop' ); ?>
 	?>
 
 
-	<div class="col-md-10 pull-right">
+	<div class="col-md-9 pull-right">
 		<div class="sort-filter-wrapper-lf product-order-wrapper borders">
 
 		</div>
 		<?php echo do_shortcode('[searchandfilter id="1772" show="results"]'); ?>
 	</div>
-	<div class="col-md-2 widget widget_search_filter_register_widget">
+	<div class="col-md-3 widget widget_search_filter_register_widget">
 		<h4 class="more-filters"><?php _e('Show Filters', 'shop') ?>    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
 		<?php echo do_shortcode('[searchandfilter id="1772"]'); ?>
 	</div>

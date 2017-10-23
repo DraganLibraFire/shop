@@ -141,4 +141,23 @@ jQuery(function($){
         $('.widget.widget_search_filter_register_widget form').slideToggle('slow');
         $(this).toggleClass('expand');
     });
+
+    $('.sf-field-taxonomy-product_cat > ul  li input').on('click', filterToggleSlide);
+
+    function filterToggleSlide(){
+        $(".searchandfilter ul li input").each(function(){
+            if( $(this).is(":checked") ){
+                $(this).parents('li').eq(0).find(' > .children').slideDown();
+            }
+            else{
+                if( $(this).parents('li').eq(0).find(' > .children input:checked').length == 0 ){
+                    $(this).parents('li').eq(0).find(' > .children').slideUp();
+                }
+
+            }
+        })
+    }
+
+    filterToggleSlide();
+
 });

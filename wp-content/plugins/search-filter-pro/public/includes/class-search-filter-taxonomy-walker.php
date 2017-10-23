@@ -164,7 +164,8 @@ class Search_Filter_Taxonomy_Walker extends Walker_Category {
 				}
 			}
 
-			$cat_name = esc_attr( $category->name );
+			$cat_name = str_replace("-", " ", $category->name);
+			$cat_name = esc_attr( ucfirst( trim( $cat_name ) ) );
 			$cat_id = esc_attr( $category->term_id );
 			$cat_name = apply_filters( 'list_cats', $cat_name, $category );
 			$cat_slug =  esc_attr( $category->slug );

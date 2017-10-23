@@ -516,7 +516,8 @@ body .select2-dropdown {
 .nav-links {
   text-align: center;
   border-bottom: 1px solid #b1b1b1;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  margin-bottom: 20px; }
   .nav-links a, .nav-links span {
     border: 1px solid #2c2c2c;
     display: inline-block;
@@ -1203,6 +1204,9 @@ input[type="checkbox"]:checked + span.search-check i:before {
     margin-top: -15px; }
     .widget.widget_search_filter_register_widget .searchandfilter li.sf-field-sort_order {
       display: none; }
+    .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children {
+      display: none;
+      margin-left: 20px; }
   .widget.widget_search_filter_register_widget .widget-title {
     font-family: "Prelo Bold";
     font-size: 18px;
@@ -1266,27 +1270,44 @@ input[type="checkbox"]:checked + span.search-check i:before {
 .widget.widget_product_categories .product-categories {
   padding-left: 0;
   margin-bottom: 30px; }
-  .widget.widget_product_categories .product-categories li ul {
-    padding-left: 0;
-    margin: 0; }
-  .widget.widget_product_categories .product-categories li a {
-    font-size: 14px;
-    line-height: 22px;
-    font-family: "Prelo Medium"; }
-  .widget.widget_product_categories .product-categories li.cat-parent > a {
-    font-family: "Prelo Bold";
-    font-size: 18px;
-    color: #856bc8;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    transition: all 0.4s;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -o-transition: all 0.4s; }
-    .widget.widget_product_categories .product-categories li.cat-parent > a:hover {
-      color: #4d3d7a; }
+  .widget.widget_product_categories .product-categories li {
+    position: relative;
+    padding: 5px 0; }
+    .widget.widget_product_categories .product-categories li .count {
+      color: #ff7800;
+      font-size: 14px;
+      display: inline-block;
+      max-width: 32%;
+      width: 100%;
+      right: -10px;
+      text-align: right;
+      vertical-align: middle; }
+    .widget.widget_product_categories .product-categories li ul {
+      padding-left: 0;
+      margin: 0; }
+    .widget.widget_product_categories .product-categories li a {
+      font-size: 14px;
+      font-family: "Prelo Medium";
+      color: #303030;
+      display: inline-block;
+      max-width: 66%;
+      width: 100%;
+      vertical-align: middle;
+      word-wrap: break-word; }
+    .widget.widget_product_categories .product-categories li.cat-parent > a {
+      font-family: "Prelo Bold";
+      font-size: 17px;
+      color: #856bc8;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 10px;
+      vertical-align: middle;
+      transition: all 0.4s;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s; }
+      .widget.widget_product_categories .product-categories li.cat-parent > a:hover {
+        color: #4d3d7a; }
 
 /*--------- Main content styling ---------------*/
 /*Home Hero*/
@@ -1405,7 +1426,8 @@ input[type="checkbox"]:checked + span.search-check i:before {
 /*home over ons*/
 .home-over-ons-wrapper {
   background-color: #f2f2f2;
-  padding: 30px 0; }
+  padding: 30px 0;
+  margin-top: 20px; }
   .home-over-ons-wrapper h1, .home-over-ons-wrapper h2, .home-over-ons-wrapper h3, .home-over-ons-wrapper h4, .home-over-ons-wrapper h5, .home-over-ons-wrapper h6 {
     margin-top: 0;
     margin-bottom: 7px; }
@@ -2796,6 +2818,7 @@ div.pp_woocommerce .pp_content_container {
     color: #ff7800;
     display: block; }
     .header-small-toggle-wrapper span {
+      cursor: pointer;
       display: inline-block; }
       .header-small-toggle-wrapper span i {
         font-size: 20px; }
@@ -2923,6 +2946,8 @@ div.pp_woocommerce .pp_content_container {
     margin-bottom: 10px; }
 
   .site-content .col-md-10.pull-left,
+  .site-content .col-md-9.pull-left,
+  .site-content .col-md-9.pull-right,
   .site-content .col-md-10.pull-right {
     float: none !important; }
 

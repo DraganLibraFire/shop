@@ -506,6 +506,7 @@ body .select2-dropdown{
   text-align: center;
   border-bottom: 1px solid $border_product_color;
   padding-bottom: 20px;
+  margin-bottom: 20px;
     a,span{
       border: 1px solid $border_dark_color;
       display: inline-block;
@@ -1343,6 +1344,16 @@ input[type="checkbox"]:checked + span.search-check{
       li.sf-field-sort_order{
         display: none;
       }
+      .sf-field-taxonomy-product_cat {
+      > ul {
+        > li{
+          .children{
+            display: none;
+            margin-left: 20px;
+          }
+         }
+        }
+      }
     }
     .widget-title{
       font-family: $headings_font;
@@ -1430,24 +1441,43 @@ input[type="checkbox"]:checked + span.search-check{
       padding-left: 0;
       margin-bottom: 30px;
       li{
+        position: relative;
+        padding: 5px 0;
+        .count{
+          color: $main_orange;
+          font-size: 14px;
+          //position: absolute;
+          display: inline-block;
+          max-width: 32%;
+          width: 100%;
+          right: -10px;
+          text-align: right;
+          vertical-align: middle;
+        }
         ul{
           padding-left: 0;
           margin: 0;
         }
         a{
           font-size: 14px;
-          line-height: 22px;
           font-family: $lists_font;
+          color: $main_paragraph;
+          display: inline-block;
+          max-width: 66%;
+          width: 100%;
+          vertical-align: middle;
+          word-wrap: break-word;
         }
         &.cat-parent{
           >a{
             font-family: $headings_font;
-            font-size: 18px;
+            font-size: 17px;
             color: $main_purple;
             text-transform: uppercase;
             display: inline-block;
-            margin-top: 25px;
+            //margin-top: 25px;
             margin-bottom: 10px;
+            vertical-align: middle;
             @include transform-transition(all 0.4s);
             &:hover{
               color: $purple_dark;
@@ -1606,6 +1636,7 @@ input[type="checkbox"]:checked + span.search-check{
 .home-over-ons-wrapper{
   background-color: $lightest_light;
   padding: 30px 0;
+  margin-top: 20px;
   h1,h2,h3,h4,h5,h6{
     margin-top: 0;
     margin-bottom: 7px;
