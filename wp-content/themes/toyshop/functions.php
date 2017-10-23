@@ -352,3 +352,29 @@ function custom_body_class($classes) {
 		$classes[] = 'woocommerce woocommerce-page archive';
 	return $classes;
 }
+
+add_action('init', function(){
+	$labels = array(
+			'name' => _x('Brand categorie', 'taxonomy general name'),
+			'singular_name' => _x('Brand categorie', 'taxonomy singular name'),
+			'search_items' => __('Search Brand Cat'),
+			'all_items' => __('All Brand Cat'),
+			'parent_item' => __('Parent Brand Cat'),
+			'parent_item_colon' => __('Parent Brand Cat:'),
+			'edit_item' => __('Edit Brand Cat'),
+			'update_item' => __('Update Brand Cat'),
+			'add_new_item' => __('Add New Brand Cat'),
+			'new_item_name' => __('New Brand Cat Name'),
+			'menu_name' => __('Brands'),
+	);
+
+	$args = array(
+			'hierarchical' => true,
+			'labels' => $labels,
+			'show_ui' => true,
+			'show_admin_column' => true,
+			'query_var' => true,
+	);
+
+	register_taxonomy('brand', 'product', $args);
+});

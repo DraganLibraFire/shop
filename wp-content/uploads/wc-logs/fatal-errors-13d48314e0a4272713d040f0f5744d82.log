@@ -51,3 +51,14 @@ Stack trace:
 #5 C:\wamp64\www\shop\wp-includes\shortcodes.php(223): preg_replace_callback('/\\[(\\[?)(search...', 'do_shortcode_ta...', '[searchandfilte...')
 #6 C:\wamp64\www\shop\wp-content\themes\toyshop\tpl-filter.php(30):
 
+2017-10-20T17:15:01+00:00 CRITICAL Uncaught Exception: Undefined field name. in C:\wamp64\www\shop\wp-content\plugins\wp-all-import-pro\models\model\record.php:148
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\wp-all-import-pro\controllers\admin\import.php(2375): PMXI_Model_Record->__get('name')
+#1 C:\wamp64\www\shop\wp-content\plugins\wp-all-import-pro\wp-all-import-pro.php(673): PMXI_Admin_Import->process()
+#2 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): PMXI_Plugin->adminDispatcher('')
+#3 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(323): WP_Hook->apply_filters('', Array)
+#4 C:\wamp64\www\shop\wp-includes\plugin.php(453): WP_Hook->do_action(Array)
+#5 C:\wamp64\www\shop\wp-admin\admin.php(222): do_action('all-import_page...')
+#6 {main}
+  thrown
+

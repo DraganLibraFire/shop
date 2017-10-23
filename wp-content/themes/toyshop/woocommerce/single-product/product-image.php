@@ -34,8 +34,15 @@ global $post, $product;
 			) );
 
 			?>
+				
 				<div class="thumbnails columns-1">
-					<?php add_filter( 'single_product_small_thumbnail_size', function(){
+					<div>
+						<a href="<?php get_the_post_thumbnail_url() ?>">
+							<?php  the_post_thumbnail(); ?>
+						</a>
+					</div>
+					<?php
+					add_filter( 'single_product_small_thumbnail_size', function(){
 						return 'full';
 					} );
 					add_filter( 'woocommerce_product_thumbnails_columns', function(){
@@ -60,7 +67,13 @@ global $post, $product;
 		}
 		?>
 	<div class="thumbnails columns-3">
+		<div class="woocommerce-product-gallery__image">
+			<a href="<?php get_the_post_thumbnail_url() ?>">
+				<?php  the_post_thumbnail(); ?>
+			</a>
+		</div>
 		<?php do_action( 'woocommerce_product_thumbnails' ); ?>
+
 	</div>
 
 		<?php

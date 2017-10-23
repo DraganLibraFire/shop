@@ -2911,9 +2911,12 @@ div.pp_woocommerce .pp_content_container {
     display: inline-block; }
     .widget.widget_product_categories .product-categories li.cat-parent {
       width: 100%;
-      display: block; }
-      .widget.widget_product_categories .product-categories li.cat-parent ul li {
-        width: 32%; }
+      display: block;
+      /* ul{
+         li{
+           width: 32%;
+         }
+       }*/ }
 
   .home-over-ons-wrapper .col-md-3 {
     text-align: center;
@@ -3124,9 +3127,12 @@ div.pp_woocommerce .pp_content_container {
     display: inline-block; }
     .widget.widget_product_categories .product-categories li.cat-parent {
       width: 100%;
-      display: block; }
-      .widget.widget_product_categories .product-categories li.cat-parent ul li {
-        width: 49%; }
+      display: block;
+      /*ul{
+        li{
+          width: 49%;
+        }
+      }*/ }
 
   .site-header .website-logo-main-wrapper .main-logo-inner {
     width: 100%; }
