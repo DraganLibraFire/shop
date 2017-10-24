@@ -262,6 +262,7 @@
       display: block;
       margin-bottom: 25px;
       text-align: center;
+      cursor: pointer;
       &.expand{
         i{
           &:before{
@@ -273,15 +274,26 @@
     }
     form{
       display: none;
-    }
-    li{
-      ul{
-        li{
-          width: 48%;
-          display: inline-block;
+      .meta-slider{
+        margin-left: auto;
+        margin-right: auto;
+      }
+      > ul {
+        > li{
+          text-align: center;
+          .children{
+            //border-top: 1px solid $main_paragraph;
+          }
+          li{
+            display: block;
+            label{
+              display: inline-block;
+            }
+          }
         }
       }
     }
+
   }
   body.woocommerce-page.woocommerce-account {
     .woo-account-header {

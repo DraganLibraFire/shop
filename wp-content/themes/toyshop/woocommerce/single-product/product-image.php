@@ -37,7 +37,7 @@ global $post, $product;
 				
 				<div class="thumbnails columns-1">
 					<div>
-						<a href="<?php get_the_post_thumbnail_url() ?>">
+						<a href="<?php echo get_the_post_thumbnail_url() ?>">
 							<?php  the_post_thumbnail(); ?>
 						</a>
 					</div>
@@ -68,7 +68,7 @@ global $post, $product;
 		?>
 	<div class="thumbnails columns-3">
 		<div class="woocommerce-product-gallery__image">
-			<a href="<?php get_the_post_thumbnail_url() ?>">
+			<a href="<?php echo get_the_post_thumbnail_url() ?>">
 				<?php  the_post_thumbnail(); ?>
 			</a>
 		</div>

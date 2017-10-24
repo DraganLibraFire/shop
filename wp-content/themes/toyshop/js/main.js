@@ -160,4 +160,12 @@ jQuery(function($){
 
     filterToggleSlide();
 
+    $('.thumbnails.columns-1 a').featherlightGallery({
+        previousIcon: "<span class='slick-prev-lf slick-arrows'><i class='fa fa-angle-left' aria-hidden='true'></i></span>",     /* Code that is used as previous icon */
+        nextIcon: "<span class='slick-prev-lf slick-arrows'><i class='fa fa-angle-right' aria-hidden='true'></i></span>",         /* Code that is used as next icon */
+        galleryFadeIn: 100,          /* fadeIn speed when slide is loaded */
+        galleryFadeOut: 300 ,         /* fadeOut speed before slide is loaded */
+        closeIcon: "<span><i class='fa fa-times' aria-hidden='true'></i></span>"
+    });
+
 });

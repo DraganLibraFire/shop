@@ -760,6 +760,37 @@ div.pp_woocommerce .pp_previous:before {
   cursor: -webkit-grabbing;
   cursor: -moz-grabbing; }
 
+.featherlight-previous span, .featherlight-next span {
+  display: inline-block !important;
+  width: auto !important; }
+.featherlight-previous .slick-arrows, .featherlight-next .slick-arrows {
+  color: #856bc8;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s; }
+  .featherlight-previous .slick-arrows:hover, .featherlight-next .slick-arrows:hover {
+    color: #4d3d7a; }
+.featherlight-previous:hover, .featherlight-next:hover {
+  background-color: transparent !important; }
+
+div.featherlight .featherlight-content {
+  background-color: rgba(255, 255, 255, 0); }
+div.featherlight .featherlight-close-icon {
+  font-size: 25px;
+  color: #856bc8;
+  background-color: white;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px; }
+  div.featherlight .featherlight-close-icon:hover {
+    color: #4d3d7a; }
+
 /*--------- Main Header style ---------------*/
 .header-phone-account-details-top-main-header a {
   font-family: "Prelo Medium";
@@ -1311,17 +1342,24 @@ input[type="checkbox"]:checked + span.search-check i:before {
 
 /*--------- Main content styling ---------------*/
 /*Home Hero*/
-.slick-slider-init .single-slide {
-  position: relative; }
-.slick-slider-init .slider-content {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  width: 100%;
-  background-position: center; }
-  .slick-slider-init .slider-content .display-table-full {
-    min-height: 260px; }
+.slick-slider-init {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s; }
+  .slick-slider-init .single-slide {
+    position: relative; }
+  .slick-slider-init .slider-content {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    background-position: center; }
+    .slick-slider-init .slider-content .display-table-full {
+      min-height: 260px; }
 
 /*slider home*/
 .slider-home-wrapper {
@@ -2957,14 +2995,21 @@ div.pp_woocommerce .pp_content_container {
     .widget.widget_search_filter_register_widget .more-filters {
       display: block;
       margin-bottom: 25px;
-      text-align: center; }
+      text-align: center;
+      cursor: pointer; }
       .widget.widget_search_filter_register_widget .more-filters.expand i:before {
         content: '\f139'; }
     .widget.widget_search_filter_register_widget form {
       display: none; }
-    .widget.widget_search_filter_register_widget li ul li {
-      width: 48%;
-      display: inline-block; }
+      .widget.widget_search_filter_register_widget form .meta-slider {
+        margin-left: auto;
+        margin-right: auto; }
+      .widget.widget_search_filter_register_widget form > ul > li {
+        text-align: center; }
+        .widget.widget_search_filter_register_widget form > ul > li li {
+          display: block; }
+          .widget.widget_search_filter_register_widget form > ul > li li label {
+            display: inline-block; }
 
   body.woocommerce-page.woocommerce-account .woo-account-header .woo-account-inner-header .customer-services-wrapper {
     padding-top: 15px;

@@ -1,5 +1,9 @@
 jQuery( document ).ready(function($) {
 
+    $('.slick-slider-init').on('init' , function(){
+        $(this).css('opacity', '1');
+        $(this).css('max-height', 'none');
+    })
 
 
     $('.slick-slider-init').slick({
@@ -41,19 +45,28 @@ jQuery( document ).ready(function($) {
         ],
     });
 
-    $('.product .images .thumbnails.columns-3 ').slick({
+    $('.product .images .thumbnails.columns-3 a').on('click',function(e){
+        e.preventDefault();
+
+        var parent_index = $(this).parents('div').eq(0).index();
+        $('.product .images .thumbnails.columns-1').slick('goTo', parent_index);
+
+
+    });
+
+    $('.product .images .thumbnails.columns-3').slick({
         infinite: false,
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplaySpeed: 2000,
         adaptiveHeight: false,
-        asNavFor: '.product .images .thumbnails.columns-1 ',
+        asNavFor: '.product .images .thumbnails.columns-1',
         prevArrow: "<span class='slick-prev-lf'><i class='fa fa-angle-left' aria-hidden='true'></i></span>",
         nextArrow: "<span class='slick-next-lf'><i class='fa fa-angle-right' aria-hidden='true'></i></span>",
 
     });
 
-    $('.product .images .thumbnails.columns-1 ').slick({
+    $('.product .images .thumbnails.columns-1').slick({
         infinite: false,
         slidesToShow: 1,
         slidesToScroll: 1,

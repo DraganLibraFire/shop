@@ -786,6 +786,37 @@ div.pp_woocommerce {
   cursor: -webkit-grabbing;
   cursor: -moz-grabbing;
 }
+.featherlight-previous, .featherlight-next {
+  span{
+    display: inline-block !important;
+    width: auto !important;
+  }
+  .slick-arrows{
+    color: $main_purple;
+    @include transform-transition(all 0.4s);
+    &:hover{
+      color: $purple_dark;
+    }
+  }
+  &:hover{
+    background-color: transparent !important;
+  }
+}
+div.featherlight {
+  .featherlight-content{
+    background-color: rgba(255,255,255,0);
+  }
+  .featherlight-close-icon{
+    font-size: 25px;
+    color: $main_purple;
+    background-color: rgba(255,255,255,1);
+    @include transform-transition(all 0.4s);
+    @include border-radius(5px);
+    &:hover{
+      color: $purple_dark;
+    }
+  }
+}
 /*--------- Main Header style ---------------*/
 .header-phone-account-details-top-main-header {
   a {
@@ -1495,6 +1526,10 @@ input[type="checkbox"]:checked + span.search-check{
 /*--------- Main content styling ---------------*/
 /*Home Hero*/
 .slick-slider-init {
+  //display: none;
+  max-height: 0;
+  opacity: 0;
+  @include transform-transition(all 0.4s);
   .single-slide {
     position: relative;
   }

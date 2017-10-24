@@ -31,7 +31,7 @@ if ( ! $product->is_purchasable() ) {
 <?php
 	// Availability
 	$availability      = $product->get_availability();
-	$availability_html = empty( $availability['availability'] ) ? '<span>Available:</span><span class="stock "> In stock' : '<span>Available:</span><span class="stock ' . esc_attr( $availability['class'] ) . '">' . esc_html( $availability['availability'] ) . '</span>';
+	$availability_html = empty( $availability['availability'] ) ? '<span>Available:</span><span class="stock "> In stock' : '<span>Available: </span><span class="stock ' . esc_attr( $availability['class'] ) . '"> ' . esc_html( $availability['availability'] ) . '</span>';
 	$wrapper_stock = "<div class=product-stock-wrapper>".$availability_html ."</div>";
 	echo apply_filters( 'woocommerce_stock_html', $wrapper_stock, $availability['availability'], $product );
 ?>
