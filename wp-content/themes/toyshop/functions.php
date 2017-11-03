@@ -385,3 +385,12 @@ add_action('init', function(){
 
 	register_taxonomy('brand', 'product', $args);
 });
+add_filter('woocommerce_get_price', 'discunt_per_user', 10, 2);
+function discunt_per_user($price, $product){
+	$user_discount = get_field('price', 'option');
+	$user_discount = intval($user_discount);
+	$price = $price + ($price * $user_discount / 100);
+
+
+	return $price;
+}
