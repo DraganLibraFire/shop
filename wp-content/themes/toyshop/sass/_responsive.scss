@@ -211,11 +211,13 @@
     float: none !important;
   }
   .shop-features{
+    padding-bottom: 2px;
     table{
       td{
         display: block;
         width: 50%;
         float: left;
+        padding-bottom: 10px;
       }
     }
   }
@@ -325,6 +327,13 @@
       }
     }
   }
+  .call-tio-action-main-wrapper {
+    .call-to-action-text{
+      padding-bottom: 10px;
+      padding-right: 0;
+    }
+  }
+
 }/*(max-width: 991px)*/
 @media all and (max-width: 960px) {
   .widget.widget_search_filter_register_widget{
@@ -401,16 +410,15 @@
     &.woocommerce-page {
       div.product {
         div.images{
-          width: 100% !important;
-          margin: auto;
-          max-width: 320px;
+          float: left !important;
         }
         div.summary{
-          width: 100% !important;
+          float: right !important;
         }
       }
     }
   }
+
 }
 @media all and (max-width: 767px) {
   @each $header, $size in (h1: 37px, h2: 35px, h3: 23px, h4: 21px, h5: 17px, h6: 15px) {
@@ -476,7 +484,7 @@
         div.summary {
           margin-top: 25px;
           .price{
-            text-align: center;
+            //text-align: center;
             margin-bottom: 15px;
           }
           .woocommerce-product-rating{
@@ -488,8 +496,8 @@
               float: none;
             }
           }
-          h1{
-            text-align: center;
+          h1,h2,h3{
+            //text-align: center;
             margin-bottom: 15px;
 
           }
@@ -529,6 +537,11 @@
   }
 }/*(max-width: 767px)*/
 @media all and (max-width: 640px) {
+  .share-buttons {
+    a{
+      margin-right: 0;
+    }
+  }
   .home-tabs-features {
     .nav.nav-tabs{
       li{
@@ -577,9 +590,10 @@
     opacity: 1 !important;
     height: auto !important;
   }
+
   body.woocommerce,
   div.woocommerce {
-    ul.products {
+   /* ul.products {
       li.product{
         display: block;
         width: 100% !important;
@@ -595,8 +609,8 @@
 
         }
       }
-    }
-    .related{
+    }*/
+    /*.related{
       .slick-list{
         width: 300px !important;
         overflow: hidden;
@@ -617,10 +631,35 @@
           }
         }
       }
+    }*/
+  }
+}
+@media all and (max-width: 600px) {
+  body.woocommerce{
+    &.woocommerce-page {
+      div.product {
+        div.images{
+          width: 100% !important;
+          margin: auto;
+          max-width: 320px;
+        }
+        div.summary{
+          width: 100% !important;
+        }
+      }
     }
   }
 }
 @media all and (max-width: 560px) {
+  .banner-wrapper {
+    .slider-content {
+      .banner-image{
+        img{
+          padding: 20px 10px 0;
+        }
+      }
+    }
+  }
   .share-buttons {
     a{
       margin-left: 0;
@@ -692,16 +731,50 @@
       width: 100%;
     }
   }
-  .search-filter-results {
-    .count-post-on-filter{
-      top: -53px;
-      p{
-        width: 140px;
+
+}
+@media all and (max-width: 480px) {
+  .home-tabs-features .nav-tabs{
+    > li{
+      margin-left: 5px !important;
+      margin-bottom: 10px;
+      &:last-child{
+        margin-left: 0!important;
+      }
+      a{
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        font-size: 10px;
+      }
+    }
+  }
+  body.woocommerce {
+    .woocommerce-tabs {
+      ul.tabs.wc-tabs {
+      > {
+        li {
+          margin-right: 5px !important;
+          margin-bottom: 10px;
+          &:last-child{
+            margin-right: 0!important;
+          }
+          a{
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+            font-size: 10px;
+          }
+        }
+      }
       }
     }
   }
 }
 @media all and (max-width: 420px) {
+  body.woocommerce ul.products li.product .product-title {
+    h2,h1,h3,h4,h5,h6{
+      font-size: 16px;
+    }
+  }
   div.woocommerce {
     table.shop_table {
       tbody {
@@ -721,6 +794,16 @@
     }
   }
 }/*(max-width: 420px)*/
+@media all and (max-width: 380px) {
+  .search-filter-results {
+    .count-post-on-filter{
+      top: -53px;
+      p{
+        width: 110px;
+      }
+    }
+  }
+}
 @media all and (max-width: 365px) {
 
 }/*(max-width: 365px)*/

@@ -394,3 +394,9 @@ function discunt_per_user($price, $product){
 
 	return $price;
 }
+add_filter( 'woocommerce_output_related_products_args', 'lf_related_products_args' );
+function lf_related_products_args( $args ) {
+	$args['posts_per_page'] = 10;
+	$args['columns'] = 10;
+	return $args;
+}

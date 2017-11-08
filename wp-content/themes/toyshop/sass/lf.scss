@@ -1357,7 +1357,16 @@ input[type="checkbox"]:checked + span.search-check{
     }
   }
 }
+.home{
+  .col-md-3.sidebar{
+    .widget{
+      .widget-title{
+        color: $purple_dark;
+      }
+    }
+  }
 
+}
 .widget{
   .widget-title{
     font-family: $headings_font;
