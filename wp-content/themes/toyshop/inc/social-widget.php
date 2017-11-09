@@ -42,42 +42,62 @@ class librafire_social_widget extends WP_Widget {
         /*------- Variables ------*/
         $facebook_icon = get_theme_mod('social_customizer_fb_icon');
         $facebook_url = esc_url(get_theme_mod('social_customizer_fb_url'));
+        $facebook_desc = get_theme_mod('social_customizer_fb_desc');
+
         $twitter_icon = get_theme_mod('social_customizer_tw_icon');
         $twitter_url = esc_url(get_theme_mod('social_customizer_tw_url'));
+        $twitter_desc = get_theme_mod('social_customizer_tw_desc');
+
         $google_icon = get_theme_mod('social_customizer_g_icon');
         $google_url = esc_url(get_theme_mod('social_customizer_g_url'));
+        $google_desc = get_theme_mod('social_customizer_g_desc');
+
+
         $linkedIn_icon = get_theme_mod('social_customizer_lni_icon');
         $linkedIn_url = esc_url(get_theme_mod('social_customizer_lni_url'));
+        $linkedIn_desc = get_theme_mod('social_customizer_lni_desc');
+
         $instagram_icon = get_theme_mod('social_customizer_instagram_icon');
         $instagram_url = esc_url(get_theme_mod('social_customizer_instagram_url'));
+        $instagram_desc = get_theme_mod('social_customizer_instagram_desc');
+
+
         $pinterest_icon = get_theme_mod('social_customizer_pinterest_icon');
         $pinterest_url = esc_url(get_theme_mod('social_customizer_pinterest_url'));
+        $pinterest_desc = get_theme_mod('social_customizer_pinterest_desc');
 
         /*---------------Icon Checker -------------------*/
-        if($facebook_icon!=''): $fb_icon = '<img src='.$facebook_icon.'>'; else: $fb_icon = '<span class="icon"><i class="fa fa-facebook" aria-hidden="true"></i></span><span class="text">facebook</span>';endif;
-        if($twitter_icon!=''): $tw_icon ='<img src='.$twitter_icon.'>'; else: $tw_icon = '<span class="icon"><i class="fa fa-twitter"></i></span><span class="text">twitter</span>';endif;
-        if($google_icon!=''): $go_icon = '<img src='.$google_icon.'>'; else: $go_icon = '<span class="icon"><i class="fa fa-youtube" aria-hidden="true"></i></span><span class="text">youtube</span>';endif;
-        if($linkedIn_icon!=''): $li_icon = '<img src='.$linkedIn_icon.'>'; else: $li_icon = '<span class="icon"><i class="fa fa-linkedin"></i></span><span class="text">linkedin</span>';endif;
-        if($instagram_icon!=''): $inst_icon = '<img src='.$instagram_icon.'>'; else: $inst_icon ='<span class="icon"><i class="fa fa-instagram"></i></span><span class="text">instagram</span>';endif;
-        if($pinterest_icon!=''): $pt_icon = '<img src='.$pinterest_icon.'>'; else: $pt_icon = '<span class="icon"><i class="fa fa-pinterest"></i></span><span class="text">pinterest</span>';endif;
+        if($facebook_icon!=''): $fb_icon = '<img src='.$facebook_icon.'>'; else: $fb_icon = '<span class="icon"><i class="fa fa-facebook" aria-hidden="true"></i></span><span class="text">facebook</span><span class="social-desc">'.$facebook_desc.'</span>';endif;
+        if($twitter_icon!=''): $tw_icon ='<img src='.$twitter_icon.'>'; else: $tw_icon = '<span class="icon"><i class="fa fa-twitter"></i></span><span class="text">twitter</span><span class="social-desc">'.$twitter_desc.'</span>';endif;
+        if($google_icon!=''): $go_icon = '<img src='.$google_icon.'>'; else: $go_icon = '<span class="icon"><i class="fa fa-youtube" aria-hidden="true"></i></span><span class="text">youtube</span><span class="social-desc">'.$google_desc.'</span>';endif;
+        if($linkedIn_icon!=''): $li_icon = '<img src='.$linkedIn_icon.'>'; else: $li_icon = '<span class="icon"><i class="fa fa-linkedin"></i></span><span class="text">linkedin</span><span class="social-desc">'.$linkedIn_desc.'</span>';endif;
+        if($instagram_icon!=''): $inst_icon = '<img src='.$instagram_icon.'>'; else: $inst_icon ='<span class="icon"><i class="fa fa-instagram" aria-hidden="true"></i></span><span class="text">instagram</span><span class="social-desc">'.$instagram_desc.'</span>';endif;
+        if($pinterest_icon!=''): $pt_icon = '<img src='.$pinterest_icon.'>'; else: $pt_icon = '<span class="icon"><i class="fa fa-pinterest"></i></span><span class="text">pinterest</span><span class="social-desc">'.$pinterest_desc.'</span>';endif;
 
         if($facebook_url!=''){
             $return_html .= '<a href="'.$facebook_url.'" target="_blank">'.$fb_icon.'</a>';
+            $return_html .= '';
         }
         if($twitter_url!=''){
             $return_html .= '<a href="'.$twitter_url.'" target="_blank">'.$tw_icon.'</a>';
+
         }
         if($google_url!=''){
             $return_html .= '<a href="'.$google_url.'" target="_blank">'.$go_icon.'</a>';
+
+
         }
         if($linkedIn_url!=''){
             $return_html .= '<a href="'.$linkedIn_url.'" target="_blank">'.$li_icon.'</a>';
+
         }
         if($instagram_url!=''){
             $return_html .= '<a href="'.$instagram_url.'" target="_blank">'.$inst_icon.'</a>';
+
         }
         if($pinterest_url!=''){
             $return_html .= '<a href="'.$pinterest_url.'" target="_blank">'.$pt_icon.'</a>';
+
         }
         echo $return_html;
         echo $args['after_widget'];

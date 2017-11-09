@@ -33,12 +33,12 @@
                         <?php
                         $counter = 0;
                         while (have_rows('tabs')) : the_row();
-                            $tax_id = get_sub_field('tab');
-                            $taxonomy = get_term_by('id', $tax_id, 'product_cat');
+                            $tax_id = str_replace(' ','-',get_sub_field('tab_heading_name'));
+                            $taxonomy = get_sub_field('tab_heading_name');
                             ?>
                             <li role="presentation" <?php if ($counter == 0): ?>class="active" <?php endif; ?>><a
-                                    href="#<?php the_sub_field('tab'); ?>" aria-controls="<?php the_sub_field('tab'); ?>"
-                                    role="tab" data-toggle="tab"><?php echo $taxonomy->name; ?></a></li>
+                                    href="#<?php echo $tax_id; ?>" aria-controls="<?php echo $tax_id ?>"
+                                    role="tab" data-toggle="tab"><?php echo $taxonomy; ?></a></li>
                             <?php
 
                             $counter++; endwhile;
@@ -50,18 +50,18 @@
                     <?php
                     $counter = 0;
                     while (have_rows('tabs')) : the_row();
-                        $tax_id = get_sub_field('tab');
-                        $taxonomy = get_term_by('id', $tax_id, 'product_cat');
+                        $tax_id = str_replace(' ','-',get_sub_field('tab_heading_name'));
+                        $taxonomy = get_sub_field('tab_heading_name');
+                        $products = get_sub_field('products');
                         ?>
 
                         <div role="tabpanel" class="tab-pane <?php if ($counter == 0): echo "active"; endif; ?>"
-                             id="<?php the_sub_field('tab'); ?>">
+                             id="<?php echo $tax_id; ?>">
                             <div class="woocommerce">
                                 <ul class="products">
-
                                     <?php $args_wo = array(
                                         'post_type' => 'product',
-                                        'posts_per_page' => 6,
+                                        'post__in' => $products,
                                         'product_cat' => $taxonomy->slug
                                     );
 
@@ -74,8 +74,8 @@
 
                                     <?php endwhile; ?>
                                 </ul>
-                                <a class="button purple pull-right" href=" <?php echo get_term_link($taxonomy); ?>">
-                                    More <?php echo $taxonomy->name; ?></a>
+                                <a class="button purple pull-right" href="<?php the_sub_field('category_link') ?> ">
+                                    More <?php echo $taxonomy ?></a>
                             </div>
                             <?php wp_reset_query(); ?>
                         </div>

@@ -18,6 +18,10 @@
         'default'   => 'https://www.facebook.com/lfweb',
         'sanitize_callback' => 'text_sanitize',
     ) );
+    $wp_customize->add_setting( 'social_customizer_fb_desc' , array(
+        'default'   => '',
+        'sanitize_callback' => 'text_sanitize',
+    ) );
 
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'facebook_icon', array(
         'label'    => __( 'Upload Facebook Icon', 'starter' ),
@@ -30,12 +34,22 @@
         'section'  => 'social_icons',
         'settings' => 'social_customizer_fb_url',
     ) ) );
+
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'facebook_desc', array(
+        'label'    => __( 'Facebook Link Description', 'starter' ),
+        'section'  => 'social_icons',
+        'settings' => 'social_customizer_fb_desc',
+    ) ) );
     /*Twitter section */
     $wp_customize->add_setting( 'social_customizer_tw_icon' , array(
         'sanitize_callback' => 'sanitize_image'
     ) );
     $wp_customize->add_setting( 'social_customizer_tw_url' , array(
         'default'   => 'https://twitter.com/LibraFireDev',
+        'sanitize_callback' => 'text_sanitize',
+    ) );
+    $wp_customize->add_setting( 'social_customizer_tw_desc' , array(
+        'default'   => '',
         'sanitize_callback' => 'text_sanitize',
     ) );
 
@@ -50,12 +64,21 @@
         'section'  => 'social_icons',
         'settings' => 'social_customizer_tw_url',
     ) ) );
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'twitter_desc', array(
+        'label'    => __( 'Twitter Link Description', 'starter' ),
+        'section'  => 'social_icons',
+        'settings' => 'social_customizer_tw_desc',
+    ) ) );
     /*Google section */
     $wp_customize->add_setting( 'social_customizer_g_icon' , array(
         'sanitize_callback' => 'sanitize_image'
     ) );
     $wp_customize->add_setting( 'social_customizer_g_url' , array(
         'default'   => 'https://plus.google.com/+LibrafireDev/',
+        'sanitize_callback' => 'text_sanitize',
+    ) );
+    $wp_customize->add_setting( 'social_customizer_g_desc' , array(
+        'default'   => '',
         'sanitize_callback' => 'text_sanitize',
     ) );
 
@@ -70,12 +93,21 @@
         'section'  => 'social_icons',
         'settings' => 'social_customizer_g_url',
     ) ) );
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'google_desc', array(
+        'label'    => __( 'Google Link Description', 'starter' ),
+        'section'  => 'social_icons',
+        'settings' => 'social_customizer_g_desc',
+    ) ) );
     /*Instagram section */
     $wp_customize->add_setting( 'social_customizer_instagram_icon' , array(
         'sanitize_callback' => 'sanitize_image'
     ) );
     $wp_customize->add_setting( 'social_customizer_instagram_url' , array(
         'default'   => 'http://instagram.com/',
+        'sanitize_callback' => 'text_sanitize',
+    ) );
+    $wp_customize->add_setting( 'social_customizer_instagram_desc' , array(
+        'default'   => '',
         'sanitize_callback' => 'text_sanitize',
     ) );
 
@@ -90,12 +122,21 @@
         'section'  => 'social_icons',
         'settings' => 'social_customizer_instagram_url',
     ) ) );
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'instagram_desc', array(
+        'label'    => __( 'Instagram Link Description', 'starter' ),
+        'section'  => 'social_icons',
+        'settings' => 'social_customizer_instagram_desc',
+    ) ) );
     /*LinkedIn section */
     $wp_customize->add_setting( 'social_customizer_lni_icon' , array(
         'sanitize_callback' => 'sanitize_image'
     ) );
     $wp_customize->add_setting( 'social_customizer_lni_url' , array(
         'default'   => 'https://www.linkedin.com/',
+        'sanitize_callback' => 'text_sanitize',
+    ) );
+    $wp_customize->add_setting( 'social_customizer_lni_desc' , array(
+        'default'   => '',
         'sanitize_callback' => 'text_sanitize',
     ) );
 
@@ -110,7 +151,11 @@
         'section'  => 'social_icons',
         'settings' => 'social_customizer_lni_url',
     ) ) );
-
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'linkedin_desc', array(
+        'label'    => __( 'LinkedIn Link Description', 'starter' ),
+        'section'  => 'social_icons',
+        'settings' => 'social_customizer_lni_desc',
+    ) ) );
 
     /*Pinterest section */
     $wp_customize->add_setting( 'social_customizer_pinterest_icon' , array(
@@ -118,6 +163,10 @@
     ) );
     $wp_customize->add_setting( 'social_customizer_pinterest_url' , array(
         'default'   => 'https://www.pinterest.com/',
+        'sanitize_callback' => 'text_sanitize',
+    ) );
+    $wp_customize->add_setting( 'social_customizer_pinterest_desc' , array(
+        'default'   => '',
         'sanitize_callback' => 'text_sanitize',
     ) );
 
@@ -131,6 +180,11 @@
         'label'    => __( 'Pinterest URL', 'starter' ),
         'section'  => 'social_icons',
         'settings' => 'social_customizer_pinterest_url',
+    ) ) );
+    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'pinterest_desc', array(
+        'label'    => __( 'Pinterest Link Description', 'starter' ),
+        'section'  => 'social_icons',
+        'settings' => 'social_customizer_pinterest_desc',
     ) ) );
 
 ?>

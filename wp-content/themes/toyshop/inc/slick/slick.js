@@ -20,7 +20,7 @@ jQuery( document ).ready(function($) {
     });
     $('.related > ul.products').slick({
         infinite: false,
-        slidesToShow: 4,
+        slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: false,
         autoplaySpeed: 2000,
@@ -31,9 +31,14 @@ jQuery( document ).ready(function($) {
         nextArrow: "<span class='slick-next-lf slick-arrows'><i class='fa fa-angle-right' aria-hidden='true'></i></span>",
         responsive: [
             {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 4,
+                }
+            },{
                 breakpoint: 800,
                 settings: {
-                    slidesToShow: 2,
+                slidesToShow: 2,
                 }
             }
         ],
@@ -57,6 +62,14 @@ jQuery( document ).ready(function($) {
         asNavFor: '.product .images .thumbnails.columns-1',
         prevArrow: "<span class='slick-prev-lf'><i class='fa fa-angle-left' aria-hidden='true'></i></span>",
         nextArrow: "<span class='slick-next-lf'><i class='fa fa-angle-right' aria-hidden='true'></i></span>",
+        responsive: [
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 2,
+                }
+            }
+        ],
 
     });
 

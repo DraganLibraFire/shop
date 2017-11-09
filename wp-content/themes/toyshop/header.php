@@ -57,8 +57,8 @@
 				<div class="website-logo-main-wrapper clearfix">
 					<aside class="main-logo-inner ">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-							<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo_svg_4.svg" alt="<?php echo( get_bloginfo( 'title' ) ); ?>" />
-<!--							<img src="--><?php //echo( get_header_image() ); ?><!--" alt="--><?php //echo( get_bloginfo( 'title' ) ); ?><!--" />-->
+<!--							<img src="--><?php //echo get_stylesheet_directory_uri(); ?><!--/images/logo-white.png" alt="--><?php //echo( get_bloginfo( 'title' ) ); ?><!--" />-->
+							<img src="<?php echo( get_header_image() ); ?>" alt="<?php echo( get_bloginfo( 'title' ) ); ?>" />
 						</a>
 					</aside>
 					<?php dynamic_sidebar('top-bar-woo-2');?>

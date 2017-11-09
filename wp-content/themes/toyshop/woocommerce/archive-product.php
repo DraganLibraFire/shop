@@ -140,7 +140,8 @@ get_header( 'shop' ); ?>
 			</div>
 		</div>
 		<div class="col-md-9 over-ons-section-text" data-equal="over-ons">
-			<?php the_field('over_ons_text', 'option');?>
+			<h2><?php woocommerce_page_title()?></h2>
+			<p><?php do_action( 'woocommerce_archive_description' ); ?></p>
 		</div>
 	</div>
 </div>

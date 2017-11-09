@@ -400,3 +400,22 @@ function lf_related_products_args( $args ) {
 	$args['columns'] = 10;
 	return $args;
 }
+
+add_action('woocommerce_before_customer_login_form','load_registration_form', 2);
+function load_registration_form(){
+	if(isset($_GET['action'])=='register'){
+
+		return woocommerce_get_template( 'myaccount/form-register.php' );
+
+
+	}
+}
+add_filter('woocommerce_registration_errors', 'registration_errors_validation', 10,3);
+function registration_errors_validation($reg_errors, $sanitized_user_login, $user_email) {
+	global $woocommerce;
+	extract( $_POST );
+	if ( strcmp( $password, $password2 ) !== 0 ) {
+		return new WP_Error( 'registration-error', __( 'Passwords do not match.', 'woocommerce' ) );
+	}
+	return $reg_errors;
+}
