@@ -5,7 +5,7 @@
  * @package   Search_Filter
  * @author    Ross Morsali
  * @link      http://www.designsandcode.com/
- * @copyright 2014 Designs & Code
+ * @copyright 2015 Designs & Code
  */
  
 ?>
@@ -14,6 +14,9 @@
 	<?php
 		global $post;
 	?>
+	<div style="display:none;">
+		<input class="checkbox treat_child_posts_as_parent" type="hidden" id="treat_child_posts_as_parent" name="treat_child_posts_as_parent" value="<?php echo esc_attr($values['treat_child_posts_as_parent']); ?>"> 
+	</div>
 	<p class="description"><?php _e("Settings &amp; Default Conditions for this Search Form.", $this->plugin_slug ); ?></p>
 	
 	<div class="tabs-container">
@@ -45,7 +48,8 @@
 						<div class="sf_post_types"><p>
 						<?php
 							$args = array(
-							   'public'   => true
+							   //'public'   => true,
+							   //'publicly_queryable '   => true
 							);
 							
 							
@@ -66,11 +70,13 @@
 								$values['post_types'] = array();
 							}
 							
+							$exclude_post_types = array("search-filter-widget","revision","nav_menu_item","shop_webhook");
 							
 							foreach ( $post_types as $post_type )
 							{
-								//if($post_type->name!="attachment")
-								//{
+								
+								if(!in_array($post_type->name, $exclude_post_types))
+								{
 									if($is_default)
 									{
 										if(($post_type->name=="post")||($post_type->name=="page"))
@@ -94,7 +100,7 @@
 									<?php _e($post_type->labels->name, $this->plugin_slug); ?></label>
 									</span>
 									<?php
-								//}
+								}
 							}
 						?>
 						</p></div>
@@ -103,10 +109,10 @@
 				
 				<tr>
 					<td>
-						<label for="results_per_page"><?php _e("Results per page:", $this->plugin_slug ); ?></label>
+						<label for="posts_per_page"><?php _e("Results per page:", $this->plugin_slug ); ?></label>
 					</td>
 					<td>
-						<input class="" id="results_per_page" name="results_per_page" type="text" size="7" value="<?php echo esc_attr($values['results_per_page']); ?>">
+						<input class="" id="posts_per_page" name="posts_per_page" type="text" size="7" value="<?php echo esc_attr($values['results_per_page']); ?>">
 					</td>
 				</tr>
 				<tr>
@@ -115,7 +121,6 @@
 					</td>
 					<td>
 						<input class="checkbox auto_submit" type="checkbox" id="auto_submit" name="auto_submit"<?php $this->set_checked($values['auto_submit']); ?>> 
-						<!-- <input type="hidden" name="auto_submit" id="auto_submit_hidden" class="auto_submit_hidden" value="1"> -->
 					</td>
 				</tr>
 				<tr>
@@ -126,9 +131,75 @@
 					</td>
 					<td>
 						<input class="checkbox maintain_state" type="checkbox" id="maintain_state" name="maintain_state"<?php $this->set_checked($values['maintain_state']); ?>> 
-						<!-- <input type="hidden" name="maintain_state" id="auto_submit_hidden" class="auto_submit_hidden" value="1"> -->
 					</td>
 				</tr>
+				
+				
+				<tr>
+					<td valign="middle">
+						<label for="field_relation"><?php _e("Field relationships:", $this->plugin_slug ); ?><span class="hint--top hint--info" data-hint="<?php _e("AND - posts shown will match all fields, OR - posts shown will match any of the fields", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span></label>
+					</td>
+					<td>
+						<select name="field_relation" id="field_relation">
+							<option value="and"<?php $this->set_selected($values['field_relation'], "and"); ?>><?php _e("AND", $this->plugin_slug); ?></option>
+							<option value="or"<?php $this->set_selected($values['field_relation'], "or"); ?>><?php _e("OR", $this->plugin_slug); ?></option>
+						</select>
+						<p class="description"><?php _e("The relationship between tag, category, taxonomy & post meta (choice) fields", $this->plugin_slug ); ?></p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td valign="middle">
+						<label for="enable_auto_count"><?php _e("Enable Auto Count:", $this->plugin_slug ); ?><span class="hint--top hint--info" data-hint="<?php _e("Dynamic counts of results in form fields - eg - Plugins (12)", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span></label>
+					</td>
+					<td>
+						<p class="description" style="font-style:normal;">
+							<label>
+								<input class="checkbox enable_auto_count" type="checkbox" id="enable_auto_count" name="enable_auto_count"<?php $this->set_checked($values['enable_auto_count']); ?>>
+								<?php _e("Enable", $this->plugin_slug); ?>
+							</label>
+						</p>
+						<p class="description"><?php _e("Dynamically update the count number shown and also calculate which options to hide in your tag, category, taxonomy & post meta (choice) fields.", $this->plugin_slug); ?></p>
+						
+						<p class="description" style="font-style:normal;">
+							<label>
+								<input class="checkbox auto_count_refresh_mode" type="checkbox" id="auto_count_refresh_mode" name="auto_count_refresh_mode"<?php $this->set_checked($values['auto_count_refresh_mode']); ?><?php if($values['enable_auto_count']!=1){ echo ' disabled="disabled"'; } ?>> 
+								<?php _e("Update the Search Form on user interaction", $this->plugin_slug); ?>
+							</label>
+						</p>
+						<p class="description"><?php _e("If disabled, the count numbers will only update when new results are loaded (ie, when the Search form is submitted)", $this->plugin_slug); ?></p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<p style="margin-bottom:0;"><strong><?php _e("Detect defaults from current page", $this->plugin_slug ); ?></strong></p>
+						<p class="description"><?php _e("When a Search Form is used on any page other than the Search Results Page, S&amp;F will try to detect the post type and associated taxonomies of the current page - and set defaults in the Search Form to match these.", $this->plugin_slug ); ?></p>
+						
+					</td>
+				</tr>
+
+				<tr>
+					<td valign="middle">
+						<?php _e("Choose which kinds of pages S&amp;F will try to do this on:", $this->plugin_slug ); ?><span class="hint--top hint--info" data-hint="<?php _e("AND - posts shown will match all fields, OR - posts shown will match any of the fields", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
+					</td>
+					<td>
+						<input class="checkbox inherit_current_post_type_archive" type="checkbox" id="inherit_current_post_type_archive" name="inherit_current_post_type_archive"<?php $this->set_checked($values['inherit_current_post_type_archive']); ?>><label for="inherit_current_post_type_archive"><?php _e(" Post Type Archives <!--(is_post_type_archive)-->", $this->plugin_slug ); ?></label><br />
+						<input class="checkbox inherit_current_taxonomy_archive" type="checkbox" id="inherit_current_taxonomy_archive" name="inherit_current_taxonomy_archive"<?php $this->set_checked($values['inherit_current_taxonomy_archive']); ?>><label for="inherit_current_taxonomy_archive"><?php _e(" Tag, Category &amp; Taxonomy Archives <!--(is_tag, is_category, is_tax)-->", $this->plugin_slug ); ?></label><br />
+						<!--<input class="checkbox inherit_current_single_post" type="checkbox" id="" name="inherit_current_single_post"<?php $this->set_checked($values['inherit_current_single_post']); ?>> Individual Posts &amp; Custom Post Types (is_single)<br />-->
+						<input class="checkbox inherit_current_author_archive" type="checkbox" id="inherit_current_author_archive" name="inherit_current_author_archive"<?php $this->set_checked($values['inherit_current_author_archive']); ?>><label for="inherit_current_author_archive"><?php _e(" Author Archives<!-- (is_author)-->", $this->plugin_slug ); ?></label><br />
+						<!--<input class="checkbox inherit_current_date_archive" type="checkbox" id="" name="inherit_current_date_archive"<?php $this->set_checked($values['inherit_current_date_archive']); ?>> Date Archives<br />-->
+						
+						
+						
+						<!--<input class="checkbox maintain_state" type="checkbox" id="maintain_state" name="maintain_state"<?php $this->set_checked($values['maintain_state']); ?>> Post Type Archives (is_post_type_archive)<br />
+						<input class="checkbox maintain_state" type="checkbox" id="maintain_state" name="maintain_state"<?php $this->set_checked($values['maintain_state']); ?>> Tag Archives (is_tag)<br />
+						<input class="checkbox maintain_state" type="checkbox" id="maintain_state" name="maintain_state"<?php $this->set_checked($values['maintain_state']); ?>> Category Archives (is_cat)<br />
+						<input class="checkbox maintain_state" type="checkbox" id="maintain_state" name="maintain_state"<?php $this->set_checked($values['maintain_state']); ?>> Taxonomy Archives (is_tax)<br />-->
+					</td>
+				</tr>
+			
 			</table>
 		
 		</div>
@@ -137,99 +208,162 @@
 				<tr>
 					<td colspan="2">
 						<p>
-							<strong><?php _e("Display results:", $this->plugin_slug); ?></strong>
+							<strong><?php _e("Display results method:", $this->plugin_slug); ?></strong>
 						</p>
+						<p>
+							<select name="display_results_as" class="display_results_as" id="display_results_as">
+								<option value="archive"<?php $this->set_selected($values['display_results_as'], "archive"); ?>><?php _e("As an Archive", $this->plugin_slug); ?></option>
+								<option value="post_type_archive"<?php $this->set_selected($values['display_results_as'], "post_type_archive"); ?>><?php _e("Post Type Archive", $this->plugin_slug); ?></option>
+								<option value="shortcode"<?php $this->set_selected($values['display_results_as'], "shortcode"); ?>><?php _e("Using a Shortcode", $this->plugin_slug); ?></option>
+								<option value="custom_woocommerce_store"<?php $this->set_selected($values['display_results_as'], "custom_woocommerce_store"); ?>><?php _e("WooCommerce Shop", $this->plugin_slug); ?></option>
+								<option value="custom_edd_store"<?php $this->set_selected($values['display_results_as'], "custom_edd_store"); ?>><?php _e("EDD Downloads Page", $this->plugin_slug); ?></option>
+								<option value="custom"<?php $this->set_selected($values['display_results_as'], "custom"); ?>><?php _e("Custom", $this->plugin_slug); ?></option>
+							</select>
+						</p>
+						
+						<div class="display_result_txt_cont notice-alert">
+							<div class="display_result_txt" id="display_result_archive_txt">
+								<p>
+									<?php _e("Use a regular template from your theme to output your results.", $this->plugin_slug ); ?>
+								</p>
+								<p>
+									<em><?php _e("* Templates must use the <a href='http://codex.wordpress.org/The_Loop' target='_blank'>The Loop</a> and not a custom query", $this->plugin_slug ); ?></em>
+								</p>
+								<p>
+									<a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/as-an-archive/" target="_blank"><?php _e("View the Archive setup instructions", $this->plugin_slug ); ?></a>
+								</p>
+							</div>
+							<div class="display_result_txt" id="display_result_post_type_archive_txt">
+								<p>
+									<?php _e("Filter results on your Post Type Archives - only one post type must be selected.", $this->plugin_slug ); ?>
+								</p>
+								<p>
+									<em><?php _e("* Templates must use the <a href='http://codex.wordpress.org/The_Loop' target='_blank'>The Loop</a> and not a custom query", $this->plugin_slug ); ?></em>
+								</p>
+								<p>
+									<a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/as-a-post-type-archive/" target="_blank"><?php _e("View the Post Type Archive setup instructions", $this->plugin_slug ); ?></a>
+								</p>
+							</div>
+							<div class="display_result_txt" id="display_result_shortcode_txt">
+								<p>
+									<?php _e("Place a results shortcode in any post or theme file to position where the results are displayed.", $this->plugin_slug ); ?>
+								</p>
+								<p>
+									<em><?php _e("* You can find your results shortcode in the <strong>Shortcodes</strong> box on this page", $this->plugin_slug ); ?></em>
+								</p>
+								<p>
+									<a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/using-a-shortcode/" target="_blank"><?php _e("View the Shortcode setup instructions", $this->plugin_slug ); ?></a>
+								</p>
+							</div>
+							<div class="display_result_txt" id="display_result_custom_txt">
+								<p>
+									<?php _e("Manually add S&F to an existing query and then simply supply the URL where this can be located.", $this->plugin_slug ); ?>
+								</p>
+								<!--<p>
+									<em><?php _e("* You can find your results shortcode in the <strong>Shortcodes</strong> box on this page", $this->plugin_slug ); ?></em>
+								</p>
+								<p>
+									<a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/using-a-shortcode/" target="_blank"><?php _e("View the Shortcode setup instructions", $this->plugin_slug ); ?></a>
+								</p>-->
+							</div>
+							<div class="display_result_txt" id="display_result_custom_woocommerce_store_txt">
+								<p>
+									<?php _e("Let WooCommerce handle the display of results and direct all searches to the shop page.", $this->plugin_slug ); ?>
+								</p>
+								<p>
+									<a href="http://www.designsandcode.com/documentation/search-filter-pro/3rd-party/woocommerce/" target="_blank"><?php _e("View the WooCommerce setup instructions", $this->plugin_slug ); ?></a>
+								</p>
+							</div>
+							<div class="display_result_txt" id="display_result_custom_edd_store_txt">
+								<p>
+									<?php _e("Let Easy Digital Downloads handle the display of results - simply supply the full URL of a page containing your downloads shortcode.", $this->plugin_slug ); ?>
+								</p>
+								<p>
+									<a href="http://www.designsandcode.com/documentation/search-filter-pro/3rd-party/easy-digital-downloads/" target="_blank"><?php _e("View the Easy Digital Downloads setup instructions", $this->plugin_slug ); ?></a>
+								</p>
+							</div>
+						</div>
 					</td>
+					
 				</tr>
-				<tr>
-					<td>
-
-						<label for="display_results_shortcode">
-							<input class="checkbox settings_display_results" type="radio" value="shortcode" id="display_results_shortcode" name="display_results_as"<?php $this->set_radio("shortcode", $values['display_results_as']); ?>> <?php _e("Using a shortcode", $this->plugin_slug); ?><br />
-							<small><?php _e("Place the shortcode in any post or theme file to position where the results are displayed.", $this->plugin_slug ); ?></small>
-						</label>
-					</td>
-					<td>
-						<label for="display_results_archive">
-							<input class="checkbox settings_display_results" type="radio" value="archive" id="display_results_archive" name="display_results_as"<?php $this->set_radio("archive", $values['display_results_as']); ?>> <?php _e("As an archive page", $this->plugin_slug); ?>
-							<!--<span class="hint--top hint--info" data-hint="<?php _e("if your meta key is not listed or not yet created enter here", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>-->
-							<br />
-							<small><?php _e("Use a regular template from your theme to output your results.", $this->plugin_slug ); ?></small>
-						</label>
-						<small><em><?php _e("*templates must use the <a href='http://codex.wordpress.org/The_Loop' target='_blank'>The Loop</a> and not a custom query", $this->plugin_slug ); ?></em></small>
-					</td>
-				</tr>
+				
+				
 			</table>
 			
 			<hr /><br />
-			<table class="template_options_table">
-				<tr>
-					<td colspan="2">
-						<strong><?php _e("Template Options", $this->plugin_slug ); ?></strong>
-					</td>
-				</tr>
-				<tr class="tpl_shortcode_rows">
-					<td>
-						<label for="results_url">
-							<?php _e("Results URL:", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("The full URL of a page where your results shortcode can be found", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
-							<br /><small><?php _e("This should the Full URL to a page/post where your results shortcode can be found", $this->plugin_slug); ?></small>
-						</label>
-					</td>
-					<td>
-						<input class="results_url" id="results_url" name="results_url" type="text" value="<?php echo esc_attr($values['results_url']); ?>" placeholder="http://www.yoursite.com/">
-						<input type="hidden"  name="results_url" id="results_url_hidden" class="results_url_hidden"  value="<?php echo $values['results_url']; ?>" disabled="disabled" />
-					</td>
-				</tr>
-				<tr class="tpl_archive_rows">
-					<td>
-						<label for="use_template_manual_toggle">
-							<?php _e("Use a custom template for results?", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("if this is not set you may not have control on how your results page displays", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
+			<div class="template_options_sect">
+				<table class="template_options_table">
+					<tr>
+						<td colspan="2">
+							<strong><?php _e("Template Options", $this->plugin_slug ); ?></strong>
+						</td>
+					</tr>
+					<tr class="tpl_shortcode_rows">
+						<td colspan="2" style="width:auto;">
+						<div>
+							<label for="results_url">
+								<?php _e("Results URL:", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("The full URL of a page where your results shortcode can be found", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
+							</label><br /><small><?php _e("This should be the Full URL to a page/post where your results can be found - must contain the shortcode", $this->plugin_slug); ?></small>
+							<p><input class="results_url" id="results_url" name="results_url" type="text" value="<?php echo esc_attr($values['results_url']); ?>" placeholder="<?php echo home_url(); ?>..." size="80" style="width:100%; max-width:100%">
+							<input type="hidden"  name="results_url" id="results_url_hidden" class="results_url_hidden"  value="<?php echo $values['results_url']; ?>" disabled="disabled" />
+							</p>
 							
-						</label>
-					</td>
-					<td>
-						<input class="checkbox use_template_manual_toggle" type="checkbox" id="use_template_manual_toggle" name="use_template_manual_toggle"<?php $this->set_checked($values['use_template_manual_toggle']); ?>> 
-						<input type="hidden"  name="use_template_manual_toggle" class="use_template_manual_toggle_hidden" id="use_template_manual_toggle_hidden"  value="<?php echo $values['use_template_manual_toggle']; ?>" disabled="disabled" />
-						<!-- <br /><em><?php _e("This must be a selector targeting all pagination links on your page - ie, <code>.nav-links a</code>", $this->plugin_slug); ?></em> -->
-					</td>
-				</tr>
+						</div>	
+						</td>
+					</tr>
+					<tr class="tpl_archive_rows">
+						<td>
+							<label for="use_template_manual_toggle">
+								<?php _e("Use a custom template for results?", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("if this is not set you may not have control on how your results page displays", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
+								
+							</label>
+						</td>
+						<td>
+							<input class="checkbox use_template_manual_toggle" type="checkbox" id="use_template_manual_toggle" name="use_template_manual_toggle"<?php $this->set_checked($values['use_template_manual_toggle']); ?>> 
+							<input type="hidden"  name="use_template_manual_toggle" class="use_template_manual_toggle_hidden" id="use_template_manual_toggle_hidden"  value="<?php echo $values['use_template_manual_toggle']; ?>" disabled="disabled" />
+							<!-- <br /><em><?php _e("This must be a selector targeting all pagination links on your page - ie, <code>.nav-links a</code>", $this->plugin_slug); ?></em> -->
+						</td>
+					</tr>
+					
+					<tr class="tpl_archive_rows">
+						<td>
+							<label for="template_name_manual">
+								<?php _e("Enter the filename of the custom template:", $this->plugin_slug); ?>
+								<br /><small><?php _e("The template will be loaded from your theme directory.", $this->plugin_slug); ?></small>
+							</label>
+						</td>
+						<td>
+							<input class="template_name_manual" id="template_name_manual" name="template_name_manual" type="text" value="<?php echo esc_attr($values['template_name_manual']); ?>" />
+							<input type="hidden"  name="template_name_manual" class="template_name_manual_hidden" id="template_name_manual_hidden"  value="<?php echo $values['template_name_manual']; ?>" disabled="disabled" />
+							<!-- <br /><em><?php _e("This must be a selector targeting all pagination links on your page - ie, <code>.nav-links a</code>", $this->plugin_slug); ?></em> -->
+						</td>
+					</tr>
+					
+					<tr class="tpl_archive_rows">
+						<td>
+							<label for="page_slug">
+								<?php _e("Set a slug?", $this->plugin_slug); ?>
+							</label>
+						</td>
+						<td>
+							<?php echo trailingslashit(home_url()); ?> <input class="page_slug" id="page_slug" name="page_slug" type="text" value="<?php echo esc_attr($values['page_slug']); ?>" placeholder="?sfid=<?php echo $post->ID; ?>"  />
+							<input type="hidden"  name="page_slug" id="page_slug_hidden" class="page_slug_hidden"  value="<?php echo $values['page_slug']; ?>" disabled="disabled" />
+							<!-- <br /><em><?php _e("This must be a selector targeting all pagination links on your page - ie, <code>.nav-links a</code>", $this->plugin_slug); ?></em> -->
+						</td>
+					</tr>
+				</table>
+				<hr />
+				<br />
+			</div>
+			<table class="template_ajax_table">
 				
-				<tr class="tpl_archive_rows">
-					<td>
-						<label for="template_name_manual">
-							<?php _e("Enter the filename of the custom template:", $this->plugin_slug); ?>
-							<br /><small><?php _e("The template will be loaded from your theme directory.", $this->plugin_slug); ?></small>
-						</label>
-					</td>
-					<td>
-						<input class="template_name_manual" id="template_name_manual" name="template_name_manual" type="text" value="<?php echo esc_attr($values['template_name_manual']); ?>" />
-						<input type="hidden"  name="template_name_manual" class="template_name_manual_hidden" id="template_name_manual_hidden"  value="<?php echo $values['template_name_manual']; ?>" disabled="disabled" />
-						<!-- <br /><em><?php _e("This must be a selector targeting all pagination links on your page - ie, <code>.nav-links a</code>", $this->plugin_slug); ?></em> -->
-					</td>
-				</tr>
-				
-				<tr class="tpl_archive_rows">
-					<td>
-						<label for="page_slug">
-							<?php _e("Set a slug?", $this->plugin_slug); ?>
-						</label>
-					</td>
-					<td>
-						<?php echo trailingslashit(home_url()); ?> <input class="page_slug" id="page_slug" name="page_slug" type="text" value="<?php echo esc_attr($values['page_slug']); ?>" placeholder="?sfid=<?php echo $post->ID; ?>"  />
-						<input type="hidden"  name="page_slug" id="page_slug_hidden" class="page_slug_hidden"  value="<?php echo $values['page_slug']; ?>" disabled="disabled" />
-						<!-- <br /><em><?php _e("This must be a selector targeting all pagination links on your page - ie, <code>.nav-links a</code>", $this->plugin_slug); ?></em> -->
-					</td>
-				</tr>
-			</table>
-			<hr />
-			<br />
-			<table class="template_options_table">
 				<tr>
 					<td colspan="2">
 						<strong><?php _e("Ajax", $this->plugin_slug ); ?></strong>
 					</td>
 					
 				</tr>
+				
 				<tr>
 					<td>
 						<label for="use_ajax_toggle"><?php _e("Load results using Ajax?", $this->plugin_slug ); ?></label>
@@ -250,8 +384,19 @@
 						<input class="checkbox update_ajax_url" type="checkbox" id="update_ajax_url" name="update_ajax_url"<?php $this->set_checked($values['update_ajax_url']); ?>> 
 					</td>
 				</tr>
-				
-				
+				<!--<tr class="tpl_use_ajax_rows tpl_archive_rows">-->
+				<tr class="tpl_use_ajax_rows">
+					<td>
+						<label for="only_results_ajax">
+							<?php _e("Only use Ajax on the results page?", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("Initially redirect users to your results page", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span><br />
+							<small><?php _e("If the user is not on the results page already, the first submit of the Search Form will cause a page redirect.", $this->plugin_slug); ?></small><br /><br />
+						</label>
+					</td>
+					<td>
+						<input class="checkbox only_results_ajax" type="checkbox" id="only_results_ajax" name="only_results_ajax"<?php $this->set_checked($values['only_results_ajax']); ?>> 
+						
+					</td>
+				</tr>
 				
 				<tr class="tpl_use_ajax_rows scroll_to_row">
 					<td>
@@ -286,8 +431,7 @@
 					</td>
 				</tr>
 				
-				
-				<tr class="tpl_archive_rows tpl_use_ajax_rows">
+				<tr class="tpl_archive_rows tpl_use_ajax_rows tpl_custom_rows">
 					<td>
 						<label for="ajax_target">
 							<?php _e("Results Container:", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("The ID or class of the container which your results are loaded in to", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
@@ -298,8 +442,6 @@
 						<!-- <br /><em><?php _e("This should be an ID, ie - <code>#content</code> - or a unique class selector, ie - <code>.content-container</code>.", $this->plugin_slug); ?></em> -->
 					</td>
 				</tr>
-					
-				
 				
 				<tr class="tpl_use_ajax_rows">
 					<td>
@@ -324,8 +466,33 @@
 				</td>
 				<td>
 					<div class="sf_post_types">
+						<?php
+							
+							foreach ($post_stati as $post_status)
+							{
+								?>
+								<label for="{0}[{1}][post_status][<?php echo $post_status->name; ?>]">
+									<input class="checkbox" type="checkbox" id="{0}[{1}][post_status][<?php echo $post_status->name; ?>]" value="publish" name="settings_post_status[<?php echo $post_status->name; ?>]"<?php $this->set_checked($values['post_status'][$post_status->name]); ?>>
+									<?php echo $post_status->label; ?>
+								</label>
+								
+								<?php
+							}
+							/*echo "<hr />";
+							foreach ($post_stati_private as $post_status)
+							{
+								?>
+								<label for="{0}[{1}][post_status][<?php echo $post_status->name; ?>]">
+									<input class="checkbox" type="checkbox" id="{0}[{1}][post_status][<?php echo $post_status->name; ?>]" value="publish" name="settings_post_status[<?php echo $post_status->name; ?>]"<?php $this->set_checked($values['post_status'][$post_status->name]); ?>>
+									<?php echo $post_status->label; ?>
+								</label>
+								
+								<?php
+							}*/
+						
+						?>
 					
-						<label for="{0}[{1}][post_status][publish]">
+						<!--<label for="{0}[{1}][post_status][publish]">
 							<input class="checkbox" type="checkbox" id="{0}[{1}][post_status][publish]" value="publish" name="settings_post_status[publish]"<?php $this->set_checked($values['post_status']['publish']); ?>>
 							<?php _e('Published', $this->plugin_slug); ?>
 						</label>
@@ -348,7 +515,7 @@
 						<label for="{0}[{1}][post_status][private]">
 							<input class="checkbox" type="checkbox" id="{0}[{1}][post_status][private]" value="private" name="settings_post_status[private]"<?php $this->set_checked($values['post_status']['private']); ?>>
 							<?php _e('Private', $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("not visible to users who are not logged in", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
-						</label>
+						</label>-->
 					</div>
 				</td>
 			</tr>
@@ -361,11 +528,29 @@
 				<td>
 					<input class="" id="exclude_post_ids" name="exclude_post_ids" type="text" size="20" value="<?php echo esc_attr($values['exclude_post_ids']); ?>">
 				</td>
+			</tr><tr>
+				<td>
+					<label for="sticky_posts">
+					<?php _e("Sticky Posts:", $this->plugin_slug ); ?>
+					</label>
+				</td>
+				<td>
+					<fieldset class="sitem">
+						
+						<select name="sticky_posts" class="sticky_posts" id="sticky_posts">
+							<option value=""><?php _e("Default", $this->plugin_slug); ?></option>
+							<option value="exclude"<?php $this->set_selected($values['sticky_posts'], "exclude"); ?>><?php _e("Exclude", $this->plugin_slug); ?></option>
+							<option value="ignore"<?php $this->set_selected($values['sticky_posts'], "ignore"); ?>><?php _e("Ignore", $this->plugin_slug); ?></option>
+							
+						</select>
+						
+					</fieldset>
+				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="default_sort_by">
-					<?php _e("Default Sort Order:", $this->plugin_slug ); ?>
+					<?php _e("Default Order:", $this->plugin_slug ); ?>
 					</label>
 				</td>
 				<td>
@@ -377,6 +562,7 @@
 							<option value="author"<?php $this->set_selected($values['default_sort_by'], "author"); ?>><?php _e("Author", $this->plugin_slug); ?></option>
 							<option value="title"<?php $this->set_selected($values['default_sort_by'], "title"); ?>><?php _e("Title", $this->plugin_slug); ?></option>
 							<option value="name"<?php $this->set_selected($values['default_sort_by'], "name"); ?>><?php _e("Name (Post Slug)", $this->plugin_slug); ?></option>
+							<option value="type"<?php $this->set_selected($values['default_sort_by'], "type"); ?>><?php _e("Type (Post Type)", $this->plugin_slug); ?></option>
 							<option value="date"<?php $this->set_selected($values['default_sort_by'], "date"); ?>><?php _e("Date", $this->plugin_slug); ?></option>
 							<option value="modified"<?php $this->set_selected($values['default_sort_by'], "modified"); ?>><?php _e("Last Modified Date", $this->plugin_slug); ?></option>
 							<option value="parent"<?php $this->set_selected($values['default_sort_by'], "parent"); ?>><?php _e("Parent ID", $this->plugin_slug); ?></option>
@@ -394,10 +580,10 @@
 					</fieldset>
 				</td>
 			</tr>
-			<tr class="sort_by_meta_container">
+			<tr class="sort_by_meta_container_default">
 				<td>
 					<label for="default_meta_key">
-					<?php _e("Sort By Meta Key:", $this->plugin_slug ); ?>
+					<?php  _e("Choose Meta Key:", $this->plugin_slug );  ?>
 					</label>
 				</td>
 				<td>
@@ -414,8 +600,68 @@
 						?> 
 					
 						<select name='default_sort_type' data-field-template-id='default_sort_type'>
-							<option value="numeric"<?php $this->set_selected($values['default_sort_type'], "numeric"); ?>><?php _e("numeric", $this->plugin_slug); ?></option>
-							<option value="alphabetic"<?php $this->set_selected($values['default_sort_type'], "alphabetic"); ?>><?php _e("alphabetic", $this->plugin_slug); ?></option>
+							<option value="numeric"<?php $this->set_selected($values['default_sort_type'], "numeric"); ?>><?php _e("Numerical", $this->plugin_slug); ?></option>
+							<option value="alphabetic"<?php $this->set_selected($values['default_sort_type'], "alphabetic"); ?>><?php _e("Alphabetical", $this->plugin_slug); ?></option>
+						</select>
+					</fieldset>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<label for="secondary_sort_by" style="white-space: nowrap;">
+					<?php _e("Secondary Sort Order:", $this->plugin_slug ); ?> <span class="hint--top hint--info" data-hint="<?php _e("only works with WordPress 4.2 and up", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span>
+					</label>
+				</td>
+				<td>
+					<fieldset class="sitem">
+						
+						<select name="secondary_sort_by" class="secondary_sort_by" id="secondary_sort_by">
+							<option value="0"><?php _e("None", $this->plugin_slug); ?></option>
+							<option value="ID"<?php $this->set_selected($values['secondary_sort_by'], "ID"); ?>><?php _e("Post ID", $this->plugin_slug); ?></option>
+							<option value="author"<?php $this->set_selected($values['secondary_sort_by'], "author"); ?>><?php _e("Author", $this->plugin_slug); ?></option>
+							<option value="title"<?php $this->set_selected($values['secondary_sort_by'], "title"); ?>><?php _e("Title", $this->plugin_slug); ?></option>
+							<option value="name"<?php $this->set_selected($values['secondary_sort_by'], "name"); ?>><?php _e("Name (Post Slug)", $this->plugin_slug); ?></option>
+							<option value="type"<?php $this->set_selected($values['secondary_sort_by'], "type"); ?>><?php _e("Type (Post Type)", $this->plugin_slug); ?></option>
+							<option value="date"<?php $this->set_selected($values['secondary_sort_by'], "date"); ?>><?php _e("Date", $this->plugin_slug); ?></option>
+							<option value="modified"<?php $this->set_selected($values['secondary_sort_by'], "modified"); ?>><?php _e("Last Modified Date", $this->plugin_slug); ?></option>
+							<option value="parent"<?php $this->set_selected($values['secondary_sort_by'], "parent"); ?>><?php _e("Parent ID", $this->plugin_slug); ?></option>
+							<option value="rand"<?php $this->set_selected($values['secondary_sort_by'], "rand"); ?>><?php _e("Random Order", $this->plugin_slug); ?></option>
+							<option value="comment_count"<?php $this->set_selected($values['secondary_sort_by'], "comment_count"); ?>><?php _e("Comment Count", $this->plugin_slug); ?></option>
+							<option value="menu_order"<?php $this->set_selected($values['secondary_sort_by'], "menu_order"); ?>><?php _e("Menu Order", $this->plugin_slug); ?></option>
+							<option value="meta_value"<?php $this->set_selected($values['secondary_sort_by'], "meta_value"); ?>><?php _e("Meta Value", $this->plugin_slug); ?></option>
+						</select>
+					
+						<select name="secondary_sort_dir" class="meta_key" id="secondary_sort_dir">
+							<option value="desc"<?php $this->set_selected($values['secondary_sort_dir'], "desc"); ?>><?php _e("Descending", $this->plugin_slug); ?></option>
+							<option value="asc"<?php $this->set_selected($values['secondary_sort_dir'], "asc"); ?>><?php _e("Ascending", $this->plugin_slug); ?></option>
+						</select>
+						
+					</fieldset>
+				</td>
+			</tr>
+			<tr class="sort_by_meta_container_secondary">
+				<td>
+					<label for="secondary_meta_key">
+					<?php _e("Choose Meta Key:", $this->plugin_slug ); ?>
+					</label>
+				</td>
+				<td>
+					<fieldset>
+						<?php
+							$all_meta_keys = $this->get_all_post_meta_keys();
+							echo '<select name="secondary_meta_key" class="meta_key" id="secondary_meta_key">';
+							foreach($all_meta_keys as $v)
+							{						
+								echo '<option value="'.$v.'"'.$this->set_selected($values['secondary_meta_key'], $v, false).'>'.$v."</option>";
+							}
+							echo '</select> ';
+							
+						?> 
+					
+						<select name='secondary_sort_type' data-field-template-id='secondary_sort_type'>
+							<option value="numeric"<?php $this->set_selected($values['secondary_sort_type'], "numeric"); ?>><?php _e("Numerical", $this->plugin_slug); ?></option>
+							<option value="alphabetic"<?php $this->set_selected($values['secondary_sort_type'], "alphabetic"); ?>><?php _e("Alphabetical", $this->plugin_slug); ?></option>
 						</select>
 					</fieldset>
 				</td>
@@ -424,26 +670,6 @@
 		</div>
 		<div class="sf_field_data sf_tab_content_taxonomies">
 			
-			
-			
-			<p class="description"><?php _e("The relationship between tag, category and taxonomy fields", $this->plugin_slug ); ?></p>
-			
-			<table>
-				<tr>
-					<td valign="middle">
-						<label for="taxonomy_relation"><strong><?php _e("Field relationships:", $this->plugin_slug ); ?></strong><span class="hint--top hint--info" data-hint="<?php _e("AND - posts shown will match all fields, OR - posts shown will match any of the fields", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span></label>
-					</td>
-					<td>
-						<select name="taxonomy_relation" id="taxonomy_relation">
-							<option value=""><?php _e("Default", $this->plugin_slug); ?></option>
-							<option value="and"<?php $this->set_selected($values['taxonomy_relation'], "and"); ?>><?php _e("AND", $this->plugin_slug); ?></option>
-							<option value="or"<?php $this->set_selected($values['taxonomy_relation'], "or"); ?>><?php _e("OR", $this->plugin_slug); ?></option>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br />
-			<hr />
 			<p class="description"><?php _e("Include or Exclude results with specific tags, categories and taxonomy terms.", $this->plugin_slug ); ?></p>
 			
 			<table>
@@ -454,51 +680,40 @@
 					<td>
 						&nbsp;
 					</td>
+					
 					<td>
 						<strong><?php _e("Comma Seperated IDs", $this->plugin_slug ); ?></strong>
 					</td>
 				</tr>
 				<?php
 					$args = array(
-					  'public'   => true
+					  //'public'   => true
 					);
 					
 					$output = 'object';
 					$taxonomies = get_taxonomies( $args, $output );
 					
-					
-					//$tag_tax = get_taxonomy('post_tag');
-					//$category_tax = get_taxonomy('category');
-					
-					
-					//check if hierarchical, if not, do not show drill down option [this taxonomy is not hierarchical so cannot be used as a drill down widget
-					
-					/*if(isset($taxonomies['category']))
+					if(isset($taxonomies['nav_menu']))
 					{
-						unset($taxonomies['category']);
+						unset($taxonomies['nav_menu']);
 					}
-					if(isset($taxonomies['post_tag']))
+					if(isset($taxonomies['link_category']))
 					{
-						unset($taxonomies['post_tag']);
+						unset($taxonomies['link_category']);
 					}
-					
-					array_unshift($taxonomies, $tag_tax, $category_tax);
-					*/
-					
+										
 					if(count($taxonomies)>0)
 					{
-						?>
-						
-						<?php
 						$i = 0;
 						foreach ($taxonomies as $taxonomy)
 						{
 							echo '<tr>';
 							echo "<td>";
 							echo '<label for="'.$taxonomy->name.'_include_exclude">';
-							echo $taxonomy->label;
+							echo $taxonomy->label.' <span class="label_taxonomy_name">('.$taxonomy->name.')';
 							echo '</label>';
 							echo "</td>";
+							
 							echo "<td>";
 							
 							
@@ -527,12 +742,12 @@
 							{
 								$ids_array = array_map("intval" , explode(",", $tval));
 								
-								if(function_exists('icl_object_id'))
+								if(Search_Filter_Helper::has_wpml())
 								{
 									$res = array();
 									foreach ($ids_array as $id)
 									{
-										$xlat = icl_object_id($id,$taxonomy->name,false);
+										$xlat = Search_Filter_Helper::wpml_object_id($id, $taxonomy->name, false);
 										if(!is_null($xlat)) $res[] = $xlat;
 									}
 									$ids_array = $res;
@@ -595,25 +810,62 @@
 				<tr>
 					<td colspan="2">
 						
-						<p><strong>Advanced / Miscellaneous Settings</strong></p>
+						<p><strong><?php _e("Advanced / Miscellaneous Settings", $this->plugin_slug ); ?></strong></p>
 					</td>
 				</tr>
 				<?php
 				
-					if ((is_plugin_active('relevanssi/relevanssi.php')) || (is_plugin_active( 'relevanssi-premium/relevanssi.php'))){
+					//if ((is_plugin_active('relevanssi/relevanssi.php')) || (is_plugin_active( 'relevanssi-premium/relevanssi.php'))){
 					//plugin is activated
 					?>
 					<tr>
 						<td>
-							<label for="use_relevanssi"><?php _e("Use Relevanssi in searches?", $this->plugin_slug ); ?></label>
+							<label for="use_relevanssi"><?php _e("Relevanssi", $this->plugin_slug ); ?></label>
 						</td>
 						<td>
-							<input class="checkbox use_relevanssi" type="checkbox" id="use_relevanssi" name="use_relevanssi"<?php $this->set_checked($values['use_relevanssi']); ?>> 
+							<p class="description" style="font-style:normal;">
+								<label for="use_relevanssi">
+									<input class="checkbox use_relevanssi" type="checkbox" id="use_relevanssi" name="use_relevanssi"<?php $this->set_checked($values['use_relevanssi']); ?>> 
+									<?php _e("Enable", $this->plugin_slug ); ?>
+								</label>
+							</p>
+							
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="use_relevanssi_sort"><?php _e("", $this->plugin_slug ); ?></label>
+						</td>
+						<td>
+							<p class="description" style="font-style:normal;">
+								<label for="use_relevanssi_sort">
+									<input class="checkbox use_relevanssi_sort" type="checkbox" id="use_relevanssi_sort" name="use_relevanssi_sort"<?php $this->set_checked($values['use_relevanssi_sort']); ?>>
+									<?php _e("Sort Results By relevance?", $this->plugin_slug ); ?>
+								</label>
+							</p>
+							<p class="description"><?php _e("When a Search Term has been entered results will be ordered by relevance instead of the default sort order", $this->plugin_slug ); ?></p>
 							<!-- <input type="hidden" name="maintain_state" id="auto_submit_hidden" class="auto_submit_hidden" value="1"> -->
 						</td>
 					</tr>
 					<?php
-					}
+					//}
+				?>
+				<?php
+				
+					//if (is_plugin_active('woocommerce/woocommerce.php')){
+					//plugin is activated
+					/*?>
+					<tr>
+						<td>
+							<label for="is_woocommerce"><?php _e("Use on WooCommerce Store?", $this->plugin_slug ); ?></label>
+						</td>
+						<td>
+							<input class="checkbox is_woocommerce" type="checkbox" id="is_woocommerce" name="is_woocommerce"<?php $this->set_checked($values['is_woocommerce']); ?>> 
+							<!-- <input type="hidden" name="maintain_state" id="auto_submit_hidden" class="auto_submit_hidden" value="1"> -->
+						</td>
+					</tr>
+					<?php*/
+					//}
 				?>
 				<tr>
 					<td width="275">
@@ -621,6 +873,14 @@
 					</td>
 					<td>
 						<input class="checkbox force_is_search" type="checkbox" id="force_is_search" name="force_is_search"<?php $this->set_checked($values['force_is_search']); ?>> 
+					</td>
+				</tr>
+				<tr>
+					<td width="275">
+						<label for="force_is_archive"><?php _e("Force <a href='http://codex.wordpress.org/Function_Reference/is_archive' target='_blank'>is_archive</a> to always be true?", $this->plugin_slug ); ?></label>
+					</td>
+					<td>
+						<input class="checkbox force_is_archive" type="checkbox" id="force_is_archive" name="force_is_archive"<?php $this->set_checked($values['force_is_archive']); ?>> 
 					</td>
 				</tr>
 				

@@ -38,7 +38,7 @@
 							
 							<?php
 								$args = array(
-								  'public'   => true
+								  //'public'   => true
 								);
 								
 								$output = 'object';
@@ -53,6 +53,14 @@
 								if(isset($taxonomies['post_tag']))
 								{
 									unset($taxonomies['post_tag']);
+								}
+								if(isset($taxonomies['nav_menu']))
+								{
+									unset($taxonomies['nav_menu']);
+								}
+								if(isset($taxonomies['link_category']))
+								{
+									unset($taxonomies['link_category']);
 								}
 								
 								//first taxonomy
@@ -73,7 +81,7 @@
 											$first_tax_label = $taxonomy->label;
 										}
 										
-										echo '<option value="'.$taxonomy->name.'"'.$this->set_selected($values['taxonomy_name'], $taxonomy->name, false).'>'.__($taxonomy->label, $this->plugin_slug)."</option>";
+										echo '<option value="'.$taxonomy->name.'"'.$this->set_selected($values['taxonomy_name'], $taxonomy->name, false).'>'.$taxonomy->label." (".$taxonomy->name.")</option>";
 										$i++;
 									}
 									
@@ -86,6 +94,7 @@
 					<p class="sf_input_type">
 						<label for="{0}[{1}][input_type]"><?php _e("Input type: ", $this->plugin_slug); ?><br />
 							<select name="{0}[{1}][input_type]" class="" id="{0}[{1}][input_type]">
+								<!--<option value="list"<?php $this->set_selected($values['input_type'], "list"); ?>><?php _e("List", $this->plugin_slug); ?></option>-->
 								<option value="select"<?php $this->set_selected($values['input_type'], "select"); ?>><?php _e("Dropdown", $this->plugin_slug); ?></option>
 								<option value="checkbox"<?php $this->set_selected($values['input_type'], "checkbox"); ?>><?php _e("Checkbox", $this->plugin_slug); ?></option>
 								<option value="radio"<?php $this->set_selected($values['input_type'], "radio"); ?>><?php _e("Radio", $this->plugin_slug); ?></option>
@@ -114,6 +123,10 @@
 						</label>
 					</p>
 					
+					<p class="sf_accessibility_label">
+						<label for="{0}[{1}][accessibility_label]"><?php _e("Add screen reader text?", $this->plugin_slug); ?><span class="hint--top hint--info" data-hint="<?php _e("adds hidden text that will be read by screen readers - complies with WCAG 2.0", $this->plugin_slug); ?>"><i class="dashicons dashicons-info"></i></span><br />
+						<input class="" id="{0}[{1}][accessibility_label]" name="{0}[{1}][accessibility_label]" type="text" value="<?php echo esc_attr($values['accessibility_label']); ?>"></label>
+					</p>
 				</fieldset>
 				
 				

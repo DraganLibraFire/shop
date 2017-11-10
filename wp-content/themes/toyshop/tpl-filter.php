@@ -25,11 +25,11 @@ get_header( 'shop' ); ?>
 		<div class="sort-filter-wrapper-lf product-order-wrapper borders">
 
 		</div>
-		<?php echo do_shortcode('[searchandfilter id="1772" show="results"]'); ?>
+		<?php echo do_shortcode('[searchandfilter id="67179" show="results"]'); ?>
 	</div>
 	<div class="col-md-3 widget widget_search_filter_register_widget">
 		<h4 class="more-filters"><?php _e('Show Filters', 'shop') ?>    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
-		<?php echo do_shortcode('[searchandfilter id="1772"]'); ?>
+		<?php echo do_shortcode('[searchandfilter id="67179"]'); ?>
 	</div>
 
 </div>

@@ -7,7 +7,7 @@
  * @package   Search_Filter
  * @author    Ross Morsali
  * @link      http://www.designsandcode.com/
- * @copyright 2014 Designs & Code
+ * @copyright 2015 Designs & Code
  * 
  * Note: these templates are not full page templates, rather 
  * just an encaspulation of the your results loop which should
@@ -52,7 +52,7 @@ if ( $query->have_posts() )
 		<div>
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			
-			<p><br /><?php the_excerpt(); ?><p>
+			<p><br /><?php the_excerpt(); ?></p>
 			<?php 
 				if ( has_post_thumbnail() ) {
 					echo '<p>';
@@ -60,9 +60,9 @@ if ( $query->have_posts() )
 					echo '</p>';
 				}
 			?>
-			<p><?php the_category(); ?><p>
-			<p><?php the_tags(); ?><p>
-			<p><small><?php the_date(); ?></small><p>
+			<p><?php the_category(); ?></p>
+			<p><?php the_tags(); ?></p>
+			<p><small><?php the_date(); ?></small></p>
 			
 		</div>
 		
