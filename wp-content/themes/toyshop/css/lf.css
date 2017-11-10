@@ -1245,7 +1245,41 @@ body.home .widget.widget_product_categories .product-categories li a {
   width: auto;
   vertical-align: top; }
 
-.widget .widget-title {
+.home-category-wrapper .home-sidebar-list-cayegory {
+  padding-left: 0;
+  margin-bottom: 10px; }
+  .home-category-wrapper .home-sidebar-list-cayegory li {
+    position: relative;
+    padding: 5px 0; }
+    .home-category-wrapper .home-sidebar-list-cayegory li ul {
+      padding-left: 0;
+      margin: 0; }
+    .home-category-wrapper .home-sidebar-list-cayegory li a {
+      font-size: 14px;
+      font-family: "Prelo Medium";
+      text-transform: capitalize;
+      color: #303030;
+      display: inline-block;
+      max-width: 66%;
+      width: 100%;
+      vertical-align: middle;
+      word-wrap: break-word;
+      transition: all 0.4s;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s; }
+      .home-category-wrapper .home-sidebar-list-cayegory li a:hover {
+        color: #4d3d7a; }
+.home-category-wrapper .custom-title-category {
+  font-family: "Prelo Bold";
+  font-size: 17px;
+  color: #856bc8;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle; }
+
+.widget .widget-title, .home-category-wrapper .widget-title {
   font-family: "Prelo Bold";
   font-size: 18px;
   color: #ff7800;
@@ -1253,16 +1287,16 @@ body.home .widget.widget_product_categories .product-categories li a {
   margin-top: 0;
   margin-bottom: 10px;
   padding: 0; }
-.widget.widget_search_filter_register_widget {
+.widget.widget_search_filter_register_widget, .home-category-wrapper.widget_search_filter_register_widget {
   margin-right: -15px; }
-  .widget.widget_search_filter_register_widget .searchandfilter {
+  .widget.widget_search_filter_register_widget .searchandfilter, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter {
     margin-top: -15px; }
-    .widget.widget_search_filter_register_widget .searchandfilter li.sf-field-sort_order {
+    .widget.widget_search_filter_register_widget .searchandfilter li.sf-field-sort_order, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter li.sf-field-sort_order {
       display: none; }
-    .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children {
+    .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children {
       display: none;
       margin-left: 20px; }
-  .widget.widget_search_filter_register_widget .widget-title {
+  .widget.widget_search_filter_register_widget .widget-title, .home-category-wrapper.widget_search_filter_register_widget .widget-title {
     font-family: "Prelo Bold";
     font-size: 18px;
     color: #ff7800;
@@ -1270,12 +1304,12 @@ body.home .widget.widget_product_categories .product-categories li a {
     margin-top: 0;
     margin-bottom: 10px;
     padding: 0; }
-  .widget.widget_search_filter_register_widget .noUi-connect {
+  .widget.widget_search_filter_register_widget .noUi-connect, .home-category-wrapper.widget_search_filter_register_widget .noUi-connect {
     background-color: #856bc8; }
-  .widget.widget_search_filter_register_widget .meta-range {
+  .widget.widget_search_filter_register_widget .meta-range, .home-category-wrapper.widget_search_filter_register_widget .meta-range {
     font-family: "Prelo Medium";
     font-size: 14px; }
-  .widget.widget_search_filter_register_widget .stepper {
+  .widget.widget_search_filter_register_widget .stepper, .home-category-wrapper.widget_search_filter_register_widget .stepper {
     display: inline-block;
     min-width: 50px;
     margin-bottom: 0;
@@ -1283,52 +1317,52 @@ body.home .widget.widget_product_categories .product-categories li a {
     vertical-align: middle;
     margin-right: 5px;
     margin-left: 5px; }
-    .widget.widget_search_filter_register_widget .stepper .stepper-arrow {
+    .widget.widget_search_filter_register_widget .stepper .stepper-arrow, .home-category-wrapper.widget_search_filter_register_widget .stepper .stepper-arrow {
       display: none !important; }
-    .widget.widget_search_filter_register_widget .stepper input {
+    .widget.widget_search_filter_register_widget .stepper input, .home-category-wrapper.widget_search_filter_register_widget .stepper input {
       border-right: 1px solid #b1b1b1 !important;
       padding: 5px 5px;
       text-align: center;
       width: 100% !important; }
-  .widget.widget_search_filter_register_widget ul {
+  .widget.widget_search_filter_register_widget ul, .home-category-wrapper.widget_search_filter_register_widget ul {
     padding: 0; }
-  .widget.widget_search_filter_register_widget h4 {
+  .widget.widget_search_filter_register_widget h4, .home-category-wrapper.widget_search_filter_register_widget h4 {
     font-size: 18px;
     line-height: 18px;
     color: #856bc8;
     margin-top: 0;
     margin-bottom: 0;
     padding: 8px 0 0px; }
-  .widget.widget_search_filter_register_widget li {
+  .widget.widget_search_filter_register_widget li, .home-category-wrapper.widget_search_filter_register_widget li {
     font-size: 14px;
     font-family: "Prelo Light";
     padding: 5px 0;
     color: #303030; }
-    .widget.widget_search_filter_register_widget li ul {
+    .widget.widget_search_filter_register_widget li ul, .home-category-wrapper.widget_search_filter_register_widget li ul {
       padding: 0 0 5px; }
-    .widget.widget_search_filter_register_widget li label {
+    .widget.widget_search_filter_register_widget li label, .home-category-wrapper.widget_search_filter_register_widget li label {
       position: relative;
       cursor: pointer; }
-      .widget.widget_search_filter_register_widget li label input[type='checkbox'] {
+      .widget.widget_search_filter_register_widget li label input[type='checkbox'], .home-category-wrapper.widget_search_filter_register_widget li label input[type='checkbox'] {
         opacity: 0;
         visibility: hidden;
         margin-right: 5px; }
-        .widget.widget_search_filter_register_widget li label input[type='checkbox']:checked + span.search-check i:before {
+        .widget.widget_search_filter_register_widget li label input[type='checkbox']:checked + span.search-check i:before, .home-category-wrapper.widget_search_filter_register_widget li label input[type='checkbox']:checked + span.search-check i:before {
           content: '\f046'; }
-      .widget.widget_search_filter_register_widget li label .search-check {
+      .widget.widget_search_filter_register_widget li label .search-check, .home-category-wrapper.widget_search_filter_register_widget li label .search-check {
         position: absolute;
         display: inline-block;
         left: 0;
         top: 5px; }
-    .widget.widget_search_filter_register_widget li .sf-count {
+    .widget.widget_search_filter_register_widget li .sf-count, .home-category-wrapper.widget_search_filter_register_widget li .sf-count {
       color: #ff7800; }
-.widget.widget_product_categories .product-categories {
+.widget.widget_product_categories .product-categories, .home-category-wrapper.widget_product_categories .product-categories {
   padding-left: 0;
   margin-bottom: 30px; }
-  .widget.widget_product_categories .product-categories li {
+  .widget.widget_product_categories .product-categories li, .home-category-wrapper.widget_product_categories .product-categories li {
     position: relative;
     padding: 5px 0; }
-    .widget.widget_product_categories .product-categories li .count {
+    .widget.widget_product_categories .product-categories li .count, .home-category-wrapper.widget_product_categories .product-categories li .count {
       color: #ff7800;
       font-size: 14px;
       display: inline-block;
@@ -1337,10 +1371,10 @@ body.home .widget.widget_product_categories .product-categories li a {
       right: -10px;
       text-align: right;
       vertical-align: middle; }
-    .widget.widget_product_categories .product-categories li ul {
+    .widget.widget_product_categories .product-categories li ul, .home-category-wrapper.widget_product_categories .product-categories li ul {
       padding-left: 0;
       margin: 0; }
-    .widget.widget_product_categories .product-categories li a {
+    .widget.widget_product_categories .product-categories li a, .home-category-wrapper.widget_product_categories .product-categories li a {
       font-size: 14px;
       font-family: "Prelo Medium";
       color: #303030;
@@ -1349,7 +1383,7 @@ body.home .widget.widget_product_categories .product-categories li a {
       width: 100%;
       vertical-align: middle;
       word-wrap: break-word; }
-    .widget.widget_product_categories .product-categories li.cat-parent > a {
+    .widget.widget_product_categories .product-categories li.cat-parent > a, .home-category-wrapper.widget_product_categories .product-categories li.cat-parent > a {
       font-family: "Prelo Bold";
       font-size: 17px;
       color: #856bc8;
@@ -1361,7 +1395,7 @@ body.home .widget.widget_product_categories .product-categories li a {
       -webkit-transition: all 0.4s;
       -moz-transition: all 0.4s;
       -o-transition: all 0.4s; }
-      .widget.widget_product_categories .product-categories li.cat-parent > a:hover {
+      .widget.widget_product_categories .product-categories li.cat-parent > a:hover, .home-category-wrapper.widget_product_categories .product-categories li.cat-parent > a:hover {
         color: #4d3d7a; }
 
 /*--------- Main content styling ---------------*/
@@ -2453,8 +2487,20 @@ div.woocommerce ul.products {
       margin: auto;
       text-align: center;
       width: 165px;
+      font-size: 12px;
+      color: #fff;
+      background-color: #4d3d7a;
+      font-family: "Prelo Book";
+      border: 1px solid #4d3d7a;
+      cursor: pointer;
       padding-top: 15px;
-      padding-bottom: 13px; }
+      padding-bottom: 13px;
+      padding-left: 0;
+      padding-right: 0; }
+      body.woocommerce ul.products li .one-product-inner .button:hover,
+      div.woocommerce ul.products li .one-product-inner .button:hover {
+        color: #4d3d7a;
+        background-color: #fff; }
       body.woocommerce ul.products li .one-product-inner .button.loading,
       div.woocommerce ul.products li .one-product-inner .button.loading {
         text-align: left;

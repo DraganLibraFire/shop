@@ -1401,8 +1401,46 @@ body.home{
     }
   }
 }
+.home-category-wrapper{
+  .home-sidebar-list-cayegory{
+    padding-left: 0;
+    margin-bottom: 10px;
+    li{
+      position: relative;
+      padding: 5px 0;
+      ul{
+        padding-left: 0;
+        margin: 0;
+      }
+      a{
+        font-size: 14px;
+        font-family: $lists_font;
+        text-transform: capitalize;
+        color: $main_paragraph;
+        display: inline-block;
+        max-width: 66%;
+        width: 100%;
+        vertical-align: middle;
+        word-wrap: break-word;
+        @include transform-transition(all 0.4s);
+        &:hover{
+          color: $purple_dark;
+        }
+      }
+    }
+  }
+  .custom-title-category{
+    font-family: $headings_font;
+    font-size: 17px;
+    color: $main_purple;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 0 ;
+    vertical-align: middle;
+  }
+}
 
-.widget{
+.widget, .home-category-wrapper{
   .widget-title{
     font-family: $headings_font;
     font-size: 18px;
@@ -2908,8 +2946,20 @@ div.woocommerce{
           margin:auto;
           text-align: center;
           width: 165px;
+          font-size: 12px ;
+          color: #fff;
+          background-color: #4d3d7a ;
+          font-family: "Prelo Book" ;
+          border: 1px solid #4d3d7a ;
+          cursor: pointer ;
           padding-top: 15px;
           padding-bottom: 13px;
+          padding-left: 0;
+          padding-right: 0;
+          &:hover{
+            color: $purple_dark;
+            background-color: $main_white;
+          }
           &.loading{
             text-align: left;
             opacity: 1;

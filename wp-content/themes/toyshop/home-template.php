@@ -17,7 +17,10 @@ get_header(); ?>
             <?php endwhile; // End of the loop. ?>
 
         </main><!-- #main -->
-        <?php get_sidebar(); ?>
+<!--        --><?php //get_sidebar(); ?>
+        <div class="col-md-2">
+            <?php get_template_part( 'template-parts/content', 'home_sidebar' );?>
+        </div>
     </div><!-- #primary -->
 </div>
 </div>
@@ -36,6 +39,5 @@ get_header(); ?>
 <?php endwhile; // End of the loop. ?>
 
 <div class="container">
-
 
 <?php get_footer(); ?>

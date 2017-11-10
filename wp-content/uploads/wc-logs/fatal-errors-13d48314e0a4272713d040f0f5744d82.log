@@ -142,3 +142,11 @@ Stack trace:
 #7 {main}
   thrown
 
+2017-11-10T08:48:01+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Term as array in C:\wamp64\www\shop\wp-content\themes\toyshop\home-template.php:50
+Stack trace:
+#0 C:\wamp64\www\shop\wp-includes\template-loader.php(74): include()
+#1 C:\wamp64\www\shop\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\s...')
+#2 C:\wamp64\www\shop\index.php(17): require('C:\\wamp64\\www\\s...')
+#3 {main}
+  thrown
+
