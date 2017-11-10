@@ -42,6 +42,15 @@
 					</select>
 				</label>
 			</p>
+			<p class="item-container">	
+				<label for="{0}[{1}][submit_form]"><?php _e("Submit Form: ", $this->plugin_slug); ?><br />
+					<select name="{0}[{1}][submit_form]" class="" id="{0}[{1}][submit_form]">
+						<option value="always"<?php $this->set_selected($values['submit_form'], "always"); ?>><?php _e("Always", $this->plugin_slug); ?></option>
+						<option value="never"<?php $this->set_selected($values['submit_form'], "never"); ?>><?php _e("Never", $this->plugin_slug); ?></option>
+						<option value="auto"<?php $this->set_selected($values['submit_form'], "auto"); ?>><?php _e("Only when auto submit is enabled", $this->plugin_slug); ?></option>
+					</select>
+				</label>
+			</p>
 			<div class="clear"></div>
 		</div>
 		
