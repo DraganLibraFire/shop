@@ -1,4 +1,13 @@
 jQuery(function($){
+
+    $('.ubermenu-target').each(function(){
+        var _this = $(this).find('.ubermenu-target-text');
+
+        if( $(_this).find("i").length <= 0 )
+            $(_this).html($(_this).html().replace(/-/g, ' '));
+
+        $(this).animate({ opacity: 1});
+    });
     function equal(){
 
         var heights = {
@@ -148,12 +157,15 @@ jQuery(function($){
         $(".searchandfilter ul li input").each(function(){
             if( $(this).is(":checked") ){
                 $(this).parents('li').eq(0).find(' > .children').slideDown();
+                $(this).parents('li').eq(0).find(' > label').css({'color':'#856BC8'});
+                $(this).parents('li').eq(0).find(' > .expand-icon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
             }
             else{
                 if( $(this).parents('li').eq(0).find(' > .children input:checked').length == 0 ){
                     $(this).parents('li').eq(0).find(' > .children').slideUp();
+                    $(this).parents('li').eq(0).find(' > label').css({'color':'#303030'});
+                    $(this).parents('li').eq(0).find(' > .expand-icon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
                 }
-
             }
         })
     }
@@ -167,5 +179,4 @@ jQuery(function($){
         galleryFadeOut: 300 ,         /* fadeOut speed before slide is loaded */
         closeIcon: "<span><i class='fa fa-times' aria-hidden='true'></i></span>"
     });
-
 });

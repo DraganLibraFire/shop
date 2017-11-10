@@ -415,6 +415,7 @@ class Search_Filter_Taxonomy_Walker extends Walker_Category {
 				return;
 
 			$indent = str_repeat("\t", $depth);
+			$output .= "$indent<i class='expand-icon fa fa-chevron-down'></i>";
 			$output .= "$indent<ul class='children'>\n";
 		}
 		else if($this->type=="multiselect")

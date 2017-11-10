@@ -112,6 +112,30 @@ $light_font: 'Prelo Light';
 $tabs_font: 'Prelo Semi Bold';
 $table_font: 'Prelo Black';
 /*General Style*/
+.ubermenu-target-text{
+  text-transform: capitalize !important;
+
+}
+.ubermenu-target{
+  opacity: 0;
+
+}
+.ubermenu-tabs-group{
+  .ubermenu-target-title{
+    font-family: $lists_font !important;
+    color: $main_purple !important;
+  }
+  .ubermenu-custom-content{
+    color: $main_dark;
+    font-family: $headings_font !important;
+    h1,h2,h3,h4,h5,h6,p{
+      font-family: inherit !important;
+    }
+  }
+}
+
+
+
 body {
   background-color: $main_background;
   h1,
@@ -334,43 +358,43 @@ a {
 ::-webkit-input-placeholder {
   opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 \:-moz-placeholder {
   opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 ::-moz-placeholder {
    opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 \:-ms-input-placeholder {
    opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 *::-webkit-input-placeholder {
    opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 *:-moz-placeholder {
    opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 *:-ms-input-placeholder {
    opacity: 1 !important;
   color: $placeholder_color;
-  font-size: 12px;
+  font-size: 14px;
   font-family: $lists_font;
 }
 /*-------inputs-------*/
@@ -891,9 +915,23 @@ div.featherlight {
     }
   }
 }
+/*aws search*/
+.aws-container{
+}
 .aws-search-result{
   max-width: 570px;
-
+  border-radius: 15px;
+  overflow: hidden;
+  li{
+    font-size: 16px;
+  }
+  .aws_result_link{
+    font-size: 16px;
+    color: $purple_dark;
+    .aws_result_title{
+      color: $purple_dark;
+    }
+  }
 }
 .site-header {
   background-color: $lightest_light;
@@ -1075,6 +1113,7 @@ div.featherlight {
       width: 90%;
       input{
         margin-bottom: 0;
+        font-size: 16px;
       }
       .aws-search-field {
         padding-left: 20px;
@@ -1097,7 +1136,7 @@ div.featherlight {
         padding: 12px 20px;
       }
       .fa{
-        font-size: 32px;
+        font-size: 33px;
       }
       a {
         color: $main_white;
@@ -1404,7 +1443,7 @@ body.home{
 .home-category-wrapper{
   .home-sidebar-list-cayegory{
     padding-left: 0;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     li{
       position: relative;
       padding: 5px 0;
@@ -1418,8 +1457,8 @@ body.home{
         text-transform: capitalize;
         color: $main_paragraph;
         display: inline-block;
-        max-width: 66%;
         width: 100%;
+        line-height: 95%;
         vertical-align: middle;
         word-wrap: break-word;
         @include transform-transition(all 0.4s);
@@ -1435,7 +1474,7 @@ body.home{
     color: $main_purple;
     text-transform: uppercase;
     display: inline-block;
-    margin-bottom: 0 ;
+    margin-bottom: 5px ;
     vertical-align: middle;
   }
 }
@@ -1458,11 +1497,49 @@ body.home{
         display: none;
       }
       .sf-field-taxonomy-product_cat {
+        h4{
+          margin-bottom: 40px;
+        }
       > ul {
+        margin-bottom: 40px;
+        .search-check{
+          color: $main_paragraph !important;
+        }
+        li{
+          position: relative;
+          .expand-icon{
+            position: absolute;
+            right: 0;
+            top: 10px;
+          }
+        }
         > li{
+          border-bottom: 1px solid $border_color;
+          padding-top: 12px;
+          padding-bottom: 15px;
+          > .expand-icon{
+            top: 15px;
+          }
+          &:last-child{
+            border-bottom: none;
+          }
+          label{
+            z-index: 1;
+          }
           .children{
             display: none;
-            margin-left: 20px;
+            margin-left: 30px;
+            position: relative;
+            &:before{
+              content: '';
+              position: absolute;
+              top:5px;
+              bottom: 5px;
+              width: 1px;
+              left: -25px;
+              background-color: $border_color;
+            }
+
           }
          }
         }
@@ -1510,7 +1587,7 @@ body.home{
       line-height: 18px;
       color: $main_purple;
       margin-top: 0;
-      margin-bottom: 0;
+      margin-bottom: 10px;
       padding: 8px 0 0px;;
     }
     li{
@@ -1553,20 +1630,23 @@ body.home{
     .product-categories{
       padding-left: 0;
       margin-bottom: 30px;
+      > li{
+        border-bottom: 1px solid #c4c4c4;
+        padding-top: 12px ;
+        padding-bottom: 15px ;
+
+      }
       li{
         position: relative;
-        padding: 5px 0;
         .count{
           color: $main_orange;
           font-size: 14px;
           //position: absolute;
           display: inline-block;
-          max-width: 32%;
-          width: 100%;
-          right: -10px;
           text-align: right;
           vertical-align: middle;
         }
+
         ul{
           padding-left: 0;
           margin: 0;
@@ -1574,28 +1654,46 @@ body.home{
         a{
           font-size: 14px;
           font-family: $lists_font;
-          color: $main_paragraph;
-          display: inline-block;
-          max-width: 66%;
-          width: 100%;
-          vertical-align: middle;
-          word-wrap: break-word;
+          padding: 5px 0;
+          color: $main_dark;
+          @include transform-transition(all 0.4s);
+          &:hover{
+            color: $purple_dark;
+          }
         }
         &.cat-parent{
           >a{
-            font-family: $headings_font;
-            font-size: 17px;
             color: $main_purple;
-            text-transform: uppercase;
-            display: inline-block;
-            //margin-top: 25px;
-            margin-bottom: 10px;
-            vertical-align: middle;
-            @include transform-transition(all 0.4s);
-            &:hover{
-              color: $purple_dark;
-            }
           }
+         .children{
+           padding-left: 30px;
+           position: relative;
+           .cat-parent{
+             >a{
+               color: $main_purple;
+             }
+           }
+           &:before{
+             content: '';
+             position: absolute;
+             top: 5px;
+             bottom: 5px;
+             width: 1px;
+             left: 0;
+             background-color: #c4c4c4;
+           }
+           li{
+             padding-top: 5px;
+             padding-bottom: 5px;
+           }
+           a{
+             color: $main_dark;
+             font-weight: 400;
+             &:hover{
+               color: $purple_dark;
+             }
+           }
+         }
 
         }
       }

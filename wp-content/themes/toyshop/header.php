@@ -69,7 +69,8 @@
 		</div>
 		<div class="menu-wrapper">
 			<div class="container">
-				<nav id="site-navigation" class="display-table-cell alignvertical pull-none main-navigation clearfix" role="navigation">
+<!--				display-table-cell alignvertical pull-none main-navigation clearfix-->
+				<nav id="site-navigation" class="lf-uber-menu-wrapper " role="navigation">
 					<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i></button>
 					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'clearfix pull-right' ) ); ?>
 				</nav><!-- #site-navigation -->

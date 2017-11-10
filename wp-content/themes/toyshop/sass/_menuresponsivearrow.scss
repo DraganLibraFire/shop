@@ -6,6 +6,7 @@ header {
       position: fixed;
       left: -100%;
       top: 0;
+      @include box-shadow( 0 0 10px $main_dark);
       @include transform-transition(all .5s);
       height: 100%;
       width: 40%;
@@ -35,7 +36,7 @@ header {
       }
     }
     .menu-toggle {
-      display: block;
+      display: none;
       background-color: transparent;
       border: none;
       color: $main_white;

@@ -19,18 +19,18 @@ get_header( 'shop' ); ?>
 	//	do_action( 'woocommerce_sidebar' );
 
 	?>
+	<div class="col-md-3 widget widget_search_filter_register_widget">
+		<h4 class="more-filters"><?php _e('Show Filters', 'shop') ?>    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
+		<?php echo do_shortcode('[searchandfilter id="67210"]'); ?>
+	</div>
 
-
-	<div class="col-md-9 pull-right">
+	<div class="col-md-9">
 		<div class="sort-filter-wrapper-lf product-order-wrapper borders">
 
 		</div>
-		<?php echo do_shortcode('[searchandfilter id="67179" show="results"]'); ?>
+		<?php echo do_shortcode('[searchandfilter id="67210" show="results"]'); ?>
 	</div>
-	<div class="col-md-3 widget widget_search_filter_register_widget">
-		<h4 class="more-filters"><?php _e('Show Filters', 'shop') ?>    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
-		<?php echo do_shortcode('[searchandfilter id="67179"]'); ?>
-	</div>
+
 
 </div>
 <?php
