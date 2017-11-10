@@ -125,6 +125,9 @@
 
 }/*(max-width: 1020px)*/
 @media all and (max-width: 991px) {
+  .widget.woocommerce.widget_product_categories{
+    display: none;
+  }
   .menu-toggle{
     display: none !important;
   }
@@ -258,7 +261,7 @@
   .widget.widget_product_categories {
     .product-categories {
       li{
-        width: 32%;
+        width: 100%;
         display: inline-block;
         &.cat-parent{
           width: 100%;
@@ -634,7 +637,7 @@
   .widget.widget_product_categories {
     .product-categories {
       li{
-        width: 49%;
+        width: 100%;
         display: inline-block;
         &.cat-parent{
           width: 100%;
@@ -747,7 +750,6 @@
       li{
         width: 100%;
         display: inline-block;
-        text-align: center;
         &.cat-parent{
           width: 100%;
           display: block;
@@ -823,6 +825,11 @@
       }
       }
     }
+  }
+}
+@media all and (max-width: 450px) {
+  .woocommerce-result-count{
+    display:none;
   }
 }
 @media all and (max-width: 420px) {

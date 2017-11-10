@@ -420,6 +420,7 @@ function registration_errors_validation($reg_errors, $sanitized_user_login, $use
 	return $reg_errors;
 }
 add_filter('woocommerce_page_title','lf_title_replace');
+
 function lf_title_replace($title){
 
 	return str_replace('-',' ',$title);

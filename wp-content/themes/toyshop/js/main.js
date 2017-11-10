@@ -8,6 +8,14 @@ jQuery(function($){
 
         $(this).animate({ opacity: 1});
     });
+
+    $('#breadcrumbs span a, .breadcrumb_last').each(function(){
+        var _this = $(this);
+
+        $(_this).html($(_this).html().replace(/-/g, ' '));
+
+        $('#breadcrumbs').animate({ opacity: 1});
+    });
     function equal(){
 
         var heights = {
@@ -148,6 +156,7 @@ jQuery(function($){
     });
     $('.more-filters').on('click',function(){
         $('.widget.widget_search_filter_register_widget form').slideToggle('slow');
+        $('.widget.woocommerce.widget_product_categories').slideToggle('slow');
         $(this).toggleClass('expand');
     });
 

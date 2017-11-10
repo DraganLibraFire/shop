@@ -508,6 +508,7 @@ body .select2-dropdown{
 /*Breadcrumbs styling*/
 #breadcrumbs {
   margin-bottom: 30px;
+  opacity: 0 ;
   span,
   a {
     color: $main_paragraph;
@@ -3052,8 +3053,8 @@ div.woocommerce{
           cursor: pointer ;
           padding-top: 15px;
           padding-bottom: 13px;
-          padding-left: 0;
-          padding-right: 0;
+          padding-left: 18px;
+          padding-right: 18px;
           &:hover{
             color: $purple_dark;
             background-color: $main_white;
@@ -3064,9 +3065,10 @@ div.woocommerce{
             &:after{
               top: 0;
               bottom: 0;
-              margin:auto;
-              right: 25px;
               height: 12px;
+              margin-top: auto;
+              margin-bottom: auto;
+              width: 12px;
             }
           }
         }
@@ -3278,6 +3280,7 @@ div.woocommerce{
       border: none;
       li{
         margin-left: 5px;
+        margin-bottom: 5px;
         border: none;
         &:first-child{
           margin-left: 0;

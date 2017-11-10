@@ -32,7 +32,9 @@ get_header( 'shop' ); ?>
 	 */
 //	do_action( 'woocommerce_sidebar' );
 
+
 	?>
+	<?php get_sidebar(); ?>
 		<div class="col-md-9 pull-right">
 			<?php
 			remove_action('woocommerce_before_main_content','woocommerce_breadcrumb', 20);
@@ -117,7 +119,7 @@ get_header( 'shop' ); ?>
 		</div>
 		</div>
 		</div>
-	<?php get_sidebar(); ?>
+
 
 </div>
 	<?php

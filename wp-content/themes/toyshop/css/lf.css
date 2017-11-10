@@ -509,7 +509,8 @@ body .select2-dropdown {
 
 /*Breadcrumbs styling*/
 #breadcrumbs {
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  opacity: 0; }
   #breadcrumbs span,
   #breadcrumbs a {
     color: #303030;
@@ -2563,8 +2564,8 @@ div.woocommerce ul.products {
       cursor: pointer;
       padding-top: 15px;
       padding-bottom: 13px;
-      padding-left: 0;
-      padding-right: 0; }
+      padding-left: 18px;
+      padding-right: 18px; }
       body.woocommerce ul.products li .one-product-inner .button:hover,
       div.woocommerce ul.products li .one-product-inner .button:hover {
         color: #4d3d7a;
@@ -2577,9 +2578,10 @@ div.woocommerce ul.products {
         div.woocommerce ul.products li .one-product-inner .button.loading:after {
           top: 0;
           bottom: 0;
-          margin: auto;
-          right: 25px;
-          height: 12px; }
+          height: 12px;
+          margin-top: auto;
+          margin-bottom: auto;
+          width: 12px; }
 body.woocommerce.woocommerce-page .woocommerce-breadcrumb,
 body.woocommerce.woocommerce-page .breadcrumbs,
 div.woocommerce.woocommerce-page .woocommerce-breadcrumb,
@@ -2783,6 +2785,7 @@ div.woocommerce nav.woocommerce-pagination ul {
   body.woocommerce nav.woocommerce-pagination ul li,
   div.woocommerce nav.woocommerce-pagination ul li {
     margin-left: 5px;
+    margin-bottom: 5px;
     border: none; }
     body.woocommerce nav.woocommerce-pagination ul li:first-child,
     div.woocommerce nav.woocommerce-pagination ul li:first-child {
@@ -3035,6 +3038,9 @@ h4.log-reg-title {
 /*(max-width: 1024px)*/
 /*(max-width: 1020px)*/
 @media all and (max-width: 991px) {
+  .widget.woocommerce.widget_product_categories {
+    display: none; }
+
   .menu-toggle {
     display: none !important; }
 
@@ -3134,7 +3140,7 @@ h4.log-reg-title {
     padding-right: 15px; }
 
   .widget.widget_product_categories .product-categories li {
-    width: 32%;
+    width: 100%;
     display: inline-block; }
     .widget.widget_product_categories .product-categories li.cat-parent {
       width: 100%;
@@ -3385,7 +3391,7 @@ margin-right: auto;*/ }
     width: 100%; }
 
   .widget.widget_product_categories .product-categories li {
-    width: 49%;
+    width: 100%;
     display: inline-block; }
     .widget.widget_product_categories .product-categories li.cat-parent {
       width: 100%;
@@ -3449,8 +3455,7 @@ margin-right: auto;*/ }
     text-align: center; }
   .widget.widget_product_categories .product-categories li {
     width: 100%;
-    display: inline-block;
-    text-align: center; }
+    display: inline-block; }
     .widget.widget_product_categories .product-categories li.cat-parent {
       width: 100%;
       display: block; }
@@ -3497,6 +3502,9 @@ margin-right: auto;*/ }
       padding-left: 5px !important;
       padding-right: 5px !important;
       font-size: 10px; } }
+@media all and (max-width: 450px) {
+  .woocommerce-result-count {
+    display: none; } }
 @media all and (max-width: 420px) {
   body.woocommerce ul.products li.product .product-title h2, body.woocommerce ul.products li.product .product-title h1, body.woocommerce ul.products li.product .product-title h3, body.woocommerce ul.products li.product .product-title h4, body.woocommerce ul.products li.product .product-title h5, body.woocommerce ul.products li.product .product-title h6 {
     font-size: 16px; }
