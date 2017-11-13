@@ -14,13 +14,15 @@ if ( ! function_exists( 'starter_setup' ) ) :
  * as indicating support for post thumbnails.
  */
 function starter_setup() {
+
+	show_admin_bar(false);
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
 	 * If you're building a theme based on Starter, use a find and replace
 	 * to change 'starter' to the name of your theme in all the template files
 	 */
-	load_theme_textdomain( 'starter', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'shop', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );

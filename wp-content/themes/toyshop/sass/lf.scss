@@ -123,7 +123,7 @@ $table_font: 'Prelo Black';
 .ubermenu-tabs-group{
   .ubermenu-target-title{
     font-family: $lists_font !important;
-    color: $main_purple !important;
+    //color: $main_purple !important;
   }
   .ubermenu-custom-content{
     color: $main_dark;
@@ -354,6 +354,7 @@ a {
      opacity: .7;
    }
 }
+
 /*---- Placeholder ----*/
 ::-webkit-input-placeholder {
   opacity: 1 !important;
@@ -934,6 +935,9 @@ div.featherlight {
     }
   }
 }
+nav.ubermenu{
+  z-index: 2 !important;
+}
 .site-header {
   background-color: $lightest_light;
   .website-logo-main-wrapper {
@@ -1031,7 +1035,7 @@ div.featherlight {
               background-color: $purple_dark;
               font-family: $paragraph_font;
               display: inline-block;
-              padding: 9px 36px;
+              padding: 9px 30px;
               text-transform: uppercase;
               border: 1px solid $purple_dark;
               line-height: 12px;
@@ -1459,7 +1463,7 @@ body.home{
         color: $main_paragraph;
         display: inline-block;
         width: 100%;
-        line-height: 95%;
+        line-height: 120%;
         vertical-align: middle;
         word-wrap: break-word;
         @include transform-transition(all 0.4s);
@@ -1839,7 +1843,7 @@ body.home{
       cursor: pointer;
       @include border-radius(20px);
       &:hover{
-        background-color: $main_white;
+        background-color: transparent;
       }
       &:active,
       &:visited{
@@ -2642,7 +2646,7 @@ body.woocommerce-page{
       .woo-account-user-email{
         font-size: 37px;
         font-family: $lists_font;
-        width: 50%;
+        width: 48%;
       }
       .woo-account-add-cart{
         a{
@@ -2662,7 +2666,7 @@ body.woocommerce-page{
         }
       }
       .customer-services-wrapper{
-        width: 40%;
+        width: 39%;
         > div{
           padding: 0 15px;
           display: inline-block;
@@ -2727,7 +2731,7 @@ div.woocommerce{
               font-size: 14px;
               border: none !important;
               background-color: $table_row_2;
-              min-width: 197px;
+              min-width: 177px;
               width: 197px;
               @include border-radius(20px 0 0 20px);
             }
@@ -3433,7 +3437,9 @@ h4{
     line-height: 170%;
   }
 }
-
+.mobile-menu{
+  display: none;
+}
   /*-------------------- Responsive ---------------*/
   /*-------------------- Responsive ---------------*/
   /*-------------------- Responsive ---------------*/

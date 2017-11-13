@@ -27,7 +27,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
 ?>
 <li <?php post_class(); ?>>
-	<div class="one-product-inner" data-equald="product" data-equal-width="620">
+	<div class="one-product-inner" data-equald="product" >
 		<?php
 		/**
 		 * woocommerce_before_shop_loop_item hook.
@@ -43,7 +43,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		 * @hooked woocommerce_template_loop_product_thumbnail - 10
 		 */
 		?>
-		<div class="product-thumbnail" data-equal="thumbnail" data-equal-width="620">
+		<div class="product-thumbnail" data-equal="thumbnail" >
 			<?php do_action( 'woocommerce_before_shop_loop_item_title' ); ?>
 		</div>
 		<?php
@@ -53,7 +53,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		 * @hooked woocommerce_template_loop_product_title - 10
 		 */
 		?>
-		<div class="product-title" data-equal="title" data-equal-width="620">
+		<div class="product-title" data-equal="title" >
 			<?php do_action( 'woocommerce_shop_loop_item_title' ); ?>
 		</div>
 

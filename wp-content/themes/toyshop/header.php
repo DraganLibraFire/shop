@@ -20,7 +20,7 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'starter' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'shop' ); ?></a>
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-phone-account-details-top-main-header">
 			<div class="container">
@@ -31,7 +31,7 @@
 								<div class="content-left">
 
 								<span id="header-phone">
-									<a href="tel: <?php echo get_theme_mod('phone_number'); ?>"><i class="fa fa-phone" aria-hidden="true"></i> Call us: <?php echo get_theme_mod('phone_number'); ?></a>
+									<a href="tel: <?php echo get_theme_mod('phone_number'); ?>"><i class="fa fa-phone" aria-hidden="true"></i> <?php _e('Call us: ','shop') ?> <?php echo get_theme_mod('phone_number'); ?></a>
 								</span>
 								</div>
 							</div>
@@ -72,10 +72,14 @@
 <!--				display-table-cell alignvertical pull-none main-navigation clearfix-->
 				<nav id="site-navigation" class="lf-uber-menu-wrapper " role="navigation">
 					<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i></button>
-					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'clearfix pull-right' ) ); ?>
+					<?php ubermenu( 'main' , array( 'menu' => 64 ) ); ?>
 				</nav><!-- #site-navigation -->
 			</div>
 		</div>
+		<div class="mobile-menu">
+			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'menu_class' => 'clearfix pull-right' ) ); ?>
+		</div>
+
 	</header><!-- #masthead -->
 	<?php
 	if( have_rows('shop_features', 'option') ): ?>

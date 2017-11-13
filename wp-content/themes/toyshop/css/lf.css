@@ -46,8 +46,7 @@
   opacity: 0; }
 
 .ubermenu-tabs-group .ubermenu-target-title {
-  font-family: "Prelo Medium" !important;
-  color: #856bc8 !important; }
+  font-family: "Prelo Medium" !important; }
 .ubermenu-tabs-group .ubermenu-custom-content {
   color: #303030;
   font-family: "Prelo Bold" !important; }
@@ -868,6 +867,9 @@ div.featherlight .featherlight-close-icon {
     .aws-search-result .aws_result_link .aws_result_title {
       color: #4d3d7a; }
 
+nav.ubermenu {
+  z-index: 2 !important; }
+
 .site-header {
   background-color: #f2f2f2; }
   .site-header .website-logo-main-wrapper > aside {
@@ -947,7 +949,7 @@ div.featherlight .featherlight-close-icon {
           background-color: #4d3d7a;
           font-family: "Prelo Book";
           display: inline-block;
-          padding: 9px 36px;
+          padding: 9px 30px;
           text-transform: uppercase;
           border: 1px solid #4d3d7a;
           line-height: 12px;
@@ -1288,7 +1290,7 @@ body.home .widget.widget_product_categories .product-categories li a {
       color: #303030;
       display: inline-block;
       width: 100%;
-      line-height: 95%;
+      line-height: 120%;
       vertical-align: middle;
       word-wrap: break-word;
       transition: all 0.4s;
@@ -1584,7 +1586,7 @@ body.home .widget.widget_product_categories .product-categories li a {
     -ms-border-radius: 20px;
     border-radius: 20px; }
     .banner-wrapper .slider-content a:hover {
-      background-color: #fff; }
+      background-color: transparent; }
     .banner-wrapper .slider-content a:active, .banner-wrapper .slider-content a:visited {
       color: #fff; }
 
@@ -2171,7 +2173,7 @@ body.woocommerce-page {
     body.woocommerce-page.woocommerce-account .woo-account-header .woo-account-user-email {
       font-size: 37px;
       font-family: "Prelo Medium";
-      width: 50%; }
+      width: 48%; }
     body.woocommerce-page.woocommerce-account .woo-account-header .woo-account-add-cart a {
       font-size: 13px;
       color: #ff7800;
@@ -2184,7 +2186,7 @@ body.woocommerce-page {
       display: block;
       text-align: center; }
     body.woocommerce-page.woocommerce-account .woo-account-header .customer-services-wrapper {
-      width: 40%; }
+      width: 39%; }
       body.woocommerce-page.woocommerce-account .woo-account-header .customer-services-wrapper > div {
         padding: 0 15px;
         display: inline-block;
@@ -2247,7 +2249,7 @@ div.woocommerce table.shop_table {
           font-size: 14px;
           border: none !important;
           background-color: #F1F1F1;
-          min-width: 197px;
+          min-width: 177px;
           width: 197px;
           -webkit-border-radius: 20px 0 0 20px;
           -moz-border-radius: 20px 0 0 20px;
@@ -2926,6 +2928,9 @@ h4.log-reg-title {
   .register-custom-text-wrapper p {
     line-height: 170%; }
 
+.mobile-menu {
+  display: none; }
+
 /*-------------------- Responsive ---------------*/
 /*-------------------- Responsive ---------------*/
 /*-------------------- Responsive ---------------*/
@@ -3030,9 +3035,9 @@ h4.log-reg-title {
   .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat h4 {
     margin-bottom: 20px; }
 
-  .home-icon-nav {
-    display: none !important; }
-
+  /*  .home-icon-nav{
+      display: none !important;
+    }*/
   body .ubermenu.ubermenu-responsive .ubermenu-column:nth-of-type(2n+1) {
     clear: none; } }
 /*(max-width: 1024px)*/
@@ -3041,8 +3046,8 @@ h4.log-reg-title {
   .widget.woocommerce.widget_product_categories {
     display: none; }
 
-  .menu-toggle {
-    display: none !important; }
+  .home-category-wrapper {
+    display: none; }
 
   body.woocommerce ul.products li .one-product-inner .button,
   div.woocommerce ul.products li .one-product-inner .button {
@@ -3211,7 +3216,10 @@ margin-right: auto;*/ }
   .home #secondary.widget-area.col-md-2 {
     display: none; }
   .home .col-md-3.sidebar {
-    margin-top: 50px; } }
+    margin-top: 50px; }
+
+  .site-header .website-logo-main-wrapper .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a {
+    padding: 9px 20px; } }
 /*(max-width: 991px)*/
 @media all and (max-width: 960px) {
   .widget.widget_search_filter_register_widget {
@@ -3222,6 +3230,78 @@ margin-right: auto;*/ }
     width: 60%; } }
 /*(max-width: 770px)*/
 @media all and (max-width: 768px) {
+  .menu-wrapper {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10; }
+
+  body {
+    margin-top: 40px; }
+
+  #site-navigation nav {
+    display: none; }
+
+  .menu-toggle {
+    display: block;
+    float: right;
+    font-size: 20px;
+    background-color: #303030;
+    color: #fff;
+    border: none; }
+
+  .mobile-menu {
+    display: block;
+    overflow: hidden;
+    position: fixed;
+    left: -100%;
+    top: 40px;
+    background: #f9f9f9;
+    width: 80%;
+    height: 100%;
+    color: #fff;
+    z-index: 10;
+    -moz-box-shadow: 0 0 10px #303030;
+    -webkit-box-shadow: 0 0 10px #303030;
+    box-shadow: 0 0 10px #303030; }
+    .mobile-menu h4 {
+      padding: 16px 0;
+      background: #856bc8;
+      color: #fff;
+      margin-top: 0;
+      font-size: 16px;
+      line-height: 100%; }
+      .mobile-menu h4 i {
+        font-size: 16px;
+        line-height: 100%;
+        color: #fff; }
+    .mobile-menu ul {
+      width: 100%;
+      padding-left: 0;
+      margin-left: 0;
+      z-index: 2; }
+    .mobile-menu li {
+      padding: 0 15px 10px; }
+      .mobile-menu li a {
+        display: inline-block;
+        width: 80%;
+        vertical-align: middle;
+        font-family: "Prelo Medium"; }
+      .mobile-menu li .expand-menu-link {
+        text-align: right;
+        position: absolute;
+        width: 19%;
+        vertical-align: middle; }
+    .mobile-menu ul.sub-menu {
+      background-color: #f9f9f9;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 105%; }
+    .mobile-menu a, .mobile-menu li, .mobile-menu span, .mobile-menu div {
+      color: #4d3d7a; }
+
   body.woocommerce-page .cart-collaterals .cart_totals {
     max-width: 100%; }
 
@@ -3326,6 +3406,9 @@ margin-right: auto;*/ }
     font-size: 15px;
     line-height: 15px; }
 
+  .site-header .website-logo-main-wrapper .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a {
+    padding: 9px 6px; }
+
   .home-tabs-features > .row {
     text-align: center; }
   .home-tabs-features .nav.nav-tabs {
@@ -3356,6 +3439,9 @@ margin-right: auto;*/ }
   body.woocommerce.woocommerce-page div.product div.images {
     padding-right: 0; } }
 /*(max-width: 767px)*/
+@media all and (max-width: 670px) {
+  .woocommerce-result-count {
+    display: none; } }
 @media all and (max-width: 640px) {
   .form-log-reg-wrapper .form-row.form-row-last, .form-log-reg-wrapper .form-row.form-row-first {
     width: 100% !important; }
@@ -3408,6 +3494,30 @@ margin-right: auto;*/ }
     width: 100%; } }
 /*(max-width: 640px)*/
 @media all and (max-width: 620px) {
+  body h1 {
+    font-size: 30px;
+    line-height: 30px; }
+
+  body h2 {
+    font-size: 25px;
+    line-height: 25px; }
+
+  body h3 {
+    font-size: 21px;
+    line-height: 21px; }
+
+  body h4 {
+    font-size: 19px;
+    line-height: 19px; }
+
+  body h5 {
+    font-size: 17px;
+    line-height: 17px; }
+
+  body h6 {
+    font-size: 15px;
+    line-height: 15px; }
+
   [data-equal] {
     opacity: 1 !important;
     height: auto !important; } }
@@ -3502,9 +3612,6 @@ margin-right: auto;*/ }
       padding-left: 5px !important;
       padding-right: 5px !important;
       font-size: 10px; } }
-@media all and (max-width: 450px) {
-  .woocommerce-result-count {
-    display: none; } }
 @media all and (max-width: 420px) {
   body.woocommerce ul.products li.product .product-title h2, body.woocommerce ul.products li.product .product-title h1, body.woocommerce ul.products li.product .product-title h3, body.woocommerce ul.products li.product .product-title h4, body.woocommerce ul.products li.product .product-title h5, body.woocommerce ul.products li.product .product-title h6 {
     font-size: 16px; }
