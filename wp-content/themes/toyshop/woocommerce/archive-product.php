@@ -142,8 +142,19 @@ get_header( 'shop' ); ?>
 			</div>
 		</div>
 		<div class="col-md-9 over-ons-section-text" data-equal="over-ons">
-			<h2><?php woocommerce_page_title()?></h2>
-			<p><?php do_action( 'woocommerce_archive_description' ); ?></p>
+
+			<?php
+			if(has_action('name_of_action_to_check_for')) {
+				// action exists so execute it
+				?>
+					<h2><?php woocommerce_page_title()?></h2>
+					<p><?php do_action( 'woocommerce_archive_description' ); ?></p>
+				<?php
+			} else {
+				the_field('over_ons_text', 'option');
+			}
+			?>
+			
 		</div>
 	</div>
 </div>

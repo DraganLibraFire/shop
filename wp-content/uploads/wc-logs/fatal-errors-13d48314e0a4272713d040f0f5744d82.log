@@ -150,3 +150,13 @@ Stack trace:
 #3 {main}
   thrown
 
+2017-11-15T15:52:37+00:00 CRITICAL Uncaught Error: Call to undefined function he_field() in C:\wamp64\www\shop\wp-content\themes\toyshop\woocommerce\archive-product.php:151
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-core-functions.php(209): include()
+#1 C:\wamp64\www\shop\wp-content\themes\toyshop\woocommerce\taxonomy-product_cat.php(22): wc_get_template('archive-product...')
+#2 C:\wamp64\www\shop\wp-includes\template-loader.php(74): include('C:\\wamp64\\www\\s...')
+#3 C:\wamp64\www\shop\wp-blog-header.php(19): require_once('C:\\wamp64\\www\\s...')
+#4 C:\wamp64\www\shop\index.php(17): require('C:\\wamp64\\www\\s...')
+#5 {main}
+  thrown
+
