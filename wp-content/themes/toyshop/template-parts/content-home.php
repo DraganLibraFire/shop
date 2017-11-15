@@ -75,7 +75,7 @@
                                     <?php endwhile; ?>
                                 </ul>
                                 <a class="button purple pull-right" href="<?php the_sub_field('category_link') ?> ">
-                                    More <?php echo $taxonomy ?></a>
+                                    Meer <?php echo $taxonomy ?></a>
                             </div>
                             <?php wp_reset_query(); ?>
                         </div>

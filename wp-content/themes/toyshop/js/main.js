@@ -188,4 +188,16 @@ jQuery(function($){
         galleryFadeOut: 300 ,         /* fadeOut speed before slide is loaded */
         closeIcon: "<span><i class='fa fa-times' aria-hidden='true'></i></span>"
     });
+
+    var menu_height = $( '.site-header .menu-wrapper' ).height();
+    var menu_height2 = $( '.site-header .menu-wrapper' ).height();
+    if($('body').hasClass('logged-in')){
+        menu_height = menu_height+46;
+    }
+    if ($(window).width() < 767) {
+        $('.mobile-menu, .widget_shopping_mini_cart_content .dropdown').css({'top': menu_height});
+        $('.mobile-menu ').css({'top': menu_height});
+        $('body > .site').css({'margin-top': menu_height2});
+    }
+
 });

@@ -20,7 +20,7 @@ get_header( 'shop' ); ?>
 
 	?>
 	<div class="col-md-3 widget widget_search_filter_register_widget">
-		<h4 class="more-filters"><?php _e('Show Filters', 'shop') ?>    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
+		<h4 class="more-filters">Toon filters <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
 		<?php echo do_shortcode('[searchandfilter id="67210"]'); ?>
 	</div>
 

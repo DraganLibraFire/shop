@@ -31,7 +31,7 @@
 								<div class="content-left">
 
 								<span id="header-phone">
-									<a href="tel: <?php echo get_theme_mod('phone_number'); ?>"><i class="fa fa-phone" aria-hidden="true"></i> <?php _e('Call us: ','shop') ?> <?php echo get_theme_mod('phone_number'); ?></a>
+									<a href="tel: <?php echo get_theme_mod('phone_number'); ?>"><i class="fa fa-phone" aria-hidden="true"></i> Bel ons <?php echo get_theme_mod('phone_number'); ?></a>
 								</span>
 								</div>
 							</div>
@@ -69,11 +69,20 @@
 		</div>
 		<div class="menu-wrapper">
 			<div class="container">
-<!--				display-table-cell alignvertical pull-none main-navigation clearfix-->
 				<nav id="site-navigation" class="lf-uber-menu-wrapper " role="navigation">
 					<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i></button>
 					<?php ubermenu( 'main' , array( 'menu' => 64 ) ); ?>
 				</nav><!-- #site-navigation -->
+				<aside class="main-logo-inner ">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+						<!--							<img src="--><?php //echo get_stylesheet_directory_uri(); ?><!--/images/logo-white.png" alt="--><?php //echo( get_bloginfo( 'title' ) ); ?><!--" />-->
+						<img src="<?php echo( get_header_image() ); ?>" alt="<?php echo( get_bloginfo( 'title' ) ); ?>" />
+					</a>
+				</aside>
+
+				<?php dynamic_sidebar('top-bar-woo-2');?>
+<!--				display-table-cell alignvertical pull-none main-navigation clearfix-->
+
 			</div>
 		</div>
 		<div class="mobile-menu">

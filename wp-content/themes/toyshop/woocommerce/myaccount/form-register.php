@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
 
-	<h4 class="log-reg-title"><?php _e( 'Create <span>Account</span>', 'woocommerce' ); ?></h4>
+	<h4 class="log-reg-title"><?php _e( 'Maak <span>Account</span>', 'woocommerce' ); ?></h4>
 
 	<div class="row">
 		<div class="register-custom-text-wrapper login-page-custom-text-wrapper col-md-6 clearfix">

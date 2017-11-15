@@ -112,15 +112,24 @@
 		if( _window.is_mobile){
 
 			$(".menu-toggle").on( 'click', function(){
-				$('.mobile-menu').animate({
-					left: '0%'
-				}, 200, function(){
-
-					$(this).addClass('expanded');
-				});
-				$(this).addClass('cancle');
+				if($(this).hasClass('expanded')){
+					$('.mobile-menu').animate({
+						left: '-100%'
+					}, 200, function(){
+						$(".menu-toggle").removeClass('expanded');
+					});
+				}
+				else{
+					$('.mobile-menu').animate({
+						left: '0%'
+					}, 200, function(){
+						$(".menu-toggle").addClass('expanded');
+					});
+				}
 
 			});
+
+
 
 
 			var back_btn_global = $(" <li style='padding-left: 0 !important; padding-right: 0 !important; text-indent: 5px;'><h4 class='back-menu-link-wrapper'><span class='back-menu-link'><i class='fa fa-close'></i></span> SLUIT</h4></li>");

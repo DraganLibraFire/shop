@@ -15,7 +15,7 @@ if ( ! function_exists( 'starter_setup' ) ) :
  */
 function starter_setup() {
 
-	show_admin_bar(false);
+//	show_admin_bar(false);
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
@@ -426,5 +426,13 @@ add_filter('woocommerce_page_title','lf_title_replace');
 function lf_title_replace($title){
 
 	return str_replace('-',' ',$title);
+
+}
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
+add_filter( 'woocommerce_product_add_to_cart_text', 'woo_custom_cart_button_text' );
+
+function woo_custom_cart_button_text() {
+
+	return __( 'In Winkelmand', 'woocommerce' );
 
 }

@@ -940,6 +940,156 @@ nav.ubermenu{
 }
 .site-header {
   background-color: $lightest_light;
+  .widget_shopping_mini_cart.dropdown-cart {
+    max-width: 200px;
+    width: 200px;
+    position: relative;
+    padding: 26px 24px 25px 15px;
+    background-color: $purple_dark;
+    @include transform-transition(all 0.4s);
+    &.active{
+      background-color: $main_white;
+      h4.widget-title{
+        color: $main_paragraph;
+      }
+      .dropdown-total{
+        .amount{
+          color: $main-paragraph;
+        }
+        &:after{
+          content: url('../images/cart-black.png') !important;
+        }
+      }
+    }
+    h4.widget-title{
+      position: relative;
+      top: 27px;
+      font-size: 16px;
+      color: $main_white;
+      height: 18px;
+    }
+    .dropdown-cart-button{
+      border: 0;
+      background: none;
+      padding: 0;
+      width: 100%;
+      display: block;
+      text-align: right;
+      position: relative;
+      .dropdown {
+        right: -24px;
+        left: auto;
+        top: 70px;
+        padding: 20px;
+        width: 420px;
+        border: none;
+        @include box-shadow(1px 2px 1px 0px rgba(242,242,242,0.7));
+        img{
+          display: none !important;
+        }
+        .dropdown-header-cart{
+          p{
+            margin: 0;
+            text-align: left;
+            &:first-child{
+              font-size: 18px;
+              font-family: $headings_font;
+            }
+            &:last-child{
+              font-size: 14px;
+              font-family: $light_font;
+              span{
+                color: $main_orange;
+              }
+            }
+          }
+        }
+        .buttons{
+          a{
+            font-size: 12px;
+            color: $main_white;
+            background-color: $purple_dark;
+            font-family: $paragraph_font;
+            display: inline-block;
+            padding: 9px 30px;
+            text-transform: uppercase;
+            border: 1px solid $purple_dark;
+            line-height: 12px;
+            @include border-radius(20px);
+            @include transform-transition(all 0.4s);
+            &:hover{
+              color: $purple_dark;
+              background-color: $main_white;
+            }
+          }
+        }
+        .total{
+          .amount{
+            min-width: 80px;
+            display: inline-block;
+          }
+        }
+        .woocommerce-Price-amount{
+          color: $main_orange;
+          font-size: 16px;
+          font-family: $headings_font;
+          display: inline-block;
+          min-width: 80px;
+        }
+        .quantity{
+          font-size: 16px;
+          font-family: $headings_font;
+          width: 30%;
+          color: $main_paragraph;
+        }
+        .cart_list{
+          li{
+            padding-top: 20px;
+            padding-bottom: 15px;
+            border-color: #303030;
+          }
+          a {
+            text-transform: none;
+            float: left;
+            width: 55%;
+            font-size: 16px;
+            font-family: $headings_font;
+            text-align: left;
+            color: $main_paragraph;
+          }
+        }
+      }
+      .dropdown-total{
+        background: none;
+        padding: 0;
+        color: $main_white;
+        font-size: 20px;
+        font-family: $headings_font;
+        position: relative;
+        .amount{
+          padding-right: 7px;
+        }
+        .count-item{
+          position: absolute;
+          display: block;
+          background-color: $main_orange;
+          height: 27px;
+          width: 27px;
+          color: $main_white;
+          font-size: 16px;
+          font-family: $paragraph_font;
+          text-align: center;
+          padding-top: 3px;
+          right: -18px;
+          top: -20px;
+          @include border-radius(50%);
+        }
+        &:after{
+          content: url("../images/cart.png");
+        }
+      }
+    }
+  }
   .website-logo-main-wrapper {
     > aside {
       vertical-align: middle;
@@ -964,156 +1114,7 @@ nav.ubermenu{
         width: 100% !important;
       }
     }
-    .widget_shopping_mini_cart.dropdown-cart {
-      max-width: 200px;
-      width: 200px;
-      position: relative;
-      padding: 26px 24px 25px 15px;
-      background-color: $purple_dark;
-      @include transform-transition(all 0.4s);
-      &.active{
-        background-color: $main_white;
-        h4.widget-title{
-          color: $main_paragraph;
-        }
-        .dropdown-total{
-          .amount{
-            color: $main-paragraph;
-          }
-          &:after{
-            content: url('../images/cart-black.png') !important;
-          }
-        }
-      }
-      h4.widget-title{
-        position: relative;
-        top: 27px;
-        font-size: 16px;
-        color: $main_white;
-        height: 18px;
-      }
-      .dropdown-cart-button{
-        border: 0;
-        background: none;
-        padding: 0;
-        width: 100%;
-        display: block;
-        text-align: right;
-        position: relative;
-        .dropdown {
-          right: -24px;
-          left: auto;
-          top: 70px;
-          padding: 20px;
-          width: 420px;
-          border: none;
-          @include box-shadow(1px 2px 1px 0px rgba(242,242,242,0.7));
-          img{
-            display: none !important;
-          }
-          .dropdown-header-cart{
-            p{
-              margin: 0;
-              text-align: left;
-              &:first-child{
-                font-size: 18px;
-                font-family: $headings_font;
-              }
-              &:last-child{
-                font-size: 14px;
-                font-family: $light_font;
-                span{
-                  color: $main_orange;
-                }
-              }
-            }
-          }
-          .buttons{
-            a{
-              font-size: 12px;
-              color: $main_white;
-              background-color: $purple_dark;
-              font-family: $paragraph_font;
-              display: inline-block;
-              padding: 9px 30px;
-              text-transform: uppercase;
-              border: 1px solid $purple_dark;
-              line-height: 12px;
-              @include border-radius(20px);
-              @include transform-transition(all 0.4s);
-              &:hover{
-                color: $purple_dark;
-                background-color: $main_white;
-              }
-            }
-          }
-          .total{
-            .amount{
-              min-width: 80px;
-              display: inline-block;
-            }
-          }
-          .woocommerce-Price-amount{
-            color: $main_orange;
-            font-size: 16px;
-            font-family: $headings_font;
-            display: inline-block;
-            min-width: 80px;
-          }
-          .quantity{
-            font-size: 16px;
-            font-family: $headings_font;
-            width: 30%;
-            color: $main_paragraph;
-          }
-          .cart_list{
-            li{
-              padding-top: 20px;
-              padding-bottom: 15px;
-              border-color: #303030;
-            }
-            a {
-              text-transform: none;
-              float: left;
-              width: 55%;
-              font-size: 16px;
-              font-family: $headings_font;
-              text-align: left;
-              color: $main_paragraph;
-            }
-          }
-        }
-        .dropdown-total{
-          background: none;
-          padding: 0;
-          color: $main_white;
-          font-size: 20px;
-          font-family: $headings_font;
-          position: relative;
-          .amount{
-            padding-right: 7px;
-          }
-          .count-item{
-            position: absolute;
-            display: block;
-            background-color: $main_orange;
-            height: 27px;
-            width: 27px;
-            color: $main_white;
-            font-size: 16px;
-            font-family: $paragraph_font;
-            text-align: center;
-            padding-top: 3px;
-            right: -18px;
-            top: -20px;
-            @include border-radius(50%);
-          }
-          &:after{
-            content: url("../images/cart.png");
-          }
-        }
-      }
-    }
+
     .aws-search-form {
       width: 90%;
       input{
@@ -3439,6 +3440,13 @@ h4{
 }
 .mobile-menu{
   display: none;
+}
+.menu-wrapper{
+  >div{
+    >aside{
+      display: none;
+    }
+  }
 }
   /*-------------------- Responsive ---------------*/
   /*-------------------- Responsive ---------------*/

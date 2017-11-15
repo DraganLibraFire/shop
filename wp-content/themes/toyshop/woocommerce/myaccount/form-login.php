@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="row">
 			<div class="login-form-wrapper form-log-reg-wrapper col-sm-6">
-				<h4 class="log-reg-title"><?php _e( 'Returning <span>Customer</span>', 'woocommerce' ); ?></h4>
+				<h4 class="log-reg-title"><?php _e( 'Terugkerende <span>Klant</span>', 'woocommerce' ); ?></h4>
 
 				<form class="woocommerce-form woocommerce-form-login login" method="post">
 
@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="login-page-custom-text-wrapper">
 					<?php the_field('login_text','option'); ?>
 					<div class="link-on-login-page">
-						<a class="button purple" href="<?php echo get_permalink(woocommerce_get_page_id('myaccount')) ?>?action=register"><?php _e('continue','shop') ?></a>
+						<a class="button purple" href="<?php echo get_permalink(woocommerce_get_page_id('myaccount')) ?>?action=register">Verder...</a>
 					</div>
 				</div>
 			</div>

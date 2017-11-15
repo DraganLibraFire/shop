@@ -407,6 +407,11 @@
 
 }/*(max-width: 770px)*/
 @media all and (max-width: 768px) {
+  .logged-in{
+    .menu-wrapper{
+      top: 46px;
+    }
+  }
   .menu-wrapper{
     position: fixed;
     top: 0;
@@ -423,11 +428,99 @@
   }
   .menu-toggle{
     display: block;
-    float: right;
+    float: left;
     font-size: 20px;
     background-color: $main_dark;
     color: $main_white;
     border: none;
+  }
+  .website-logo-main-wrapper{
+    display: none;
+  }
+
+  .site-header{
+    .header-small-toggle-wrapper{
+      border-bottom: 1px solid $main_dark;
+    }
+    nav#site-navigation{
+      display: inline-block !important;
+      width: 32%;
+      vertical-align: middle;
+      button{
+        padding:0;
+
+      }
+    }
+    .main-logo-inner{
+      display: inline-block;
+      vertical-align: middle;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      width: 33%;
+      text-align: center;
+      img{
+        height: 50px;
+      }
+    }
+    .widget.widget_text{
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .widget_shopping_mini_cart.dropdown-cart{
+      display: inline-block;
+      padding: 10px 0 0 0;
+      width: 33%;
+      vertical-align: middle;
+      text-align: right;
+      margin-bottom: 0;
+      background-color: transparent;
+      &.active{
+        background-color: transparent;
+        .dropdown-total{
+          height: 30px;
+          width: 25px;
+          display: inline-block !important;
+          background-size: contain !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          &:after{
+            content: none !important;
+          }
+        }
+      }
+      .dropdown-total {
+        height: 30px;
+        width: 25px;
+        display: inline-block !important;
+        background: url("../images/cart.png") !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        &:after{
+          content: none !important;
+        }
+        .count-item{
+          display: none !important;
+        }
+        .woocommerce-Price-amount{
+          display: none !important;
+        }
+      }
+      .dropdown-cart-button {
+        .dropdown{
+          position: fixed;
+          width: 100%;
+          left:0;
+          right:0;
+          max-width: 100%;
+        }
+      }
+      .widget-title{
+        display: none;
+      }
+    }
   }
   .mobile-menu {
     display: block;
