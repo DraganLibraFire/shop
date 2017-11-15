@@ -43,7 +43,7 @@
 						</div>
 					</div>
 					<div class="search-form-header-small">
-						<?php echo do_shortcode('[aws_search_form]'); ?>
+						<?php echo do_shortcode('[wi_autosearch_suggest_form]'); ?>
 					</div>
 				</div>
 				<div class="header-small-toggle-wrapper text-center">

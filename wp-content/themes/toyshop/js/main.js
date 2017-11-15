@@ -200,4 +200,7 @@ jQuery(function($){
         $('body > .site').css({'margin-top': menu_height2});
     }
 
+    var timeout = setInterval(function(){
+        $(".wp_autosearch_suggestions ul li, .wp_autosearch_suggestions ul li a").off('click');
+    }, 500);
 });

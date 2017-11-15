@@ -16,7 +16,7 @@
 @media all and (max-width: 1200px) {
   .site-header {
     .website-logo-main-wrapper {
-      .widget.widget_text form{
+      .widget.widget_wizardinfosys_autosearch form{
         max-width: 470px;
       }
       .widget_shopping_mini_cart.dropdown-cart {
@@ -26,6 +26,11 @@
       }
     }
 
+  }
+  body{
+    .wp_autosearch_suggestions{
+      min-width: 470px;
+    }
   }
 }/*(max-width: 1200px)*/
 @media all and (max-width: 1024px) {
@@ -147,10 +152,25 @@
   }
   .search-form-header-small{
     display: block;
-    .aws-search-form .aws-search-field{
-      padding-left: 20px;
-      padding-right: 20px;
-      border-radius: 30px !important;
+    #wizardinfosys_autosearch_form {
+      width: 100%;
+
+      input{
+        margin-bottom: 0;
+        width: 100% !important;
+        font-size: 16px !important;
+        height: 44px !important;
+      }
+      button{
+        display: none !important;
+      }
+      .wp_autosearch_form_wrapper {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        border-color: $border_color !important;
+        height: 46px !important;
+        @include border-radius(30px !important);
+      }
     }
   }
   .logo-shop-details-wrapper{
@@ -203,7 +223,7 @@
           }
         }
       }
-      .widget.widget_text{
+      .widget.widget_wizardinfosys_autosearch{
        display: none;
       }
     }
@@ -1017,8 +1037,12 @@
     }
   }
 }
-@media all and (max-width: 450px) {
-
+@media all and (max-width: 470px) {
+  body{
+    .wp_autosearch_suggestions{
+      min-width: auto;
+    }
+  }
 }
 @media all and (max-width: 420px) {
   body.woocommerce ul.products li.product .product-title {

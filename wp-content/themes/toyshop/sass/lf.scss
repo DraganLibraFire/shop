@@ -938,6 +938,18 @@ div.featherlight {
 nav.ubermenu{
   z-index: 2 !important;
 }
+body{
+  .wp_autosearch_suggestions{
+    min-width: 570px;
+    margin-left: -20px !important;
+    overflow: hidden;
+    @include border-radius(15px);
+    ul{
+      height: 300px;
+      overflow: auto;
+    }
+  }
+}
 .site-header {
   background-color: $lightest_light;
   .widget_shopping_mini_cart.dropdown-cart {
@@ -1107,23 +1119,30 @@ nav.ubermenu{
       }
     }
 
-    .widget.widget_text {
+    .widget.widget_wizardinfosys_autosearch {
       width: 60%;
       form{
         max-width: 570px;
         width: 100% !important;
       }
     }
-
-    .aws-search-form {
+    #wizardinfosys_autosearch_form {
       width: 90%;
+
       input{
         margin-bottom: 0;
-        font-size: 16px;
+        width: 100% !important;
+        font-size: 16px !important;
+        height: 44px !important;
       }
-      .aws-search-field {
-        padding-left: 20px;
-        padding-right: 20px;
+      button{
+        display: none !important;
+      }
+      .wp_autosearch_form_wrapper {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        border-color: $border_color !important;
+        height: 46px !important;
         @include border-radius(30px !important);
       }
     }
