@@ -206,7 +206,6 @@
         }
         .widget_shopping_mini_cart_content{
           width: 100%;
-          display: inline-block;
           .dropdown.dropdown-left{
             width: 100%;
             top: 83px;
@@ -472,7 +471,7 @@
       }
     }
     .main-logo-inner{
-      display: inline-block;
+      display: inline-block !important;
       vertical-align: middle;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -489,7 +488,7 @@
     }
 
     .widget_shopping_mini_cart.dropdown-cart{
-      display: inline-block;
+      display: inline-block !important;
       padding: 10px 0 0 0;
       width: 33%;
       vertical-align: middle;
@@ -785,6 +784,13 @@
   }
 }
 @media all and (max-width: 640px) {
+  .dropdown-cart-button .dropdown .buttons{
+    a{
+      &:first-child{
+        margin-bottom: 5px;
+      }
+    }
+  }
   .form-log-reg-wrapper{
     .form-row{
       &.form-row-last,

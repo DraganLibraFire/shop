@@ -558,6 +558,89 @@ body .select2-dropdown{
 }
 }
 /*-------------------- search page - 404 page - styling ---------------*/
+body.search{
+  .page-title{
+    color: #856bc8;
+    font-size: 22px;
+    line-height: 22px;
+    font-family: "Prelo Bold";
+    padding-bottom: 0;
+    margin-bottom: 15px;
+    padding-top: 10px;
+  }
+  .page-header{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  div{
+    ul.products{
+      padding-left: 0;
+      li{
+        &.product{
+          display: inline-block;
+          width: 21.7%;
+          position: relative;
+          margin: 0 2% 35px;
+          span{
+            &.price{
+              width: 100%;
+              display: inline-block;
+              margin-bottom: 9px;
+            }
+          }
+          .button{
+            &.loading{
+              text-align: center;
+              opacity: 1;
+            }
+          }
+        }
+        &.first{
+          margin-left: 0;
+        }
+        &.last{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+}
+.nav-pagination{
+  text-align: center;
+  padding-bottom: 30px;
+    a{
+      margin-left: 5px;
+      margin-bottom: 5px;
+      border: none;
+      &:first-child{
+        margin-left: 0;
+      }
+
+    }
+  a,span{
+    border: 1px solid $border_dark_color;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 16px;
+    padding: 7px 10px 3px;
+    font-family: $paragraph_font;
+    &.next,
+    &.prev{
+      border: none;
+      padding: 5px 5px;
+      &:hover{
+        background-color: transparent;
+        color: $main_paragraph;
+      }
+    }
+    &:hover,
+    &.current{
+      background-color: $main_purple;
+      color: $main_white;
+    }
+  }
+}
 article {
   &.search-resoults-section {
     border-bottom: 1px solid;
@@ -952,6 +1035,12 @@ body{
 }
 .site-header {
   background-color: $lightest_light;
+  .widget_shopping_mini_cart_content{
+    display: none;
+    &:first-of-type{
+      display: block;
+    }
+  }
   .widget_shopping_mini_cart.dropdown-cart {
     max-width: 200px;
     width: 200px;
@@ -2711,7 +2800,7 @@ body.woocommerce-page{
     }
   }
 }
-
+body.search,
 body.woocommerce,
 div.woocommerce{
   form.login, form.register{
@@ -3460,10 +3549,10 @@ h4{
 .mobile-menu{
   display: none;
 }
-.menu-wrapper{
+div.menu-wrapper{
   >div{
     >aside{
-      display: none;
+      display: none !important;
     }
   }
 }
