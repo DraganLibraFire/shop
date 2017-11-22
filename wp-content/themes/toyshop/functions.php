@@ -436,3 +436,46 @@ function woo_custom_cart_button_text() {
 	return __( 'In Winkelmand', 'woocommerce' );
 
 }
+
+function get_shipping_method_min_amount_by_name( $method_name = 'free_shipping' ) {
+
+	$packages = WC()->cart->get_shipping_packages();
+
+	for($i = 0; $i < count( $packages ); $i++){
+
+		$methods = WC()->shipping()->load_shipping_methods($packages[$i]);
+
+		foreach ($methods as $method) {
+
+			if( $method->id == $method_name ){
+
+				return $method->min_amount;
+
+			}
+			
+		}
+	}
+}
+add_filter('add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
+
+function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
+
+	$value = WC()->cart->cart_contents_total;
+	$min_amount = get_shipping_method_min_amount_by_name();
+
+	$difference = $min_amount - $value;
+
+	if( $value == 0 ){
+		$fragments['span.free_shipping_notice'] = get_field('message_cart_empty','option');
+		return $fragments;
+	}
+	else if($difference > 0){
+		$message = sprintf(get_field('shipping_message', 'option'), $difference);
+	}else{
+		$message = get_field('free_shipping_message', 'option');
+	}
+	$fragments['span.free_shipping_notice'] = '<span class="free_shipping_notice">' . $message . '</span>';
+
+	return $fragments;
+
+}

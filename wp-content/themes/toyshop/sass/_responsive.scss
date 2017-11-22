@@ -55,7 +55,21 @@
     }
   }
   //@import "menuresponsivearrow";
-
+  .shop-features{
+    margin-bottom: 0;
+  }
+  .free-shipping-wrapper{
+    position: inherit;
+    right: 0;
+    padding: 0 15px;
+    display: table;
+    min-height: 50px;
+    width: 100%;
+    top: 50%;
+    z-index: 1;
+    margin-bottom: 34px;
+    @include transform-translate(0%, 0%);
+  }
   .site-header{
     .main-navigation{
       width: 100%;
