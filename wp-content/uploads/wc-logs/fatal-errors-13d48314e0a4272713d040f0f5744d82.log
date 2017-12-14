@@ -265,3 +265,43 @@ Stack trace:
 #5 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): WC_Deprecated_Hooks->maybe_handle_deprecated_hook(Array)
 #6 C:\wamp64\www\shop\wp-includes\plugin.php(
 
+2017-12-14T11:23:24+00:00 CRITICAL Uncaught Error: Cannot unset string offsets in C:\wamp64\www\shop\wp-content\themes\toyshop\functions.php:401
+Stack trace:
+#0 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): discunt_per_user('0513', Object(WC_Product_Simple))
+#1 C:\wamp64\www\shop\wp-includes\plugin.php(244): WP_Hook->apply_filters('0513', Array)
+#2 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-deprecated-filter-hooks.php(90): apply_filters_ref_array('woocommerce_get...', Array)
+#3 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-deprecated-filter-hooks.php(77): WC_Deprecated_Filter_Hooks->trigger_hook('woocommerce_get...', Array)
+#4 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\abstracts\abstract-wc-deprecated-hooks.php(60): WC_Deprecated_Filter_Hooks->handle_deprecated_hook('woocommerce_pro...', 'woocommerce_get...', Array, '0513')
+#5 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): WC_Deprecated_Hooks->maybe_handle_deprecated_hook('0513', Object(WC_Product_Simple))
+#6 C:\wa
+
+2017-12-14T11:23:28+00:00 CRITICAL Uncaught Error: Cannot unset string offsets in C:\wamp64\www\shop\wp-content\themes\toyshop\functions.php:401
+Stack trace:
+#0 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): discunt_per_user('0513', Object(WC_Product_Simple))
+#1 C:\wamp64\www\shop\wp-includes\plugin.php(244): WP_Hook->apply_filters('0513', Array)
+#2 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-deprecated-filter-hooks.php(90): apply_filters_ref_array('woocommerce_get...', Array)
+#3 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\class-wc-deprecated-filter-hooks.php(77): WC_Deprecated_Filter_Hooks->trigger_hook('woocommerce_get...', Array)
+#4 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\abstracts\abstract-wc-deprecated-hooks.php(60): WC_Deprecated_Filter_Hooks->handle_deprecated_hook('woocommerce_pro...', 'woocommerce_get...', Array, '0513')
+#5 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(298): WC_Deprecated_Hooks->maybe_handle_deprecated_hook('0513', Object(WC_Product_Simple))
+#6 C:\wa
+
+2017-12-14T12:26:25+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+
+2017-12-14T12:26:32+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes)
+
+2017-12-14T12:26:50+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+
+2017-12-14T12:27:02+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes)
+
+2017-12-14T12:27:19+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+
+2017-12-14T12:28:19+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 4096 bytes)
+
+2017-12-14T12:31:22+00:00 CRITICAL Allowed memory size of 1073741824 bytes exhausted (tried to allocate 20480 bytes)
+
+2017-12-14T12:34:00+00:00 CRITICAL Allowed memory size of 1073741824 bytes exhausted (tried to allocate 20480 bytes)
+
+2017-12-14T12:34:28+00:00 CRITICAL Allowed memory size of 1073741824 bytes exhausted (tried to allocate 20480 bytes)
+
+2017-12-14T12:36:49+00:00 CRITICAL Allowed memory size of 1073741824 bytes exhausted (tried to allocate 20480 bytes)
+

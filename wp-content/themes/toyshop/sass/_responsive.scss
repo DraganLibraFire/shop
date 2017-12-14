@@ -455,15 +455,30 @@
 }/*(max-width: 770px)*/
 @media all and (max-width: 768px) {
   .logged-in{
-    .menu-wrapper{
+    header.site-header{
       top: 46px;
     }
   }
-  .menu-wrapper{
+  header.site-header{
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    .menu-wrapper{
+      order: 1;
+      width: 100%;
+    }
+    .header-phone-account-details-top-main-header{
+      order:2;
+      width: 100%;
+
+    }
   }
   body{
     margin-top: 40px;
@@ -484,10 +499,13 @@
   .website-logo-main-wrapper{
     display: none;
   }
-
+  //.shop-features{
+  //  border-top: 1px solid #303030;
+  //}
   .site-header{
+    border-bottom: 1px solid $main_dark;
     .header-small-toggle-wrapper{
-      border-bottom: 1px solid $main_dark;
+      //border-bottom: 1px solid $main_dark;
     }
     nav#site-navigation{
       display: inline-block !important;
@@ -582,7 +600,7 @@
     height: 100%;
     color: $main_white;
     z-index: 10;
-    @include box-shadow(0 0 10px $main_dark);
+    @include box-shadow(0 5px 10px $main_dark);
     h4{
       padding: 16px 0;
       background: $main_purple;
@@ -821,6 +839,19 @@
       div.images{
         padding-right: 0;
       }
+    }
+  }
+  body header .widget.widget_shopping_mini_cart.dropdown-cart{
+    .dropdown-total{
+      @include transform-transition(all 0s);
+    }
+  }
+  body header .widget.widget_shopping_mini_cart.dropdown-cart.active{
+    .dropdown-total{
+      background: url(../images/close-white-icon.png) !important;
+      background-size: contain !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
     }
   }
 }/*(max-width: 767px)*/

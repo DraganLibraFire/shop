@@ -47,8 +47,8 @@
 					</div>
 				</div>
 				<div class="header-small-toggle-wrapper text-center">
-
-					<span><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+					<span><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/shop-search-icon.png" alt=""></span>
+<!--					<span><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-chevron-down" aria-hidden="true"></i></span>-->
 				</div>
 			</div>
 		</div>

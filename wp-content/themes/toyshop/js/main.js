@@ -189,8 +189,8 @@ jQuery(function($){
         closeIcon: "<span><i class='fa fa-times' aria-hidden='true'></i></span>"
     });
 
-    var menu_height = $( '.site-header .menu-wrapper' ).height();
-    var menu_height2 = $( '.site-header .menu-wrapper' ).height();
+    var menu_height = $( '.site-header' ).height();
+    var menu_height2 = $( '.site-header' ).height();
     if($('body').hasClass('logged-in')){
         menu_height = menu_height+46;
     }

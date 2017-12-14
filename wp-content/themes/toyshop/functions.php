@@ -391,10 +391,30 @@ add_filter('woocommerce_get_price', 'discunt_per_user', 10, 2);
 function discunt_per_user($price, $product){
 	$user_discount = get_field('price', 'option');
 	$user_discount = intval($user_discount);
+
+	/*$pos = strpos($price, '0');
+	$pos_s = strpos($price, '.');
+	if ($pos === false) {
+
+	} else {
+
+		if( $pos == 0 AND $pos_s != 1){
+			$price = substr_replace($price, '0.', 0, 1);
+		}
+	}
+
+	if( strlen($price) > 4 && $pos_s === false ){
+		$price = floatval($price);
+		if( $price > 1000 ){
+			$price = $price / 1000;
+		}*/
+//		$price = substr_replace($price, '', 4, ( strlen($price) - 4) );
+//	}
+
 	$price = $price + ($price * $user_discount / 100);
 
-
 	return $price;
+
 }
 add_filter( 'woocommerce_output_related_products_args', 'lf_related_products_args' );
 function lf_related_products_args( $args ) {
@@ -505,3 +525,44 @@ add_action( 'admin_bar_menu', function( \WP_Admin_Bar $bar )
 			),
 	) );
 } );
+
+add_action('initd', function(){
+//	error_reporting(0);
+//
+	set_time_limit(-1);
+	$q = array(
+		'suppress_filters'	=> false,
+		'post_type'			=> 'product',
+		'posts_per_page'	=> -1,
+		'meta_query'		=> array(
+			array(
+					'key'			=> '_regular_price',
+					'value'			=> 1000,
+					'type'			=> 'NUMERIC',
+					'compare'		=> '>='
+			)
+		)
+	);
+	$quer = new WP_Query($q);
+
+	if( $quer->have_posts() ){
+		$i = 1;
+		while( $quer->have_posts() ){
+			$quer->the_post();
+
+			$product_id = get_the_ID();
+
+			$price_entered = get_field('_regular_price', $product_id);
+
+			$price_entered = floatval($price_entered);
+			if( $price_entered > 1000 ){
+				$regular_price = $price_entered / 1000;
+				$regular_price_real = round($regular_price, 2);
+				update_field('_regular_price', $regular_price_real);
+			}
+			$i++;
+
+		}
+	}
+
+});
