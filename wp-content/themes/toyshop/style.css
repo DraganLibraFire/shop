@@ -1,13 +1,12 @@
 /*
-Theme Name: Shop
-Theme URI:
-Author: LibraFire
-Author URI: http://www.librafire.com/
-Description: Shop
+Theme Name: Speelgoedkasteel.be
+Theme URI: https://www.speelgoedkasteel.be
+Author: WebKrunch
+Author URI: https://www.webkrunch.be/
 Version: 1.0.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: shop
-Tags:
 
 */
+.mobile-menu a, .mobile-menu li, .mobile-menu span, .mobile-menu div {
+    width: 100%;
+}

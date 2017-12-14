@@ -479,3 +479,29 @@ function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
 	return $fragments;
 
 }
+
+/* WK Admin logo */
+function lf_remove_admin_wp_logo()
+{
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');
+}
+
+add_action( 'admin_bar_menu', function( \WP_Admin_Bar $bar )
+{
+	$bar->add_menu( array(
+			'id'     => 'wpse',
+			'parent' => null,
+			'group'  => null,
+			'title'  => __( '<img style="width: 130px" src="https://webkrunch-webdesign-webkrunch1.netdna-ssl.com/wp-content/uploads/2016/09/webkrunch-logo.png" />', 'some-textdomain' ),
+			'href'   => 'https://www.webkrunch.be',
+			'meta'   => array(
+					'target'   => '_blank',
+					'title'    => __( 'Webkrunch Support', 'wk' ),
+					'html'     => '',
+					'class'    => 'wpse--item',
+					'rel'      => 'webkrunch',
+					'tabindex' => PHP_INT_MAX,
+			),
+	) );
+} );

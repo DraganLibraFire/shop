@@ -146,7 +146,7 @@ jQuery(function($){
     });
 
     $sort_select.prependTo( jQuery(".sort-filter-wrapper-lf") );
-    $('.postform, .product-order-wrapper .orderby').select2({
+    $('.postform, .product-order-wrapper .orderby,.product-order-wrapper select').select2({
         minimumResultsForSearch: Infinity
     });
     $('.product-order-wrapper  .select2-selection__arrow').append('<i class="fa fa-angle-down"></i>');

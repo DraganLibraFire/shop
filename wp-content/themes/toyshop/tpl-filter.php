@@ -21,16 +21,15 @@ get_header( 'shop' ); ?>
 	?>
 	<div class="col-md-3 widget widget_search_filter_register_widget">
 		<h4 class="more-filters">Toon filters <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></h4>
-		<?php echo do_shortcode('[searchandfilter id="67210"]'); ?>
+		<?php echo do_shortcode('[searchandfilter id="67313"]'); ?>
 	</div>
 
 	<div class="col-md-9">
 		<div class="sort-filter-wrapper-lf product-order-wrapper borders">
 
 		</div>
-		<?php echo do_shortcode('[searchandfilter id="67210" show="results"]'); ?>
+		<?php echo do_shortcode('[searchandfilter id="67313" show="results"]'); ?>
 	</div>
-
 
 </div>
 <?php
