@@ -527,7 +527,8 @@ add_action( 'admin_bar_menu', function( \WP_Admin_Bar $bar )
 } );
 
 add_action('initd', function(){
-//	error_reporting(0);
+
+	error_reporting(0);
 //
 	set_time_limit(-1);
 	$q = array(
@@ -536,7 +537,7 @@ add_action('initd', function(){
 		'posts_per_page'	=> -1,
 		'meta_query'		=> array(
 			array(
-					'key'			=> '_regular_price',
+					'key'			=> '_price',
 					'value'			=> 1000,
 					'type'			=> 'NUMERIC',
 					'compare'		=> '>='
@@ -552,17 +553,41 @@ add_action('initd', function(){
 
 			$product_id = get_the_ID();
 
-			$price_entered = get_field('_regular_price', $product_id);
+			$price_entered = get_field('_price', $product_id);
 
 			$price_entered = floatval($price_entered);
 			if( $price_entered > 1000 ){
 				$regular_price = $price_entered / 1000;
 				$regular_price_real = round($regular_price, 2);
+				update_field('_price', $regular_price_real);
 				update_field('_regular_price', $regular_price_real);
 			}
 			$i++;
 
 		}
+	}
+
+	global $wpdb;
+
+	$fckedupposts = $wpdb->get_results("SELECT wp_posts.ID, wp_postmeta.meta_key, wp_postmeta.meta_value FROM wp_posts INNER JOIN wp_postmeta ON ( wp_posts.ID = wp_postmeta.post_id ) WHERE 1=1 AND ( ( wp_postmeta.meta_key = '_price' AND wp_postmeta.meta_value LIKE '0%' AND wp_postmeta.meta_value NOT LIKE '0.%' ) ) AND wp_posts.post_type = 'product' AND (wp_posts.post_status = 'publish' OR wp_posts.post_status = 'acf-disabled' OR wp_posts.post_status = 'private') ORDER BY wp_posts.post_date DESC", ARRAY_A);
+
+	foreach ($fckedupposts as $fckeduppost) {
+
+		$price = $fckeduppost['meta_value'];
+		$pos = strpos($price, '0');
+		$pos_s = strpos($price, '.');
+		if ($pos === false) {
+
+		} else {
+
+			if ($pos == 0 AND $pos_s != 1) {
+				$price = substr_replace($price, '0.', 0, 1);
+			}
+		}
+
+		update_field('_price', $price, $fckeduppost['ID']);
+		update_field('_regular_price', $price, $fckeduppost['ID']);
+
 	}
 
 });
