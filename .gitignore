@@ -4,6 +4,7 @@ xxx.php
 .htaccess
 .idea
 .idea/*
+*.sql
 
 #DESIGN
 design
