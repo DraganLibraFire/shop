@@ -1850,7 +1850,8 @@ body:not(.woocommerce-page) .site-main article table, body.page-template-default
   margin-bottom: 15px; }
   body:not(.woocommerce-page) .site-main article table td, body:not(.woocommerce-page) .site-main article table th, body.page-template-default .site-main article table td, body.page-template-default .site-main article table th {
     padding: 10px;
-    border: 1px solid; }
+    border: none;
+    border-right: 1px solid #fff; }
 
 body.woocommerce-page {
  /*
@@ -2037,6 +2038,7 @@ body.woocommerce-page {
     font-family: "Prelo Medium";
     font-weight: 400;
     border-top: none !important;
+    border: none;
     border-right: 1px solid #fff; }
   body.woocommerce-page .woo-checkout-order-wrapper tfoot tr td {
     border: none !important; }
@@ -2087,7 +2089,7 @@ body.woocommerce-page {
             position: absolute;
             font-family: FontAwesome;
             left: -15px;
-            top: -2px; }
+            top: 3px; }
         body.woocommerce-page .woo-checkout-order-wrapper div.woocommerce-checkout-payment#payment ul.payment_methods li p {
           font-family: "Prelo Medium";
           font-size: 14px; }

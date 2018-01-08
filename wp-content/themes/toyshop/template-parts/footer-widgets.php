@@ -1,8 +1,7 @@
 <?php 
 $footer_layout_number = get_theme_mod('footer_column_number');
-$footer_layout =get_theme_mod('footer_layout');
-$footer_elem_class=get_footer_widget_class($footer_layout);
-
+$footer_layout = get_theme_mod('footer_layout');
+$footer_elem_class= get_footer_widget_class($footer_layout);
 $helper =0;
 	for( $i=0; $i < $footer_layout_number; $i++ ){
 		$footer_slug_number = $i+1;

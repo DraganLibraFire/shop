@@ -93,7 +93,7 @@ jQuery(function($){
 
     var button_color = $(".woocommerce a.button.add_to_cart_button").css('background-color');
 
-    var h2 = $(".related.products h2");
+    var h2 = $(".related.products > h2");
     if( $(h2).length > 0 ){
         var h2_html = $(h2).html();
 

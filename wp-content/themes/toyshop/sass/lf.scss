@@ -2154,7 +2154,8 @@ body:not(.woocommerce-page), body.page-template-default{
         margin-bottom: 15px;
         td,th{
           padding: 10px;
-          border: 1px solid;
+          border: none;
+          border-right: 1px solid #fff;
         }
       }
     }
@@ -2431,7 +2432,8 @@ body.woocommerce-page{
           font-family: $lists_font;
           font-weight: 400;
           border-top: none !important;
-          border-right: 1px solid $main_white;
+          border: none;
+          border-right: 1px solid #fff;
         }
         td{
           border: none !important;
@@ -2501,7 +2503,7 @@ body.woocommerce-page{
               position: absolute;
               font-family: FontAwesome;
               left: -15px;
-              top:-2px;
+              top: 3px;
             }
           }
           p{
