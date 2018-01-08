@@ -472,7 +472,7 @@ function get_shipping_method_min_amount_by_name( $method_name = 'free_shipping' 
 				return $method->min_amount;
 
 			}
-			
+
 		}
 	}
 }
@@ -591,3 +591,15 @@ add_action('initd', function(){
 	}
 
 });
+
+add_filter( 'woocommerce_before_calculate_totals', 'change_cart_items_prices', 10, 1 );
+function change_cart_items_prices( $cart_object ) {
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+    foreach ( $cart_object->get_cart() as $cart_item ) {
+        $cart_item['data']->set_tax_status( 'taxable' ); // Above 2500
+
+    }
+}

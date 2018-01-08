@@ -10,3 +10,6 @@ Text Domain: shop
 .mobile-menu a, .mobile-menu li, .mobile-menu span, .mobile-menu div {
     width: 100%;
 }
+.dropdown-total .tax_label{
+    display: none;
+}
