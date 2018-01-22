@@ -94,6 +94,15 @@ span.woocs_price_info_icon{
     margin-left: 3px;
 }
 
+.woocs_price_info + .woocs_price_info{
+    display: none !important;
+}
+
+.woocs_price_info + .woocs_price_info{
+    display: none !important;
+}
+
+
 div.woocs_price_info ul{
     list-style: none;
     position: absolute;
@@ -104,6 +113,7 @@ div.woocs_price_info ul{
     background: #000000 !important;
     height: auto;
     min-height: 19px;
+    /*font-size: 24px;*/
     line-height: normal;
     vertical-align: middle;
     text-align: left;
@@ -150,3 +160,8 @@ ul.woocs_price_info_list li span{
     text-indent: 0;
     margin-left: 5px;
 }
+
+.woocs_currency_rate_flag{
+    width: 25px !important; max-width: 25px !important; display: inline;
+}
+

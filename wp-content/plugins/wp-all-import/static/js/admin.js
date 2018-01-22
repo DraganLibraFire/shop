@@ -169,9 +169,9 @@
 		});
 
 		if ( $import_to_custom_type != 'product' && 
-				( $('textarea[name=download_featured_image]').val() != "" || 
-					$('textarea[name=gallery_featured_image]').val() != "" || 
-						$('textarea[name=featured_image]').val() != "" )) 
+				( $('textarea[name=download_featured_image]').length && $('textarea[name=download_featured_image]').val() != "" ||
+					$('textarea[name=gallery_featured_image]').length && $('textarea[name=gallery_featured_image]').val() != "" ||
+						$('textarea[name=featured_image]').length && $('textarea[name=featured_image]').val() != "" ))
 		{
 			$is_show_images_notice = true;
 		}
@@ -209,12 +209,27 @@
 				$wrap.css({'height': formHeight + 'px'});				
 			},
 			onSelected: function(selectedData){								
-				if (fixWrapHeight)
-					$wrap.css({'height': formHeight + 'px'});				
-				else
+				if (fixWrapHeight){
+					$wrap.css({'height': formHeight + 'px'});
+				}
+				else{
 					fixWrapHeight = true;
-		        $('input[name=custom_type]').val(selectedData.selectedData.value);		        
-		        $('#custom_type_selector').find('.dd-selected').css({'color':'#555'});		        		        
+				}
+
+				$('.wpallimport-upgrade-notice').hide();
+
+				$('input[name=custom_type]').val(selectedData.selectedData.value);
+				$('#custom_type_selector').find('.dd-selected').css({'color':'#555'});
+
+				var is_import_denied = $('.wpallimport-upgrade-notice[rel='+ selectedData.selectedData.value +']').length;
+
+				if (is_import_denied){
+					$('.wpallimport-upgrade-notice[rel='+ selectedData.selectedData.value +']').slideDown();
+					$('.wpallimport-submit-buttons').hide();
+				}
+				else{
+					$('.wpallimport-submit-buttons').slideDown();
+				}
 		    } 
 		});
 
@@ -338,9 +353,17 @@
 
 				$('#custom_type_selector').find('.dd-selected').css({'color':'#555'});
 
+				$('.wpallimport-upgrade-notice').hide();
+
 				$('input[name=custom_type]').val(selectedData.selectedData.value);
 
-				if (selectedData.selectedData.value == 'shop_order')
+				var is_import_denied = $('.wpallimport-upgrade-notice[rel='+ selectedData.selectedData.value +']').length;
+
+				if (is_import_denied){
+					$('.wpallimport-upgrade-notice[rel='+ selectedData.selectedData.value +']').slideDown();
+				}
+
+				if (is_import_denied)
 				{					
 			        $('.wpallimport-choose-file').find('.wpallimport-submit-buttons').hide();		
 			        $('.wpallimport-import-orders-notice').show();
@@ -632,7 +655,7 @@
 			$form.find('a[rel="preview"].preview').click();
 		});
 		$form.find('input[name$=download_images]').each(function(){			
-			if ($(this).is(':checked') && ( $(this).val() == 'gallery' || $(this).val() == 'no') )
+			if ($(this).is(':checked') && $(this).val() == 'gallery' )
 			{
 				$(this).parents('.wpallimport-collapsed-content:first').find('.advanced_options_files').find('p:first').show();
 				$(this).parents('.wpallimport-collapsed-content:first').find('.advanced_options_files').find('input').attr({'disabled':'disabled'});
@@ -640,7 +663,7 @@
 		});
 		
 		$form.find('input[name$=download_images]').click(function(){			
-			if ($(this).is(':checked') && ( $(this).val() == 'gallery' || $(this).val() == 'no') )
+			if ($(this).is(':checked') && $(this).val() == 'gallery' )
 			{				
 				$(this).parents('.wpallimport-collapsed-content:first').find('.advanced_options_files').find('p:first').show();
 				$(this).parents('.wpallimport-collapsed-content:first').find('.advanced_options_files').find('input').attr({'disabled':'disabled'});
@@ -1147,7 +1170,7 @@
 
 	    	if ($rule.val() != 'is_empty' && $rule.val() != "is_not_empty" && $val.val() == "") return;
 
-	    	var relunumber = $('.filtering_rules').find('li').length;
+	    	var relunumber = $('.filtering_rules').find('li').length + "_" + $.now();
 
 	    	var html = '<li><div class="drag-element">';
 	    		html += '<input type="hidden" value="'+ $el.val() +'" class="pmxi_xml_element"/>';
@@ -1630,8 +1653,6 @@
 			container: 'plupload-ui',
 			browse_button : 'select-files',
 			file_data_name : 'async-upload',
-			flash_swf_url : plugin_url + '/static/js/plupload/plupload.flash.swf',
-			silverlight_xap_url : plugin_url + '/static/js/plupload/plupload.silverlight.xap',		
 			multipart: true,
 			max_file_size: '1000mb',
 			chunk_size: '1mb',			
@@ -1788,33 +1809,35 @@
     	e.preventDefault();
     	var $ths = $(this);
     	$(this).attr('disabled', 'disabled');
-    	var request = {
-			action: 'delete_import',	
-			data: $(this).parents('form:first').serialize(),				
-			security: wp_all_import_security				
-	    };    	    
 	    var iteration = 1;
+		var request = {
+			action: 'delete_import',
+			data: $(this).parents('form:first').serialize(),
+			security: wp_all_import_security,
+			iteration: iteration
+		};
 		var deleteImport = function(){
+			request.iteration = iteration;
 			$.ajax({
 				type: 'POST',
-				url: ajaxurl + '?iteration=' + iteration,
+				url: ajaxurl,
 				data: request,
-				success: function(response) {		
-					
+				success: function(response) {
+
 					iteration++;
 
 					$ths.parents('form:first').find('.wp_all_import_deletion_log').html('<p>' + response.msg + '</p>');
 
-					if (response.result){																												
+					if (response.result){
 						$('.wp_all_import_functions_preloader').hide();
 						window.location.href = response.redirect;
 					}
 					else
-					{						
+					{
 						deleteImport();
 					}
 				},
-				error: function( jqXHR, textStatus ) {						
+				error: function( jqXHR, textStatus ) {
 					$ths.removeAttr('disabled');
 					$('.wp_all_import_functions_preloader').hide();
 				},

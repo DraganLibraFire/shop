@@ -31,6 +31,16 @@ class Mollie_WC_Helper_Settings
         return trim(get_option($this->getSettingId('payment_description')));
     }
 
+	/**
+	 * Order status for cancelled payments
+	 *
+	 * @return string|null
+	 */
+	public function getOrderStatusCancelledPayments ()
+	{
+		return trim(get_option($this->getSettingId('order_status_cancelled_payments')));
+	}
+
     /**
      * @return string
      */
@@ -212,7 +222,7 @@ class Mollie_WC_Helper_Settings
             $content .= sprintf(
                 /* translators: The surrounding %s's Will be replaced by a link to the Mollie profile */
                 __('The following payment methods are activated in your %sMollie profile%s:', 'mollie-payments-for-woocommerce'),
-                '<a href="https://www.mollie.com/beheer/account/profielen/" target="_blank">',
+                '<a href="https://www.mollie.com/dashboard/settings/profiles" target="_blank">',
                 '</a>'
             );
 
@@ -316,7 +326,7 @@ class Mollie_WC_Helper_Settings
                     /* translators: Placeholder 1: API key mode (live or test). The surrounding %s's Will be replaced by a link to the Mollie profile */
                     __('The API key is used to connect to Mollie. You can find your <strong>%s</strong> API key in your %sMollie profile%s', 'mollie-payments-for-woocommerce'),
                     'live',
-                    '<a href="https://www.mollie.com/beheer/account/profielen/" target="_blank">',
+                    '<a href="https://www.mollie.com/dashboard/settings/profiles" target="_blank">',
                     '</a>'
                 ),
                 'css'               => 'width: 350px',
@@ -342,7 +352,7 @@ class Mollie_WC_Helper_Settings
                     /* translators: Placeholder 1: API key mode (live or test). The surrounding %s's Will be replaced by a link to the Mollie profile */
                     __('The API key is used to connect to Mollie. You can find your <strong>%s</strong> API key in your %sMollie profile%s', 'mollie-payments-for-woocommerce'),
                     'test',
-                    '<a href="https://www.mollie.com/beheer/account/profielen/" target="_blank">',
+                    '<a href="https://www.mollie.com/dashboard/settings/profiles" target="_blank">',
                     '</a>'
                 ),
                 'css'               => 'width: 350px',
@@ -361,7 +371,18 @@ class Mollie_WC_Helper_Settings
                 'default' => $default_payment_description,
                 'css'     => 'width: 350px',
             ),
-            array(
+	        array(
+		        'id'      => $this->getSettingId('order_status_cancelled_payments'),
+		        'title'   => __('Order status after cancelled payment', 'mollie-payments-for-woocommerce'),
+		        'type'    => 'select',
+		        'options' => array(
+			        'pending'          => __('Pending', 'mollie-payments-for-woocommerce'),
+			        'cancelled'     => __('Cancelled', 'mollie-payments-for-woocommerce'),
+		        ),
+		        'desc'    => __('Status for orders when a payment is cancelled. Default: pending. Orders with status Pending can be paid with another payment method, customers can try again. Cancelled orders are final. Set this to Cancelled if you only have one payment method or don\'t want customers to re-try paying with a different payment method.', 'mollie-payments-for-woocommerce'),
+		        'default' => 'pending',
+	        ),
+	        array(
                 'id'      => $this->getSettingId('payment_locale'),
                 'title'   => __('Payment screen language', 'mollie-payments-for-woocommerce'),
                 'type'    => 'select',

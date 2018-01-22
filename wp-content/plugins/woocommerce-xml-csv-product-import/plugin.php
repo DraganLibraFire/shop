@@ -3,8 +3,9 @@
 Plugin Name: WP All Import - WooCommerce Add-On
 Plugin URI: http://www.wpallimport.com/
 Description: An extremely easy, drag & drop importer to import WooCommerce simple products. A paid upgrade is available for premium support and support for Variable, Grouped, and External/Affiliate products
-Version: 1.2.9
+Version: 1.3.7
 Author: Soflyy
+WC tested up to: 3.2.3
 */
 /**
  * Plugin root dir with forward slashes as directory separator regardless of actuall DIRECTORY_SEPARATOR value
@@ -24,7 +25,7 @@ define('PMWI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMWI_PREFIX', 'pmwi_');
 
-define('PMWI_FREE_VERSION', '1.2.9');
+define('PMWI_FREE_VERSION', '1.3.7');
 
 define('PMWI_EDITION', 'free');
 
@@ -32,7 +33,7 @@ define('PMWI_EDITION', 'free');
  * Main plugin file, Introduces MVC pattern
  *
  * @singletone
- * @author Pavel Kulbakin <p.kulbakin@gmail.com>
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 
 final class PMWI_Plugin {
@@ -155,11 +156,8 @@ final class PMWI_Plugin {
 
 		// create/update required database tables
 
-		// regirster autoloading method
-		if (function_exists('__autoload') and ! in_array('__autoload', spl_autoload_functions())) { // make sure old way of autoloading classes is not broken
-			spl_autoload_register('__autoload');
-		}
-		spl_autoload_register(array($this, '__autoload'));		
+		// register autoloading method
+		spl_autoload_register(array($this, 'autoload'));
 
 		// register helpers
 		if (is_dir(self::ROOT_DIR . '/helpers')) foreach (PMWI_Helper::safe_glob(self::ROOT_DIR . '/helpers/*.php', PMWI_Helper::GLOB_RECURSE | PMWI_Helper::GLOB_PATH) as $filePath) {
@@ -175,7 +173,7 @@ final class PMWI_Plugin {
 		update_option($option_name, $this->options);
 		$this->options = get_option(get_class($this) . '_Options');
 
-		register_activation_hook(self::FILE, array($this, '__activation'));
+		register_activation_hook(self::FILE, array($this, 'activation'));
 
 		// register action handlers
 		if (is_dir(self::ROOT_DIR . '/actions')) if (is_dir(self::ROOT_DIR . '/actions')) foreach (PMWI_Helper::safe_glob(self::ROOT_DIR . '/actions/*.php', PMWI_Helper::GLOB_RECURSE | PMWI_Helper::GLOB_PATH) as $filePath) {
@@ -210,9 +208,102 @@ final class PMWI_Plugin {
 		}
 
 		// register admin page pre-dispatcher
-		add_action('admin_init', array($this, '__adminInit'));		
+		add_action('admin_init', array($this, 'adminInit'));
+		add_action('admin_init', array($this, 'migrate_options'));
 		add_action('init', array($this, 'init'));
 
+	}
+
+	public function migrate_options(){
+
+		$installed_ver = get_option( "wp_all_import_woocommerce_addon_db_version" );
+
+		if ( $installed_ver == PMWI_FREE_VERSION || ! class_exists( 'PMXI_Plugin' ) ) return true;
+
+		$imports   = new PMXI_Import_List();
+
+		$templates = new PMXI_Template_List();
+
+		foreach ($imports->setColumns($imports->getTable() . '.*')->getBy(array('id !=' => ''))->convertRecords() as $imp){
+			$imp->getById($imp->id);
+			if ( ! $imp->isEmpty() ){
+				$options = $imp->options;
+				$this->migrate($options, $installed_ver);
+				$imp->set(array(
+					'options' => $options
+				))->update();
+			}
+		}
+
+		foreach ($templates->setColumns($templates->getTable() . '.*')->getBy(array('id !=' => ''))->convertRecords() as $tpl){
+			$tpl->getById($tpl->id);
+			if ( ! $tpl->isEmpty() ) {
+				$options = ( empty($tpl->options) ) ? array() : $tpl->options;
+				$this->migrate($options, $installed_ver);
+				$tpl->set(array(
+					'options' => $options
+				))->update();
+			}
+		}
+		update_option( "wp_all_import_woocommerce_addon_db_version", PMWI_FREE_VERSION );
+	}
+
+	private function migrate(&$options, $version){
+
+		// Update _featured, _visibility and _stock_status options according to WooCommerce 3.0
+		if ( version_compare($version, '2.3.7-beta-2.1') < 0  ){
+
+			$remove_cf = array('_featured', '_visibility', '_stock_status');
+
+			if ($options['is_keep_former_posts'] == 'no'
+					&& $options['update_all_data'] == 'no'){
+
+				if ($options['is_update_custom_fields']){
+					if (in_array($options['update_custom_fields_logic'], array('only', 'all_except'))){
+						// Update Options
+						switch ($options['update_custom_fields_logic']){
+							case 'only':
+								$fields_list = explode(',', $options['custom_fields_only_list']);
+								if ( ! in_array('_featured', $fields_list) ){
+									$options['is_update_featured_status'] = 0;
+								}
+								if ( ! in_array('_visibility', $fields_list) ){
+									$options['is_update_catalog_visibility'] = 0;
+								}
+								break;
+							case 'all_except':
+								$fields_list = explode(',', $options['custom_fields_except_list']);
+								if ( in_array('_featured', $fields_list) ){
+									$options['is_update_featured_status'] = 0;
+								}
+								if ( in_array('_visibility', $fields_list) ){
+									$options['is_update_catalog_visibility'] = 0;
+								}
+								break;
+						}
+					}
+				}
+				else{
+					$options['is_update_advanced_options'] = 0;
+					$options['is_update_featured_status'] = 0;
+					$options['is_update_catalog_visibility'] = 0;
+				}
+			}
+
+			// remove deprecated fields from custom fields list
+			$options_to_update = array('custom_fields_list', 'custom_fields_only_list', 'custom_fields_except_list');
+			foreach ($options_to_update as $option){
+				if ( ! empty($options[$option])){
+					$fields_list = is_array($options[$option]) ? $options[$option] : explode(',', $options[$option]);
+					foreach ($fields_list as $key => $value){
+						if (in_array($value, $remove_cf)){
+							unset($fields_list[$key]);
+						}
+					}
+					$options[$option] = is_array($options[$option]) ? $fields_list : implode(',', $fields_list);
+				}
+			}
+		}
 	}
 
 	public function init()
@@ -238,7 +329,7 @@ final class PMWI_Plugin {
 	/**
 	 * pre-dispatching logic for admin page controllers
 	 */
-	public function __adminInit() {
+	public function adminInit() {
 		$input = new PMWI_Input();
 		$page = strtolower($input->getpost('page', ''));
 		if (preg_match('%^' . preg_quote(str_replace('_', '-', self::PREFIX), '%') . '([\w-]+)$%', $page)) {
@@ -257,7 +348,7 @@ final class PMWI_Plugin {
 	 */
 	public function shortcodeDispatcher($args, $content, $tag) {
 
-		$controllerName = self::PREFIX . preg_replace('%(^|_).%e', 'strtoupper("$0")', $tag); // capitalize first letters of class name parts and add prefix
+    $controllerName = self::PREFIX . preg_replace_callback('%(^|_).%', array($this, "replace_callback"), $tag);// capitalize first letters of class name parts and add prefix
 		$controller = new $controllerName();
 		if ( ! $controller instanceof PMWI_Controller) {
 			throw new Exception("Shortcode `$tag` matches to a wrong controller type.");
@@ -266,6 +357,10 @@ final class PMWI_Plugin {
 		$controller->index($args, $content);
 		return ob_get_clean();
 	}
+
+  public function replace_callback($matches){
+    return strtoupper($matches[0]);
+  }
 
 	/**
 	 * Dispatch admin page: call corresponding controller based on get parameter `page`
@@ -290,7 +385,7 @@ final class PMWI_Plugin {
 				throw new Exception('There is no previousely buffered content to display.');
 			}
 		} else {
-			$controllerName =  preg_replace('%(^' . preg_quote(self::PREFIX, '%') . '|_).%e', 'strtoupper("$0")', str_replace('-', '_', $page)); // capitalize prefix and first letters of class name parts
+      $controllerName = preg_replace_callback('%(^' . preg_quote(self::PREFIX, '%') . '|_).%', array($this, "replace_callback"),str_replace('-', '_', $page));
 			$actionName = str_replace('-', '_', $action);
 			if (method_exists($controllerName, $actionName)) {
 
@@ -352,7 +447,7 @@ final class PMWI_Plugin {
 	 * @param string $className
 	 * @return bool
 	 */
-	public function __autoload($className) {
+	public function autoload($className) {
 		$is_prefix = false;
 		$filePath = str_replace('_', '/', preg_replace('%^' . preg_quote(self::PREFIX, '%') . '%', '', strtolower($className), 1, $is_prefix)) . '.php';
 		if ( ! $is_prefix) { // also check file with original letter case
@@ -410,7 +505,7 @@ final class PMWI_Plugin {
 	/**
 	 * Plugin activation logic
 	 */
-	public function __activation() {		
+	public function activation() {
 
 		// uncaught exception doesn't prevent plugin from being activated, therefore replace it with fatal error so it does
 		set_exception_handler(create_function('$e', 'trigger_error($e->getMessage(), E_USER_ERROR);'));
@@ -630,7 +725,10 @@ final class PMWI_Plugin {
 			'variation_stock' => '',
 			'variation_stock_status' => 'auto',
 			'put_variation_image_to_gallery' => 0,
-			'single_variation_stock_status' => ''
+			'single_variation_stock_status' => '',
+			'is_update_advanced_options' => 1,
+			'is_update_catalog_visibility' => 1,
+			'is_update_featured_status' => 1
 		);
 	}
 }

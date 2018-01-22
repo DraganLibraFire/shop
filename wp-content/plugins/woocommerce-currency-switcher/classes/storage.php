@@ -4,7 +4,7 @@ if (!defined('ABSPATH'))
     die('No direct access allowed');
 
 //keeps current user data
-class WOOCS_STORAGE
+final class WOOCS_STORAGE
 {
 
     public $type = 'session'; //session, transient, cookie
@@ -25,7 +25,7 @@ class WOOCS_STORAGE
                 @session_start();
             }
         }
-        //$this->user_ip = $_SERVER['REMOTE_ADDR'];
+        
         $this->user_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
         $this->transient_key = md5($this->user_ip);
     }

@@ -1,4 +1,4 @@
-<div class="wpallimport-header" style="overflow:hidden; height: 60px; padding-top: 10px; margin-bottom: -20px;">
+<div class="wpallimport-header" style="overflow:hidden; height: 65px; padding-top: 10px; margin-bottom: -20px;">
 	<div class="wpallimport-logo"></div>
 	<div class="wpallimport-title">
 		<p><?php _e('WP All Import', 'wp_all_import_plugin'); ?></p>
@@ -306,7 +306,7 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 									
 									<a href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'scheduling'), $this->baseUrl)?>"><?php _e('Cron Scheduling', 'wp_all_import_plugin'); ?></a> <br>
 									
-									<a href="<?php echo add_query_arg(array('page' => 'pmxi-admin-history', 'id' => $item['id']), $this->baseUrl)?>"><?php _e('History Logs', 'wp_all_import_plugin'); ?></a>
+									<a href="<?php echo add_query_arg(array('page' => 'pmxi-admin-history', 'id' => $item['id']), remove_query_arg('pagenum', $this->baseUrl))?>"><?php _e('History Logs', 'wp_all_import_plugin'); ?></a>
 
 								</td>
 								<?php

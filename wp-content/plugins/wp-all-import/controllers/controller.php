@@ -1,8 +1,8 @@
 <?php
 /**
  * Common logic for all shortcodes plugin implements
- * 
- * @author Pavel Kulbakin <p.kulbakin@gmail.com>
+ *
+ * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 abstract class PMXI_Controller {
 	/**
@@ -123,6 +123,7 @@ abstract class PMXI_Controller {
 			$msgs = $this->warnings;
 		}
 		if (is_wp_error($msgs)) {
+			unset($msgs->errors['root-element-validation']);
 			$msgs = $msgs->get_error_messages();
 		}
 		if ( ! is_array($msgs)) {

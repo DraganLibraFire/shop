@@ -2,9 +2,9 @@
 
 $pluginUrl = plugins_url('', dirname(__DIR__));
 
-echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">' .
-	'<link rel="stylesheet" type="text/css" href="' . $pluginUrl . '/assets/bootstrap.min.css" />' .
-	'<link rel="stylesheet" type="text/css" href="' . $pluginUrl . '/assets/style.css" />';
+echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=latin,latin-ext" rel="stylesheet" property="stylesheet" type="text/css">' .
+	'<link rel="stylesheet" property="stylesheet" type="text/css" href="' . $pluginUrl . '/assets/bootstrap.min.css" />' .
+	'<link rel="stylesheet" property="stylesheet" type="text/css" href="' . $pluginUrl . '/assets/style.css" />';
 
 ?><div class="wrap" id="content">
 
@@ -24,7 +24,10 @@ echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700&
 						</p>
 						<div class="clear"></div>
 						<section class="intro">
-							<h4><?= __('Go to Smartsupp to start chatting with visitors, customize chat box design and access all features.', $domain) ?></h4>
+                            <h4>
+                                <strong class="green"><?= __('Smartsupp’s chat box is now visible on your website.', $domain) ?></strong> <br /><br />
+                                <?= __('Go to Smartsupp to chat with visitors, customize chat box design and access all features.', $domain) ?>
+                            </h4>
 							<div class="intro--btn">
 								<a href="https://dashboard.smartsupp.com?utm_source=Wordpress&utm_medium=integration&utm_campaign=link" target="_blank" class="js-register btn btn-primary btn-xl"><?= __('Go to Smartsupp', $domain) ?></a>
 							</div>
@@ -36,7 +39,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700&
 					<div class="settings-container">
 						<div class="section--header">
 							<h3 class="no-margin bold"><?= __('Advanced settings', $domain) ?></h3>
-							<p><?= __('Optional code for advanced customization with <a href="https://developers.smartsupp.com?utm_source=Wordpress&utm_medium=integration&utm_campaign=link" target="_blank">Smartsupp API</a>', $domain) ?></p>
+							<p><?= __('Don\'t put the chat code here — this box is for (optional) advanced customizations via <a href="https://developers.smartsupp.com?utm_source=Wordpress&utm_medium=integration&utm_campaign=link" target="_blank">Smartsupp API</a>', $domain) ?></p>
 						</div>
 						<div class="section--body">
 							<form action="" method="post" id="settingsForm" class="js-code-form form-horizontal" autocomplete="off">

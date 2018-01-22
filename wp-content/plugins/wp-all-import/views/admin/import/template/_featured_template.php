@@ -8,7 +8,7 @@
 				<?php if ($section_is_show_warning and ( $post_type != "product" or ! class_exists('PMWI_Plugin'))):?>
 					
 					<div class="wpallimport-free-edition-notice" style="text-align:center; margin-top:-15px; margin-bottom: 40px;">
-						<a href="http://www.wpallimport.com/upgrade-to-pro/?utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=images" target="_blank" class="upgrade_link"><?php _e('Upgrade to the Pro edition of WP All Import to import images.', 'pmxi_plugin');?></a>
+						<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1748&edd_options%5Bprice_id%5D=0?utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=images" target="_blank" class="upgrade_link"><?php _e('Upgrade to the Pro edition of WP All Import to Import Images', 'pmxi_plugin');?></a>
 						<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
 					</div>
 					
@@ -149,7 +149,7 @@
 										</div>										
 										<h4><?php _e('Files', 'wp_all_import_plugin'); ?></h4>
 										<div class="advanced_options_files">
-											<p style="font-style:italic; display:none;"><?php _e('These options only available if Download images hosted elsewhere is selected above.', 'wp_all_import_plugin'); ?></p>
+											<p style="font-style:italic; display:none;"><?php _e('These options not available if Use images currently in Media Library is selected above.', 'wp_all_import_plugin'); ?></p>
 											<div class="input" style="margin:3px 0px;">
 												<input type="hidden" name="<?php echo $section_slug; ?>auto_rename_images" value="0" />
 												<input type="checkbox" id="<?php echo $section_slug; ?>auto_rename_images" name="<?php echo $section_slug; ?>auto_rename_images" value="1" <?php echo $post[$section_slug . 'auto_rename_images'] ? 'checked="checked"' : ''; ?> class="switcher fix_checkbox"/>

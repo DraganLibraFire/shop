@@ -30,10 +30,7 @@ function pmxi_wp_ajax_upload_resource(){
 
 		$filesXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<data><node></node></data>";
 
-		if ( strpos($post['file'], "dropbox") !== false && preg_match('%\W(dl=0)$%i', $post['file']) )
-		{
-			$post['file'] = str_replace("?dl=0", "?dl=1", $post['file']);
-		}
+		$post['file'] = apply_filters('wp_all_import_feed_url', wp_all_import_sanitize_url($post['file']));
 
 		$files = XmlImportParser::factory($filesXML, '/data/node', $post['file'], $file)->parse(); $tmp_files[] = $file;	
 
@@ -70,6 +67,13 @@ function pmxi_wp_ajax_upload_resource(){
 
 		}
 		else {
+
+			// $root_element = wp_all_import_get_reader_engine( array($upload_result['filePath']), array('root_element' => $upload_result['root_element']) );	
+				
+			// if ( ! empty($root_element) and empty($upload_result['root_element']))
+			// {
+			// 	$upload_result['root_element'] = $root_element;
+			// }
 
 			// validate XML
 			$file = new PMXI_Chunk($upload_result['filePath'], array('element' => $upload_result['root_element']));										    					    					   												
@@ -121,12 +125,14 @@ function pmxi_wp_ajax_upload_resource(){
 				$response['upload_result'] = $upload_result;			
 				$response['filesize'] = filesize($upload_result['filePath']);
 				$response['post_type'] = $upload_result['post_type'];
+				$response['taxonomy_type'] = $upload_result['taxonomy_type'];
 
 				if ( ! empty($response['post_type']) ) 
 				{
 					switch ( $response['post_type'] ) {
 
 						case 'product':
+						case 'shop_order':
 							
 							if ( ! class_exists('WooCommerce') ) {
 								$response['notice'] = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires WooCommerce.</p><a class="upgrade_link" href="https://wordpress.org/plugins/woocommerce/" target="_blank">Get WooCommerce</a>.', 'wp_all_import_plugin');							

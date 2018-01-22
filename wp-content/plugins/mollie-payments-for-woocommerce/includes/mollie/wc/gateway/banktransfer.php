@@ -177,13 +177,13 @@ class Mollie_WC_Gateway_BankTransfer extends Mollie_WC_Gateway_Abstract
         {
             $instructions .= sprintf(
                 /* translators: Placeholder 1: consumer name, placeholder 2: consumer IBAN, placeholder 3: consumer BIC */
-                __('Payment completed by <strong>%s</strong> (IBAN: %s, BIC: %s)', 'mollie-payments-for-woocommerce'),
+                __('Payment completed by <strong>%s</strong> (IBAN (last 4 digits): %s, BIC: %s)', 'mollie-payments-for-woocommerce'),
                 $payment->details->consumerName,
-                implode(' ', str_split($payment->details->consumerAccount, 4)),
+	            substr($payment->details->consumerAccount, -4),
                 $payment->details->consumerBic
             );
         }
-        elseif ($data_helper->hasOrderStatus($order, 'on-hold'))
+        elseif ($data_helper->hasOrderStatus($order, 'on-hold') || $data_helper->hasOrderStatus($order, 'pending') )
         {
             if (!$admin_instructions)
             {
@@ -212,7 +212,7 @@ class Mollie_WC_Gateway_BankTransfer extends Mollie_WC_Gateway_Abstract
             {
                 $expiry_date = DateTime::createFromFormat( 'U', time() );
 	            $expiry_date->add( new DateInterval( $payment->expiryPeriod ) );
-	            $expiry_date = $expiry_date->format( wc_date_format() );
+	            $expiry_date = $expiry_date->format( 'Y-m-d H:i:s' );
 	            $expiry_date = date_i18n( wc_date_format(), strtotime( $expiry_date ) );
 
                 if ($admin_instructions)

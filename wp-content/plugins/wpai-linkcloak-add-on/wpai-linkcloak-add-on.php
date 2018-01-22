@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - Link Cloaking Add-on
 Plugin URI: http://www.wpallimport.com/
 Description: Cloak all links present during import.
-Version: 1.0.8
+Version: 1.1.0
 Author: Soflyy
 */
 
@@ -25,7 +25,7 @@ define('PMLCA_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMLCA_PREFIX', 'pmlca_');
 
-define('PMLCA_VERSION', '1.0.8');
+define('PMLCA_VERSION', '1.1.0');
 
 final class WPAI_Link_Cloak {
 
@@ -72,7 +72,7 @@ final class WPAI_Link_Cloak {
 
 		if (self::$instance == NULL) {
 
-			register_activation_hook(self::FILE, array($this, '__activation'));			
+			register_activation_hook(self::FILE, array($this, 'activation'));
 
 			// Register own wpallimport addon
 			add_filter('pmxi_addons', array( &$this, 'register_addon' ), 10, 1);				
@@ -88,7 +88,7 @@ final class WPAI_Link_Cloak {
 			add_filter('pmxi_the_excerpt', array( &$this, 'pmxi_the_content'), 10, 2);
 			add_filter('pmxi_custom_field', array( &$this, 'pmxi_custom_field'), 10, 5);
 			add_filter('pmwi_cloak_affiliate_url', array( &$this, 'pmwi_cloak_affiliate_url'), 10, 2);
-
+            add_filter('pmxi_save_options', array( &$this, 'pmwi_pmxi_save_options'), 10, 1);
 		}			
 
 	}
@@ -110,6 +110,11 @@ final class WPAI_Link_Cloak {
 			global $wpdb;			
 
 			$link = $wpdb->get_row("SELECT * FROM {$table_prefix}links WHERE slug = '$slug'", ARRAY_A);
+
+			if ( empty($link) && !empty($mtch[0])){
+				$slug = ltrim($mtch[0], "/");
+				$link = $wpdb->get_row("SELECT * FROM {$table_prefix}links WHERE slug = '$slug'", ARRAY_A);
+			}
 
 			if ( $link != null ){				
 				
@@ -163,7 +168,7 @@ final class WPAI_Link_Cloak {
 	/**
 	 * Plugin activation logic
 	 */
-	public function __activation(){
+	public function activation(){
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		require self::ROOT_DIR . '/schema.php';
@@ -240,9 +245,23 @@ final class WPAI_Link_Cloak {
 	public static function get_default_import_options(){
 		return array(			
 			'pmlca_mode'   => 'all',
-			'pmlca_prefix' => ''			
+			'pmlca_prefix' => '',
+            'pmlca_old_prefix' => ''
 		);
 	}
+
+	public function pmwi_pmxi_save_options( $options ){
+
+	    $import_id = $_GET['id'];
+
+        $import = new PMXI_Import_Record();
+        $import->getById($import_id);
+        if (!$import->isEmpty() && !empty($import->options['pmlca_prefix']) && $import->options['pmlca_prefix'] != $import->options['pmlca_old_prefix']){
+            $options['pmlca_old_prefix'] = $import->options['pmlca_prefix'];
+        }
+
+        return $options;
+    }
 
 	/**
 	 * Function for parsing data. Function name should start from your addon's prefix {Addon Prefix}_parse, for example 'my_pmai_addon_parse'
@@ -296,7 +315,7 @@ final class WPAI_Link_Cloak {
 				+ $default			
 			);		
 
-		if ( version_compare(PMXI_VERSION, '4.0.0-beta1') >= 0 ){
+		if ( (PMXI_EDITION == 'free' and version_compare(PMXI_VERSION, '3.3.6-beta1') >= 0) or (PMXI_EDITION == 'paid' and version_compare(PMXI_VERSION, '4.0.0-beta1') >= 0 )){
 			$is_loaded_template = (!empty(PMXI_Plugin::$session->is_loaded_template)) ? PMXI_Plugin::$session->is_loaded_template : false;
 		}
 		else{
@@ -318,7 +337,7 @@ final class WPAI_Link_Cloak {
 							
 		}
 
-		if ( version_compare(PMXI_VERSION, '4.0.0-beta1') >= 0 ){
+		if ( (PMXI_EDITION == 'free' and version_compare(PMXI_VERSION, '3.3.6-beta1') >= 0) or (PMXI_EDITION == 'paid' and version_compare(PMXI_VERSION, '4.0.0-beta1') >= 0 )){
 		?>
 		<div class="wpallimport-section">
 			<div class="wpallimport-collapsed closed">
@@ -388,7 +407,7 @@ final class WPAI_Link_Cloak {
 
 			if ( empty($import->options['is_cloak']) and ! empty($import->options['pmlca_mode']) and $import->options['pmlca_mode'] == "all" )
 
-				return $this->cloak_aff_links($content, false, $import->options['pmlca_prefix']);
+				return $this->cloak_aff_links($content, false, $import->options['pmlca_prefix'], $import->options['pmlca_old_prefix']);
 		}
 
 		return $content; 
@@ -405,7 +424,7 @@ final class WPAI_Link_Cloak {
 
 			if ( empty($import->options['is_cloak']) and ! empty($import->options['pmlca_mode']) and $import->options['pmlca_mode'] == "all" )
 
-				return $this->cloak_aff_links($value, true, $import->options['pmlca_prefix']);
+				return $this->cloak_aff_links($value, true, $import->options['pmlca_prefix'], $import->options['pmlca_old_prefix']);
 		}
 
 		return $value; 
@@ -422,7 +441,7 @@ final class WPAI_Link_Cloak {
 
 			if ( (empty($import->options['is_cloak']) or ! class_exists('PMLC_Plugin')) and ! empty($import->options['pmlca_mode']) and ( in_array($import->options['pmlca_mode'], array("affiliate", "all")) ) )			
 			{								
-				return $this->cloak_aff_links($aff_url, true, $import->options['pmlca_prefix']);
+				return $this->cloak_aff_links($aff_url, true, $import->options['pmlca_prefix'], $import->options['pmlca_old_prefix']);
 			}
 		}
 
@@ -430,9 +449,9 @@ final class WPAI_Link_Cloak {
 
 	}
 
-	protected function cloak_aff_links( $content, $single_url = true, $link_prefix = '' ){
+	protected function cloak_aff_links( $content, $single_url = true, $link_prefix = '',  $old_prefix = ''){
 
-		return pmailc_cloak_aff_links( $content, $single_url, $link_prefix );		
+		return pmailc_cloak_aff_links( $content, $single_url, $link_prefix, $old_prefix );
 
 	}
 
@@ -473,7 +492,7 @@ if ( ! empty($wpai_linkcloak_addon_options['info_api_url']) and class_exists('PM
 
 if ( ! function_exists('pmailc_cloak_aff_links')):
 
-	function pmailc_cloak_aff_links($content, $single_url = true, $link_prefix = ''){
+	function pmailc_cloak_aff_links($content, $single_url = true, $link_prefix = '', $old_prefix = ''){
 
 		if ($single_url){
 					
@@ -485,7 +504,10 @@ if ( ! function_exists('pmailc_cloak_aff_links')):
 				$results = $wpdb->get_results( "SELECT * FROM {$table_prefix}links WHERE afflink LIKE '%{$content}%'", OBJECT );
 				
 				if ($results) { // matching link found
-					$link = $results[0];						
+					$link = $results[0];
+                    if (!empty($old_prefix) && $old_prefix != $link_prefix){
+                        $link->slug = str_replace($old_prefix, '', $link->slug);
+                    }
 					$slug = apply_filters('wpai_link_cloak_update_slug', $link_prefix . str_replace($link_prefix, '', $link->slug), $link->afflink);									
 					if ($slug != $link->slug)
 					{
@@ -550,6 +572,9 @@ if ( ! function_exists('pmailc_cloak_aff_links')):
 					
 					if ($results) { // matching link found
 						$link = $results[0];
+                        if (!empty($old_prefix) && $old_prefix != $link_prefix){
+                            $link->slug = str_replace($old_prefix, '', $link->slug);
+                        }
 						$slug = apply_filters('wpai_link_cloak_update_slug', $link_prefix . str_replace($link_prefix, '', $link->slug), $link->afflink);									
 						if ($slug != $link->slug)
 						{

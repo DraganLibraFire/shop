@@ -1,31 +1,5 @@
-<?php
-
-$l10n = array(
-	'queue_limit_exceeded' => 'You have attempted to queue too many files.',
-	'file_exceeds_size_limit' => 'This file exceeds the maximum upload size for this site.',
-	'zero_byte_file' => 'This file is empty. Please try another.',
-	'invalid_filetype' => 'This file type is not allowed. Please try another.',
-	'default_error' => 'An error occurred in the upload. Please try again later.',
-	'missing_upload_url' => 'There was a configuration error. Please contact the server administrator.',
-	'upload_limit_exceeded' => 'You may only upload 1 file.',
-	'http_error' => 'HTTP Error: Click here for our <a href="http://www.wpallimport.com/documentation/advanced/troubleshooting/" target="_blank">troubleshooting guide</a>, or ask your web host to look in your error_log file for an error that takes place at the same time you are trying to upload a file.',
-	'upload_failed' => 'Upload failed.',
-	'io_error' => 'IO error.',
-	'security_error' => 'Security error.',
-	'file_cancelled' => 'File canceled.',
-	'upload_stopped' => 'Upload stopped.',
-	'dismiss' => 'Dismiss',
-	'crunching' => 'Crunching&hellip;',
-	'deleted' => 'moved to the trash.',
-	'error_uploading' => 'has failed to upload due to an error',
-	'cancel_upload' => 'Cancel upload',
-	'dismiss' => 'Dismiss'
-);
-
-?>
 <script type="text/javascript">
 	var plugin_url = '<?php echo WP_ALL_IMPORT_ROOT_URL; ?>';
-	var swfuploadL10n = <?php echo json_encode($l10n); ?>;
 </script>
 
 <div class="change_file">
@@ -104,8 +78,8 @@ $l10n = array(
 								<span class="wpallimport-url-icon"></span>
 								<input type="text" class="regular-text" name="url" value="<?php echo ('url' == $import->type) ? esc_attr($import->path) : 'Enter a web address to download the file from...'; ?>"/> 								
 								<div class="wpallimport-free-edition-notice">									
-									<a href="http://www.wpallimport.com/upgrade-to-pro/?utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=download-from-url" target="_blank" class="upgrade_link"><?php _e('Upgrade to the Pro edition of WP All Import to use this feature.', 'wp_all_import_plugin');?></a>
-									<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
+									<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1748&edd_options%5Bprice_id%5D=0&utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=download-from-url" target="_blank" class="upgrade_link"><?php _e('Upgrade to the Pro edition of WP All Import to Download from URL', 'wp_all_import_plugin');?></a>
+									<p style="margin-top:16px;"><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
 								</div>
 							</div>
 							<input type="hidden" name="downloaded"/>
@@ -126,12 +100,12 @@ $l10n = array(
 								
 								<input type="hidden" name="file" value="<?php if ('file' == $import->type) echo esc_attr($import->path); ?>"/>	
 								
-								<div class="wpallimport-note" style="width:60%; margin: 0 auto; ">
-									<?php printf(__('Upload files to <strong>%s</strong> and they will appear in this list', 'wp_all_import_plugin'), $upload_dir['basedir'] . '/wpallimport/files'); ?>									
+								<div class="wpallimport-note" style="margin: 0 auto; ">
+									<?php printf(__('Files uploaded to <strong>%s</strong> will appear in this list.', 'wp_all_import_plugin'), $upload_dir['basedir'] . '/wpallimport/files'); ?>									
 								</div>
 								<div class="wpallimport-free-edition-notice">									
-									<a href="http://www.wpallimport.com/upgrade-to-pro/?utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=use-existing-file" target="_blank" class="upgrade_link"><?php _e('Upgrade to the Pro edition of WP All Import to use this feature.', 'wp_all_import_plugin');?></a>
-									<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
+									<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1748&edd_options%5Bprice_id%5D=0&utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=use-existing-file" target="_blank" class="upgrade_link"><?php _e('Upgrade to the Pro edition of WP All Import to Use Existing Files', 'wp_all_import_plugin');?></a>
+									<p style="margin-top:16px;"><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
 								</div>
 							</div>
 						</div>						

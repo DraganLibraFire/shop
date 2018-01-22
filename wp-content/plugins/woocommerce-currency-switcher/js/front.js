@@ -1,28 +1,54 @@
-var wocs_loading_first_time = true;//simply flag var
+var woocs_loading_first_time = true;//simply flag var
 var sumbit_currency_changing = true;//juts a flag variable for drop-down redraws when prices redraws by AJAX
-jQuery(function () {
+
+jQuery(function ($) {
 
     jQuery.fn.life = function (types, data, fn) {
 	jQuery(this.context).on(types, this.selector, data, fn);
 	return this;
     };
 
-    //keeps data of $_GET array
     woocs_array_of_get = jQuery.parseJSON(woocs_array_of_get);
+
+    //wp-content\plugins\woocommerce\assets\js\frontend\cart.js
+    if (Object.keys(woocs_array_of_get).length !== 0) {
+	if ('currency' in woocs_array_of_get) {
+	    //console.log('here');
+	    //this code nessesary for correct redrawing of the shipping methods while currency changes on the cart page
+	    $('body.woocommerce-cart .shop_table.cart').closest('form').find('input[name="update_cart"]').prop('disabled', false);
+	    $('body.woocommerce-cart .shop_table.cart').closest('form').find('input[name="update_cart"]').trigger('click');
+	}
+    }
+
+    //keeps data of $_GET array
+
     if (Object.keys(woocs_array_of_get).length == 0) {
 	woocs_array_of_get = {};
     }
 
+    //***
     woocs_array_no_cents = jQuery.parseJSON(woocs_array_no_cents);
 
+    //***
 
-    if (woocs_array_of_get.currency != undefined || woocs_array_of_get.removed_item != undefined)
+    //emptying cart widget after checkout
+    if (!parseInt(woocs_get_cookie('woocommerce_items_in_cart'), 10)) {
+	$('.widget_shopping_cart_content').empty();
+	$(document.body).trigger('wc_fragment_refresh');
+    }
+
+    if (woocs_array_of_get.currency != undefined || woocs_array_of_get.removed_item != undefined || woocs_array_of_get.key != undefined)
     {
 	woocs_refresh_mini_cart(555);
     }
     //intercept adding to cart event to redraw mini-cart widget
     jQuery(document).on("adding_to_cart", function () {
 	woocs_refresh_mini_cart(999);
+    });
+
+    //to make price popup mobile friendly
+    jQuery('.woocs_price_info').life('click', function () {
+	return false;
     });
 
     //+++++++++++++++++++++++++++++++++++++++++++++++
@@ -57,7 +83,7 @@ jQuery(function () {
 		    selectText: "Select currency",
 		    //background:'#ff0000',
 		    onSelected: function (data) {
-			if (!wocs_loading_first_time)
+			if (!woocs_loading_first_time)
 			{
 			    var form = jQuery(data.selectedItem).closest('form.woocommerce-currency-switcher-form');
 			    jQuery(form).find('input[name="woocommerce-currency-switcher"]').eq(0).val(data.selectedData.value);
@@ -80,7 +106,7 @@ jQuery(function () {
 	}
     }
 
-
+ woocs_loading_first_time = false;
 
 
     if (woocs_drop_down_view == 'wselect' && woocs_is_mobile != 1) {
@@ -176,6 +202,12 @@ jQuery(function () {
 		    products_ids.push(jQuery(item).data('product-id'));
 		});
 
+		//if no prices on the page - do nothing
+		if (products_ids.length === 0) {
+                    sumbit_currency_changing = true;
+		    return;
+		}
+
 		var data = {
 		    action: "woocs_get_products_price_html",
 		    products_ids: products_ids
@@ -187,7 +219,11 @@ jQuery(function () {
 		    if (!jQuery.isEmptyObject(data)) {
 			jQuery('.woocs_price_info').remove();
 			jQuery.each(jQuery('.woocs_price_code'), function (index, item) {
-			    jQuery(item).replaceWith(data.ids[jQuery(item).data('product-id')]);
+                            
+                        if(data.ids[jQuery(item).data('product-id')]!=undefined){
+                            jQuery(item).replaceWith(data.ids[jQuery(item).data('product-id')]);
+                        }   
+			   
 			});
 			//***
 			jQuery('.woocommerce-currency-switcher').val(data.current_currency);
@@ -233,7 +269,14 @@ jQuery(function () {
 	}
     }
 
-    wocs_loading_first_time = false;
+    //***
+    //removing price info on single page near variation prices
+    setTimeout(function () {
+	//jQuery('body.single-product .woocommerce-variation-price').find('.woocs_price_info').remove();
+    }, 300);
+    //***
+    
+   
 });
 
 
@@ -260,6 +303,7 @@ function woocs_redirect(currency) {
 	jQuery.each(woocs_array_of_get, function (index, value) {
 	    string_of_get = string_of_get + "&" + index + "=" + value;
 	});
+        //string_of_get+=decodeURIComponent(jQuery.param(woocs_array_of_get));
     }
     window.location = l + string_of_get;
 }
@@ -310,11 +354,18 @@ function woocs_refresh_mini_cart(delay) {
 
 
 	    /* Cart hiding */
-	    if (jQuery.cookie('woocommerce_items_in_cart') > 0) {
-		jQuery('.hide_cart_widget_if_empty').closest('.widget_shopping_cart').show();
-	    } else {
-		jQuery('.hide_cart_widget_if_empty').closest('.widget_shopping_cart').hide();
+	    try {
+		//if (jQuery.cookie('woocommerce_items_in_cart') > 0)
+		if (woocs_get_cookie('woocommerce_items_in_cart') > 0)
+		{
+		    jQuery('.hide_cart_widget_if_empty').closest('.widget_shopping_cart').show();
+		} else {
+		    jQuery('.hide_cart_widget_if_empty').closest('.widget_shopping_cart').hide();
+		}
+	    } catch (e) {
+		//***
 	    }
+
 
 	    jQuery('body').bind('adding_to_cart', function () {
 		jQuery('.hide_cart_widget_if_empty').closest('.widget_shopping_cart').show();
@@ -326,5 +377,12 @@ function woocs_refresh_mini_cart(delay) {
 
     }, delay);
 
+}
+
+function woocs_get_cookie(name) {
+    var matches = document.cookie.match(new RegExp(
+	    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 

@@ -56,7 +56,7 @@
 	<input type="checkbox" id="is_not_keep_former_posts" name="is_keep_former_posts" value="no" <?php echo "yes" != $post['is_keep_former_posts'] ? 'checked="checked"': '' ?> class="switcher" />
 	<label for="is_not_keep_former_posts"><?php _e('Update existing posts with changed data in your file', 'wp_all_import_plugin') ?></label>
 	<?php if ( $this->isWizard and "new" == $post['wizard_type'] and empty(PMXI_Plugin::$session->deligate)): ?>
-	<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('These options will only be used if you run this import again later. All data is imported the first time you run an import.', 'wp_all_import_plugin') ?>">?</a>	
+	<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('These options will only be used if you run this import again later. All data is imported the first time you run an import.<br/><br/>Note that WP All Import will only update/remove posts created by this import. If you want to match to posts that already exist on this site, use Existing Items in Step 1.', 'wp_all_import_plugin') ?>">?</a>	
 	<?php endif; ?>
 	<div class="switcher-target-is_not_keep_former_posts" style="padding-left:17px;">
 		<input type="radio" id="update_all_data" class="switcher" name="update_all_data" value="yes" <?php echo 'no' != $post['update_all_data'] ? 'checked="checked"': '' ?>/>
@@ -64,7 +64,10 @@
 		
 		<input type="radio" id="update_choosen_data" class="switcher" name="update_all_data" value="no" <?php echo 'no' == $post['update_all_data'] ? 'checked="checked"': '' ?>/>
 		<label for="update_choosen_data"><?php _e('Choose which data to update', 'wp_all_import_plugin' )?></label><br>
-		<div class="switcher-target-update_choosen_data"  style="padding-left:17px;">
+		<div class="switcher-target-update_choosen_data"  style="padding-left:27px;">
+			<div class="input">
+				<h4 class="wpallimport-trigger-options wpallimport-select-all" rel="<?php _e("Unselect All", "wp_all_import_plugin"); ?>"><?php _e("Select All", "wp_all_import_plugin"); ?></h4>
+			</div>
 			<div class="input">
 				<input type="hidden" name="is_update_status" value="0" />
 				<input type="checkbox" id="is_update_status" name="is_update_status" value="1" <?php echo $post['is_update_status'] ? 'checked="checked"': '' ?> />
@@ -110,6 +113,11 @@
 				<input type="hidden" name="is_update_parent" value="0" />
 				<input type="checkbox" id="is_update_parent" name="is_update_parent" value="1" <?php echo $post['is_update_parent'] ? 'checked="checked"': '' ?> />
 				<label for="is_update_parent"><?php _e('Parent post', 'wp_all_import_plugin') ?></label>
+			</div>
+			<div class="input">
+				<input type="hidden" name="is_update_post_type" value="0" />
+				<input type="checkbox" id="is_update_post_type" name="is_update_post_type" value="1" <?php echo $post['is_update_post_type'] ? 'checked="checked"': '' ?> />
+				<label for="is_update_post_type"><?php _e('Post type', 'wp_all_import_plugin') ?></label>
 			</div>
 			<div class="input">
 				<input type="hidden" name="is_update_comment_status" value="0" />
@@ -185,7 +193,7 @@
 				<div class="switcher-target-is_update_categories" style="padding-left:17px;">
 					<?php
 					$existing_taxonomies = array();
-					$hide_taxonomies = (class_exists('PMWI_Plugin')) ? array('product_type') : array();
+					$hide_taxonomies = (class_exists('PMWI_Plugin')) ? array('product_type', 'product_visibility') : array();
 					$post_taxonomies = array_diff_key(get_taxonomies_by_object_type($post['is_override_post_type'] ? array_keys(get_post_types( '', 'names' )) : array($post_type), 'object'), array_flip($hide_taxonomies));
 					if (!empty($post_taxonomies)): 
 						foreach ($post_taxonomies as $ctx):  if ("" == $ctx->labels->name or (class_exists('PMWI_Plugin') and $post_type == "product" and strpos($ctx->name, "pa_") === 0)) continue;
@@ -218,7 +226,11 @@
 						<label for="update_categories_logic_add_new"><?php _e('Only add new', 'wp_all_import_plugin') ?></label>
 					</div>
 				</div>
-			</div>	
+			</div>
+			<?php
+				// add-ons re-import options
+				do_action('pmxi_reimport_options_after_taxonomies', $post_type, $post);
+			?>
 		</div>
 	</div>
 </div>	

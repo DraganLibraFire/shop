@@ -1,7 +1,7 @@
 <div class="panel woocommerce_options_panel" id="woocommerce_attributes" style="display:none;">
 	<div style="margin-left:-2%;">
 		<div class="woo-add-on-free-edition-notice upgrade_template" style="margin-top:0;">
-			<a href="http://www.wpallimport.com/upgrade-to-pro/?utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=woocommerce" target="_blank" class="upgrade_woo_link"><?php _e('Upgrade to the Pro edition of WP All Import and the WooCommerce add-on to import to Variable, Affiliate, and Grouped products.', 'wpai_woocommerce_addon_plugin');?></a>
+			<a href="https://www.wpallimport.com/checkout/?edd_action=purchase_collection&taxonomy=download_category&terms=14&utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=woocommerce" target="_blank" class="upgrade_woo_link"><?php _e('Upgrade to the Pro edition of WP All Import and the WooCommerce Add-On to import to Variable, Affiliate, and Grouped Products', 'wpai_woocommerce_addon_plugin');?></a>
 			<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
 		</div>
 	</div>	
@@ -12,7 +12,7 @@
 					<td><?php _e('Name', 'wpai_woocommerce_addon_plugin'); ?></td>
 					<td style="padding-bottom: 5px;">
 						<?php _e('Values', 'wpai_woocommerce_addon_plugin'); ?>
-						<a href="#help" class="wpallimport-help" title="<?php _e('Separate mutiple values with a |', 'wpai_woocommerce_addon_plugin') ?>" style="top:-1px;">?</a>
+						<a href="#help" class="wpallimport-help" title="<?php _e('Separate multiple values with a |', 'wpai_woocommerce_addon_plugin') ?>" style="top:-1px;">?</a>
 					</td>
 					<td></td>
 				</tr>

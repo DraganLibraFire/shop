@@ -1,6 +1,6 @@
 <div class="panel woocommerce_options_panel" id="inventory_product_data" style="display:none;">
 	<div class="woo-add-on-free-edition-notice upgrade_template">
-		<a href="http://www.wpallimport.com/upgrade-to-pro/?utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=woocommerce" target="_blank" class="upgrade_woo_link"><?php _e('Upgrade to the Pro edition of WP All Import and the WooCommerce add-on to import to Variable, Affiliate, and Grouped products.', 'wpai_woocommerce_addon_plugin');?></a>
+		<a href="https://www.wpallimport.com/checkout/?edd_action=purchase_collection&taxonomy=download_category&terms=14&utm_source=free-plugin&utm_medium=in-plugin&utm_campaign=woocommerce" target="_blank" class="upgrade_woo_link"><?php _e('Upgrade to the Pro edition of WP All Import and the WooCommerce Add-On to Import to Variable, Affiliate, and Grouped Products', 'wpai_woocommerce_addon_plugin');?></a>
 		<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_import_plugin'); ?></p>
 	</div>	
 	<div class="options_group show_if_simple show_if_variable">
@@ -49,7 +49,7 @@
 		<p class="form-field wpallimport-radio-field">
 			<input type="radio" id="product_stock_status_automatically" class="switcher" name="product_stock_status" value="auto" <?php echo 'auto' == $post['product_stock_status'] ? 'checked="checked"': '' ?>/>
 			<label for="product_stock_status_automatically" style="width:105px;"><?php _e("Set automatically", "wpai_woocommerce_addon_plugin"); ?></label>
-			<a href="#help" class="wpallimport-help" title="<?php _e('Set the stock status to In Stock for positive Stock Qty values, and Out Of Stock if Stock Qty is 0 or blank.', 'wpai_woocommerce_addon_plugin') ?>" style="position:relative; top:2px;">?</a>
+			<a href="#help" class="wpallimport-help" title="<?php _e('Set the stock status to In Stock for positive or blank Stock Qty values, and Out Of Stock if Stock Qty is 0.', 'wpai_woocommerce_addon_plugin') ?>" style="position:relative; top:2px;">?</a>
 		</p>
 		<div class="form-field wpallimport-radio-field">
 			<input type="radio" id="product_stock_status_xpath" class="switcher" name="product_stock_status" value="xpath" <?php echo 'xpath' == $post['product_stock_status'] ? 'checked="checked"': '' ?>/>
