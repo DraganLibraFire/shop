@@ -32,13 +32,12 @@ global $post, $product;
 				'title'	 => $props['title'],
 				'alt'    => $props['alt'],
 			) );
-
 			?>
 				
 				<div class="thumbnails columns-1">
 					<div>
 						<a href="<?php echo get_the_post_thumbnail_url() ?>">
-							<?php  the_post_thumbnail(); ?>
+							<img src="<?php echo get_the_post_thumbnail_url()?>" alt="<?php echo get_the_title()?>" title="<?php echo get_the_title()?>">
 						</a>
 					</div>
 					<?php
@@ -69,7 +68,7 @@ global $post, $product;
 	<div class="thumbnails columns-3">
 		<div class="woocommerce-product-gallery__image">
 			<a href="<?php echo get_the_post_thumbnail_url() ?>">
-				<?php  the_post_thumbnail(); ?>
+				<img src="<?php echo get_the_post_thumbnail_url()?>" alt="<?php echo get_the_title()?>" title="<?php echo get_the_title()?>">
 			</a>
 		</div>
 		<?php do_action( 'woocommerce_product_thumbnails' ); ?>

@@ -305,3 +305,26 @@ Stack trace:
 
 2017-12-14T12:36:49+00:00 CRITICAL Allowed memory size of 1073741824 bytes exhausted (tried to allocate 20480 bytes)
 
+2018-01-22T17:04:24+00:00 CRITICAL Uncaught Error: Cannot use object of type WC_Product_Simple as array in C:\wamp64\www\shop\wp-content\themes\toyshop\woocommerce\single-product\product-image.php:35
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-core-functions.php(209): include()
+#1 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-template-functions.php(893): wc_get_template('single-product/...')
+#2 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(286): woocommerce_show_product_images('')
+#3 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#4 C:\wamp64\www\shop\wp-includes\plugin.php(453): WP_Hook->do_action(Array)
+#5 C:\wamp64\www\shop\wp-content\themes\toyshop\woocommerce\content-single-product.php(48): do_action('woocommerce_bef...')
+#6 C:\wamp64\www\shop\wp-includes\template.php(690): require('C:\\wamp64\\www\\s...')
+#7 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-core-functions.php(179): load_template('C:\\wamp64\\www\\s...', false)
+#8 
+
+2018-01-22T17:05:08+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_item_name() in C:\wamp64\www\shop\wp-content\themes\toyshop\woocommerce\single-product\product-image.php:35
+Stack trace:
+#0 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-core-functions.php(209): include()
+#1 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-template-functions.php(893): wc_get_template('single-product/...')
+#2 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(286): woocommerce_show_product_images('')
+#3 C:\wamp64\www\shop\wp-includes\class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#4 C:\wamp64\www\shop\wp-includes\plugin.php(453): WP_Hook->do_action(Array)
+#5 C:\wamp64\www\shop\wp-content\themes\toyshop\woocommerce\content-single-product.php(48): do_action('woocommerce_bef...')
+#6 C:\wamp64\www\shop\wp-includes\template.php(690): require('C:\\wamp64\\www\\s...')
+#7 C:\wamp64\www\shop\wp-content\plugins\woocommerce\includes\wc-core-functions.php(179): load_template('C:\\wamp64\\www\\s...', fal
+

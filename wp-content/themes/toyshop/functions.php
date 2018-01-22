@@ -490,6 +490,7 @@ function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
 		return $fragments;
 	}
 	else if($difference > 0){
+		echo "<pre>"; print_r( get_field('shipping_message', 'option') ); echo "</pre>" ; exit();
 		$message = sprintf(get_field('shipping_message', 'option'), $difference);
 	}else{
 		$message = get_field('free_shipping_message', 'option');

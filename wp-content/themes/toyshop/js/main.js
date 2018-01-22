@@ -222,6 +222,7 @@ jQuery(function($){
         //}else{
         //    message = 'Free shipping';
         //}
+        console.log(amount);
         $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
     });
 });

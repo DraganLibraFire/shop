@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 		<div class="share-buttons clearfix">
 			<div class="share-link-text pull-left">
-				<?php _e('Share this' , 'shop') ?>
+				<?php _e('Deel' , 'shop') ?>
 			</div>
 			<div class="share-links-wrapper pull-right">
 				<!-- Facebook -->
