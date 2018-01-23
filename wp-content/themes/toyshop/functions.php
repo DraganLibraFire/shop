@@ -489,12 +489,14 @@ function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
 		$fragments['span.free_shipping_notice'] = get_field('message_cart_empty','option');
 		return $fragments;
 	}
-	else if($difference > 0){
-		echo "<pre>"; print_r( get_field('shipping_message', 'option') ); echo "</pre>" ; exit();
-		$message = sprintf(get_field('shipping_message', 'option'), $difference);
-	}else{
-		$message = get_field('free_shipping_message', 'option');
-	}
+	else if( $difference > 0 ){
+        $message = sprintf(get_field('shipping_message', 'option'), $difference);
+    }else{
+//        $message = get_field('free_shipping_message', 'option');
+        $message = sprintf(get_field('free_shipping_message', 'option'), $difference);
+
+//        echo "<pre>"; print_r( $message); echo "</pre>" ; exit();
+    }
 	$fragments['span.free_shipping_notice'] = '<span class="free_shipping_notice">' . $message . '</span>';
 
 	return $fragments;

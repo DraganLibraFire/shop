@@ -68,8 +68,8 @@ class WooCommerce_Widget_DropdownCart extends WP_Widget {
                     </a>
                     <div class="dropdown dropdown-<?php echo $popup_align ?>">
                         <div class="dropdown-header-cart">
-                            <p>Shopping Cart</p>
-                            <p>You have <span><?php echo $cart_contents_count; ?></span> articles in your cart.</p>
+                            <p>Winkelwagen</p>
+                            <p>Je hebt <span><?php echo $cart_contents_count; ?></span> producten in je winkelwagen.</p>
                         </div>
                         <?php woocommerce_mini_cart(); ?>
                         <div class="clear"></div>

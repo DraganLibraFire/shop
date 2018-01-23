@@ -1130,6 +1130,9 @@ body{
           }
         }
         .total{
+          .tax_label{
+            display: none;
+          }
           .amount{
             min-width: 80px;
             display: inline-block;
@@ -2863,6 +2866,9 @@ div.woocommerce{
         .stepper{
           display: inline-block;
           margin-bottom: auto;
+        }
+        .tax_label{
+          display: none;
         }
         &.actions{
           padding: 20px 0;

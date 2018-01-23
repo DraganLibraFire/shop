@@ -24,9 +24,7 @@
             <div class="home-tabs-features">
                 <div class="row">
                     <div class="col-md-4 home-tabs-title">
-                        <h6>
-                            <?php _e('BESTSELLER ', 'shop'); ?> <span><?php _e('PRODUCTS', 'shop') ?></span>
-                        </h6>
+                        <?php the_field('home_tabs_title')?>
 
                     </div>
                     <ul class="nav nav-tabs col-md-8" role="tablist">

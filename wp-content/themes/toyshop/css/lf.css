@@ -1022,6 +1022,8 @@ body .wp_autosearch_suggestions {
           .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a:hover {
             color: #4d3d7a;
             background-color: #fff; }
+        .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .total .tax_label {
+          display: none; }
         .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .total .amount {
           min-width: 80px;
           display: inline-block; }
@@ -2351,6 +2353,10 @@ div.woocommerce table.shop_table {
     div.woocommerce table.shop_table tbody td .stepper {
       display: inline-block;
       margin-bottom: auto; }
+    body.search table.shop_table tbody td .tax_label,
+    body.woocommerce table.shop_table tbody td .tax_label,
+    div.woocommerce table.shop_table tbody td .tax_label {
+      display: none; }
     body.search table.shop_table tbody td.actions,
     body.woocommerce table.shop_table tbody td.actions,
     div.woocommerce table.shop_table tbody td.actions {

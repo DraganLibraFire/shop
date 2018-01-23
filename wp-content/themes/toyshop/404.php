@@ -12,12 +12,11 @@ get_header(); ?>
 
 			<section class="error-404 not-found">
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( '404', 'starter' ); ?><span> Error</span></h1>
+					<?php the_field('404_title', 'option')?>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p>Suspendisse elit felis, molestie vitae mi nec, ultrices ultricies tortor. Sed eu nisi arcu. Morbi sapien nibh, varius nec hendrerit a, fermentum quis nibh. Aenean luctus, enim eget ullamcorper ultrices, turpis nisi dignissim erat, sit amet fermentum felis nulla vitae.</p>
-
+					<?php the_field('404_content', 'option')?>
 				</div><!-- .page-content -->
 				<a class="button purple" href="<?php echo home_url()?>"> Back to home</a>
 			</section><!-- .error-404 -->
