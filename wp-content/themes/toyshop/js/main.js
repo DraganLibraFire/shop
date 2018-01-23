@@ -90,6 +90,8 @@ jQuery(function($){
         }, 500);
     });
 
+    $('a[data-toggle="tab"]').on('shown.bs.tab', equal);
+
 
     var button_color = $(".woocommerce a.button.add_to_cart_button").css('background-color');
 
@@ -205,24 +207,6 @@ jQuery(function($){
     }, 500);
 
     $(document.body).on('added_to_cart', function(cart_contents, amount){
-        //var my_amount = $(amount['div.widget_shopping_cart_content']).find('.total .woocommerce-Price-amount').text();
-        //
-        //var min_value = $('body').find('.free-shipping-wrapper .min-value-free-shipping').text();
-        //var min_value =  parseFloat(min_value).toFixed(2);
-        //
-        //var my_amount =  my_amount.replace( /^\D+/g, '');
-        //var my_amount =  my_amount.replace( /,/g, '.');
-        //var my_amount =  parseFloat(my_amount).toFixed(2);
-        //
-        //var value = min_value-my_amount;
-        //var value = value.toFixed(2);
-        //var message = '';
-        //if(value > 0){
-        //    message = 'Add more items to your cart to get the free shipping! '+ value +' € remaining for free shipping.';
-        //}else{
-        //    message = 'Free shipping';
-        //}
-        console.log(amount);
         $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
     });
 });

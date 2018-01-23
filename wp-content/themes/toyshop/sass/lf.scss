@@ -2453,6 +2453,9 @@ body.woocommerce-page{
             padding-right: 20px;
             height: 52px;
             font-weight: 400;
+            .tax_label{
+              display: none;
+            }
           }
         }
         &.shipping{
@@ -3335,6 +3338,12 @@ div.woocommerce{
         }
         .thumbnails{
           padding-top: 0;
+          &.columns-1{
+            .slick-slide{
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+          }
           &.columns-3{
             padding-left: 15px;
             padding-right: 15px;

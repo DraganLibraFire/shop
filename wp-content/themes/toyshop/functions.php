@@ -387,6 +387,7 @@ add_action('init', function(){
 
 	register_taxonomy('brand', 'product', $args);
 });
+
 add_filter('woocommerce_get_price', 'discunt_per_user', 10, 2);
 function discunt_per_user($price, $product){
 	$user_discount = get_field('price', 'option');
@@ -595,8 +596,8 @@ add_action('initd', function(){
 
 });
 
-add_filter( 'woocommerce_before_calculate_totals', 'change_cart_items_prices', 10, 1 );
-function change_cart_items_prices( $cart_object ) {
+//add_filter( 'woocommerce_before_calculate_totals', 'change_cart_items_prices', 10, 1 );
+/*function change_cart_items_prices( $cart_object ) {
 
     if ( is_admin() && ! defined( 'DOING_AJAX' ) )
         return;
@@ -605,4 +606,16 @@ function change_cart_items_prices( $cart_object ) {
         $cart_item['data']->set_tax_status( 'taxable' ); // Above 2500
 
     }
+}*/
+//meta description for all products
+function add_meta_tags() {
+    global $post;
+    if ( is_product() ) {
+        $meta = get_the_title() .' Speelgoedkasteel.be ★ is de online speelgoedwinkel van Vlaanderen. Vandaag besteld? In géén tijd bij u thuis - of op kantoor geleverd! Koop *product* vandaag nog.';
+        echo '<meta name="description" content="' . $meta . '" />' . "\n";
+    }elseif( is_product_category() ){
+        $meta = single_term_title('',false) ." Speelgoedkasteel.be ★ is de online speelgoedwinkel van Vlaanderen. Vandaag besteld? In géén tijd bij u thuis - of op kantoor geleverd! Bekijk meteen ons uitgebreid assortiment.";
+        echo '<meta name="description" content="' . $meta . '" />' . "\n";
+    }
 }
+add_action( 'wp_head', 'add_meta_tags' , 2 );

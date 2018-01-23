@@ -2054,6 +2054,8 @@ body.woocommerce-page {
       padding-right: 20px;
       height: 52px;
       font-weight: 400; }
+      body.woocommerce-page .woo-checkout-order-wrapper tfoot tr.cart-subtotal td .tax_label, body.woocommerce-page .woo-checkout-order-wrapper tfoot tr.order-total td .tax_label, body.woocommerce-page .woo-checkout-order-wrapper tfoot tr.shipping td .tax_label {
+        display: none; }
   body.woocommerce-page .woo-checkout-order-wrapper tfoot tr.shipping {
     background-color: #F1F1F1; }
     body.woocommerce-page .woo-checkout-order-wrapper tfoot tr.shipping td {
@@ -2909,6 +2911,11 @@ div.woocommerce.woocommerce-page div.product div.images {
   body.woocommerce.woocommerce-page div.product div.images .thumbnails,
   div.woocommerce.woocommerce-page div.product div.images .thumbnails {
     padding-top: 0; }
+    body.search.woocommerce-page div.product div.images .thumbnails.columns-1 .slick-slide,
+    body.woocommerce.woocommerce-page div.product div.images .thumbnails.columns-1 .slick-slide,
+    div.woocommerce.woocommerce-page div.product div.images .thumbnails.columns-1 .slick-slide {
+      margin-left: 5px;
+      margin-right: 5px; }
     body.search.woocommerce-page div.product div.images .thumbnails.columns-3,
     body.woocommerce.woocommerce-page div.product div.images .thumbnails.columns-3,
     div.woocommerce.woocommerce-page div.product div.images .thumbnails.columns-3 {
