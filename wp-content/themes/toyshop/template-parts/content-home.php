@@ -60,7 +60,7 @@
                                     <?php $args_wo = array(
                                         'post_type' => 'product',
                                         'post__in' => $products,
-                                        'product_cat' => $taxonomy->slug
+                                        'product_cat' => @$taxonomy->slug
                                     );
 
                                     $woo_query = new WP_Query($args_wo);

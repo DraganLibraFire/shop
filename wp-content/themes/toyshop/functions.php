@@ -388,7 +388,8 @@ add_action('init', function(){
 	register_taxonomy('brand', 'product', $args);
 });
 
-add_filter('woocommerce_get_price', 'discunt_per_user', 10, 2);
+add_filter('woocommerce_product_get_price', 'discunt_per_user', 10, 2);
+//add_filter('woocommerce_get_price', 'discunt_per_user', 10, 2);
 function discunt_per_user($price, $product){
 	$user_discount = get_field('price', 'option');
 	$user_discount = intval($user_discount);
@@ -446,7 +447,7 @@ add_filter('woocommerce_page_title','lf_title_replace');
 
 function lf_title_replace($title){
 
-	return str_replace('-',' ',$title);
+	return str_replace('-',' ', $title);
 
 }
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
@@ -477,11 +478,13 @@ function get_shipping_method_min_amount_by_name( $method_name = 'free_shipping' 
 		}
 	}
 }
-add_filter('add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
+add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
 
 function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
 
 	$value = WC()->cart->cart_contents_total;
+    $value = $value + $value * 0.21;
+
 	$min_amount = get_shipping_method_min_amount_by_name();
 
 	$difference = $min_amount - $value;
@@ -491,12 +494,10 @@ function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
 		return $fragments;
 	}
 	else if( $difference > 0 ){
-        $message = sprintf(get_field('shipping_message', 'option'), $difference);
+        $message = sprintf(get_field('shipping_message', 'option'), round($difference, 2));
     }else{
-//        $message = get_field('free_shipping_message', 'option');
-        $message = sprintf(get_field('free_shipping_message', 'option'), $difference);
+        $message = sprintf(get_field('free_shipping_message', 'option'), round($difference, 2));
 
-//        echo "<pre>"; print_r( $message); echo "</pre>" ; exit();
     }
 	$fragments['span.free_shipping_notice'] = '<span class="free_shipping_notice">' . $message . '</span>';
 
@@ -596,17 +597,6 @@ add_action('initd', function(){
 
 });
 
-//add_filter( 'woocommerce_before_calculate_totals', 'change_cart_items_prices', 10, 1 );
-/*function change_cart_items_prices( $cart_object ) {
-
-    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
-        return;
-
-    foreach ( $cart_object->get_cart() as $cart_item ) {
-        $cart_item['data']->set_tax_status( 'taxable' ); // Above 2500
-
-    }
-}*/
 //meta description for all products
 function add_meta_tags() {
     global $post;
@@ -619,3 +609,10 @@ function add_meta_tags() {
     }
 }
 add_action( 'wp_head', 'add_meta_tags' , 2 );
+
+//declare WC support
+function aventurine_child_wc_support() {
+    add_theme_support( 'woocommerce' );
+}
+
+add_action( 'after_setup_theme', 'aventurine_child_wc_support' );

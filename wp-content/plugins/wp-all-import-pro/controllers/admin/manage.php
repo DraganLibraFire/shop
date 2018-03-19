@@ -331,7 +331,7 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 		$this->data['isWizard'] = false;
 
 		$default = PMXI_Plugin::get_default_import_options();
-
+		
 		$DefaultOptions = $item->options + $default;
 		foreach (PMXI_Admin_Addons::get_active_addons() as $class) {
 			if (class_exists($class)) $DefaultOptions += call_user_func(array($class, "get_default_import_options"));			

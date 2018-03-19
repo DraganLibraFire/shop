@@ -209,4 +209,10 @@ jQuery(function($){
     $(document.body).on('added_to_cart', function(cart_contents, amount){
         $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
     });
+
+    $(document.body).on('wc_fragment_refresh', function(cart_contents, amount){
+
+        console.log(cart_contents, amount);
+        $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
+    });
 });

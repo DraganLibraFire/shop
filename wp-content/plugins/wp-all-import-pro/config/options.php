@@ -34,4 +34,4 @@ $config = array(
 	"licenses" => array(),
 	"statuses" => array(),
 	"force_stream_reader" => 0
-);if (!defined('WPALLIMPORT_SIGNATURE')) define('WPALLIMPORT_SIGNATURE', 'Y2ZjZDIwODQ5NWQ1NjVlZjY2ZTdkZmY5Zjk4NzY0ZGE=');
+);if (!defined('WPALLIMPORT_SIGNATURE')) define('WPALLIMPORT_SIGNATURE', 'NTE4ZmUzY2Q3ZDA1MmFiNGJjMjdjNTBkNTU4NGQ4YjI=');
