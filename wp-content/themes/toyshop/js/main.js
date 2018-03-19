@@ -215,4 +215,58 @@ jQuery(function($){
         console.log(cart_contents, amount);
         $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
     });
+    $('.site-header .widget_shopping_cart').on('click', function(){
+        var wrapper = $('.site-header .widget_shopping_cart .widget_shopping_cart_content');
+        wrapper.fadeIn();
+        if(wrapper.hasClass('active')){
+            wrapper.fadeOut();
+            wrapper.removeClass('active');
+        }else{
+            wrapper.addClass('active');
+            wrapper.fadeIn();
+        }
+
+    });
+    $( window ).on( 'load ', function(){
+        var money = $('.widget_shopping_cart_content .total .amount').html();
+        if(money){
+            money = $('.widget_shopping_cart_content .total .amount').html();
+        }else{
+            money = "0,00"
+        }
+
+        if($('.site-header .widget_shopping_cart .money').length > 0 ){
+
+            $('body .site-header .widget_shopping_cart .count').empty().append('<span>'+ money +'</span>');
+
+        }else{
+
+            $('body .site-header .widget_shopping_cart h4').after('<div class="money"><span>'+ money +'</span></div>');
+        }
+    });
+    $( document.body ).on( 'added_to_cart', function(){
+        var count = $('.site-header .widget_shopping_cart .count span').html();
+        var add_count = parseInt(count) + 1 ;
+        var money = $('.widget_shopping_cart_content .total .amount').html();
+        if(money){
+            money = $('.widget_shopping_cart_content .total .amount').html();
+        }else{
+            money = "0,00"
+        }
+        if($('.site-header .widget_shopping_cart .count').length > 0 ){
+
+            $('body .site-header .widget_shopping_cart .count').empty().append('<span>'+ add_count +'</span>');
+
+        }
+
+        if($('.site-header .widget_shopping_cart .money').length > 0 ){
+
+            $('body .site-header .widget_shopping_cart .money').empty().append('<span>'+ money +'</span>');
+
+        }else{
+
+            $('body .site-header .widget_shopping_cart h4').after('<div class="money"><span>'+ money +'</span></div>');
+        }
+
+    });
 });

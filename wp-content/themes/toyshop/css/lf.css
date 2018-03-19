@@ -946,6 +946,78 @@ body .wp_autosearch_suggestions {
 
 .site-header {
   background-color: #f2f2f2; }
+  .site-header .widget_shopping_cart {
+    position: relative;
+    background-color: #4d3d7a;
+    height: 140px;
+    width: 200px;
+    padding: 0 15px !important;
+    cursor: pointer; }
+    .site-header .widget_shopping_cart .money {
+      color: #fff;
+      font-size: 20px;
+      font-family: "Prelo Bold";
+      max-width: 115px;
+      text-align: right;
+      padding-right: 5px; }
+    .site-header .widget_shopping_cart .count {
+      position: absolute;
+      display: block;
+      background-color: #ff7800;
+      height: 27px;
+      width: 27px;
+      line-height: 25px;
+      color: #fff;
+      font-size: 16px;
+      font-family: "Prelo Book";
+      text-align: center;
+      padding-top: 3px;
+      right: 5px;
+      top: 40px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%; }
+    .site-header .widget_shopping_cart .widget-title {
+      background: none;
+      padding: 0;
+      color: #fff;
+      position: relative;
+      margin-bottom: 0;
+      margin-top: 40px; }
+      .site-header .widget_shopping_cart .widget-title:after {
+        content: url("../images/cart.png");
+        position: relative;
+        bottom: -20px;
+        padding-left: 5px; }
+    .site-header .widget_shopping_cart .widget_shopping_cart_content {
+      background-color: #fff;
+      position: absolute;
+      width: 420px;
+      z-index: 20;
+      padding: 15px;
+      right: 0;
+      top: 100%;
+      transition: all 0.4s;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      display: none; }
+      .site-header .widget_shopping_cart .widget_shopping_cart_content .buttons {
+        text-align: right;
+        margin-bottom: 0; }
+        .site-header .widget_shopping_cart .widget_shopping_cart_content .buttons a {
+          display: inline-block;
+          vertical-align: middle;
+          padding: 10px 20px 8px; }
+          .site-header .widget_shopping_cart .widget_shopping_cart_content .buttons a:last-of-type {
+            margin-right: 0; }
+      .site-header .widget_shopping_cart .widget_shopping_cart_content .woocommerce-mini-cart__total {
+        text-align: right; }
+        .site-header .widget_shopping_cart .widget_shopping_cart_content .woocommerce-mini-cart__total small {
+          display: none; }
+    .site-header .widget_shopping_cart .mini_cart_item img {
+      display: none; }
   .site-header .widget_shopping_mini_cart_content {
     display: none; }
     .site-header .widget_shopping_mini_cart_content:first-of-type {
@@ -1091,40 +1163,50 @@ body .wp_autosearch_suggestions {
           border-radius: 50%; }
         .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown-total:after {
           content: url("../images/cart.png"); }
-  .site-header .website-logo-main-wrapper > aside {
-    vertical-align: middle;
-    margin-bottom: 0;
-    display: table-cell;
-    height: 120px; }
-    .site-header .website-logo-main-wrapper > aside:nth-child(2) {
-      padding-left: 38px; }
-  .site-header .website-logo-main-wrapper .main-logo-inner {
-    width: 260px; }
-    .site-header .website-logo-main-wrapper .main-logo-inner img {
-      width: 160px; }
-  .site-header .website-logo-main-wrapper .widget.widget_wizardinfosys_autosearch {
-    width: 60%; }
-    .site-header .website-logo-main-wrapper .widget.widget_wizardinfosys_autosearch form {
-      max-width: 570px;
-      width: 100% !important; }
-  .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form {
-    width: 90%; }
-    .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form input {
+  .site-header .website-logo-main-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .site-header .website-logo-main-wrapper > aside {
+      vertical-align: middle;
       margin-bottom: 0;
-      width: 100% !important;
-      font-size: 16px !important;
-      height: 44px !important; }
-    .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form button {
-      display: none !important; }
-    .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form .wp_autosearch_form_wrapper {
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      border-color: #c4c4c4 !important;
-      height: 46px !important;
-      -webkit-border-radius: 30px !important;
-      -moz-border-radius: 30px !important;
-      -ms-border-radius: 30px !important;
-      border-radius: 30px !important; }
+                 /*
+display: table-cell;
+height: 120px;*/
+      padding: 15px 0; }
+      .site-header .website-logo-main-wrapper > aside:nth-child(2) {
+        padding-left: 38px; }
+    .site-header .website-logo-main-wrapper .main-logo-inner {
+      width: 260px; }
+      .site-header .website-logo-main-wrapper .main-logo-inner img {
+        width: 160px; }
+    .site-header .website-logo-main-wrapper .widget.widget_wizardinfosys_autosearch {
+      width: 60%; }
+      .site-header .website-logo-main-wrapper .widget.widget_wizardinfosys_autosearch form {
+        max-width: 570px;
+        width: 100% !important; }
+    .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form {
+      width: 90%; }
+      .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form input {
+        margin-bottom: 0;
+        width: 100% !important;
+        font-size: 16px !important;
+        height: 44px !important; }
+      .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form button {
+        display: none !important; }
+      .site-header .website-logo-main-wrapper #wizardinfosys_autosearch_form .wp_autosearch_form_wrapper {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        border-color: #c4c4c4 !important;
+        height: 46px !important;
+        -webkit-border-radius: 30px !important;
+        -moz-border-radius: 30px !important;
+        -ms-border-radius: 30px !important;
+        border-radius: 30px !important; }
   .site-header .logo-shop-details-wrapper {
     background-color: #856bc8; }
   .site-header .menu-wrapper {

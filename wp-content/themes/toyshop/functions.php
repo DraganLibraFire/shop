@@ -602,3 +602,35 @@ function add_meta_tags() {
 
 }
 add_action( 'wp_head', 'add_meta_tags' , 2 );
+
+add_filter( 'woocommerce_widget_cart_is_hidden', 'always_show_cart', 40, 0 );
+function always_show_cart() {
+    return false;
+}
+
+add_action('wp_footer', 'custom_cart_item_count_script');
+function custom_cart_item_count_script(){
+    if( WC()->cart->is_empty() )
+        $cart_count = 0;
+    else
+        $cart_count = WC()->cart->get_cart_contents_count();
+
+    if(isset($cart_count)){
+        ?>
+        <script type="text/javascript">
+            jQuery(function($){
+                var count = <?php echo $cart_count?>;
+
+                if($('.site-header .widget_shopping_cart .count').length > 0 ){
+
+                    $('body .site-header .widget_shopping_cart .count').empty().append('<span>'+ count +'</span>');
+
+                }else{
+
+                    $('body .site-header .widget_shopping_cart h4').after('<div class="count"><span>'+ count +'</span></div>');
+                }
+            });
+        </script>
+        <?php
+    }
+}
