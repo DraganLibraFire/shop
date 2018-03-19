@@ -3274,25 +3274,49 @@ div.menu-wrapper > div > aside {
     font-size: 39px;
     line-height: 39px; }
 
+  body:not(.woocommerce-page) .site-main article h1, body.page-template-default .site-main article h1 {
+    font-size: 39px;
+    line-height: 100%; }
+
   body h2 {
     font-size: 37px;
     line-height: 37px; }
+
+  body:not(.woocommerce-page) .site-main article h2, body.page-template-default .site-main article h2 {
+    font-size: 37px;
+    line-height: 100%; }
 
   body h3 {
     font-size: 25px;
     line-height: 25px; }
 
+  body:not(.woocommerce-page) .site-main article h3, body.page-template-default .site-main article h3 {
+    font-size: 25px;
+    line-height: 100%; }
+
   body h4 {
     font-size: 23px;
     line-height: 23px; }
+
+  body:not(.woocommerce-page) .site-main article h4, body.page-template-default .site-main article h4 {
+    font-size: 23px;
+    line-height: 100%; }
 
   body h5 {
     font-size: 18px;
     line-height: 18px; }
 
+  body:not(.woocommerce-page) .site-main article h5, body.page-template-default .site-main article h5 {
+    font-size: 18px;
+    line-height: 100%; }
+
   body h6 {
     font-size: 16px;
     line-height: 16px; }
+
+  body:not(.woocommerce-page) .site-main article h6, body.page-template-default .site-main article h6 {
+    font-size: 16px;
+    line-height: 100%; }
 
   .shop-features {
     margin-bottom: 0; }
@@ -3821,25 +3845,43 @@ margin-right: auto;*/ }
     font-size: 37px;
     line-height: 37px; }
 
+  body:not(.woocommerce-page) .site-main article h1, body.page-template-default .site-main article h1 {
+    font-size: 37px; }
+
   body h2 {
     font-size: 35px;
     line-height: 35px; }
+
+  body:not(.woocommerce-page) .site-main article h2, body.page-template-default .site-main article h2 {
+    font-size: 35px; }
 
   body h3 {
     font-size: 23px;
     line-height: 23px; }
 
+  body:not(.woocommerce-page) .site-main article h3, body.page-template-default .site-main article h3 {
+    font-size: 23px; }
+
   body h4 {
     font-size: 21px;
     line-height: 21px; }
+
+  body:not(.woocommerce-page) .site-main article h4, body.page-template-default .site-main article h4 {
+    font-size: 21px; }
 
   body h5 {
     font-size: 17px;
     line-height: 17px; }
 
+  body:not(.woocommerce-page) .site-main article h5, body.page-template-default .site-main article h5 {
+    font-size: 17px; }
+
   body h6 {
     font-size: 15px;
     line-height: 15px; }
+
+  body:not(.woocommerce-page) .site-main article h6, body.page-template-default .site-main article h6 {
+    font-size: 15px; }
 
   .site-header .website-logo-main-wrapper .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a {
     padding: 9px 6px; }
@@ -3894,25 +3936,49 @@ margin-right: auto;*/ }
     font-size: 33px;
     line-height: 33px; }
 
+  body:not(.woocommerce-page) .site-main article h1, body.page-template-default .site-main article h1 {
+    font-size: 33px;
+    line-height: 100%; }
+
   body h2 {
     font-size: 30px;
     line-height: 30px; }
+
+  body:not(.woocommerce-page) .site-main article h2, body.page-template-default .site-main article h2 {
+    font-size: 30px;
+    line-height: 100%; }
 
   body h3 {
     font-size: 23px;
     line-height: 23px; }
 
+  body:not(.woocommerce-page) .site-main article h3, body.page-template-default .site-main article h3 {
+    font-size: 23px;
+    line-height: 100%; }
+
   body h4 {
     font-size: 21px;
     line-height: 21px; }
+
+  body:not(.woocommerce-page) .site-main article h4, body.page-template-default .site-main article h4 {
+    font-size: 21px;
+    line-height: 100%; }
 
   body h5 {
     font-size: 17px;
     line-height: 17px; }
 
+  body:not(.woocommerce-page) .site-main article h5, body.page-template-default .site-main article h5 {
+    font-size: 17px;
+    line-height: 100%; }
+
   body h6 {
     font-size: 15px;
     line-height: 15px; }
+
+  body:not(.woocommerce-page) .site-main article h6, body.page-template-default .site-main article h6 {
+    font-size: 15px;
+    line-height: 100%; }
 
   .dropdown-cart-button .dropdown .buttons {
     flex-direction: column; }
@@ -3979,25 +4045,49 @@ margin-right: auto;*/ }
     font-size: 27px;
     line-height: 27px; }
 
+  body:not(.woocommerce-page) .site-main article h1, body.page-template-default .site-main article h1 {
+    font-size: 27px;
+    line-height: 100%; }
+
   body h2 {
     font-size: 24px;
     line-height: 24px; }
+
+  body:not(.woocommerce-page) .site-main article h2, body.page-template-default .site-main article h2 {
+    font-size: 24px;
+    line-height: 100%; }
 
   body h3 {
     font-size: 21px;
     line-height: 21px; }
 
+  body:not(.woocommerce-page) .site-main article h3, body.page-template-default .site-main article h3 {
+    font-size: 21px;
+    line-height: 100%; }
+
   body h4 {
     font-size: 19px;
     line-height: 19px; }
+
+  body:not(.woocommerce-page) .site-main article h4, body.page-template-default .site-main article h4 {
+    font-size: 19px;
+    line-height: 100%; }
 
   body h5 {
     font-size: 17px;
     line-height: 17px; }
 
+  body:not(.woocommerce-page) .site-main article h5, body.page-template-default .site-main article h5 {
+    font-size: 17px;
+    line-height: 100%; }
+
   body h6 {
     font-size: 15px;
     line-height: 15px; }
+
+  body:not(.woocommerce-page) .site-main article h6, body.page-template-default .site-main article h6 {
+    font-size: 15px;
+    line-height: 100%; }
 
   /*section:not(.related.products) {
     [data-equal]{

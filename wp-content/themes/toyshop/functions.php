@@ -77,21 +77,13 @@ function starter_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+
+    add_theme_support( 'woocommerce' );
+
+    $GLOBALS['content_width'] = apply_filters( 'starter_content_width', 640 );
 }
 endif; // starter_setup
 add_action( 'after_setup_theme', 'starter_setup' );
-
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function starter_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'starter_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'starter_content_width', 0 );
 
 /**
  * Register widget area.
@@ -239,10 +231,6 @@ add_filter( 'get_the_archive_title', function ($title) {
     return $title;
 
 });
-function customizer_css() {
-	get_template_part( '/inc/customizer_css' );
-}
-add_action( 'wp_head', 'customizer_css', '100' );
 /**
  * Implement the Custom Header feature.
  */
@@ -480,7 +468,7 @@ function get_shipping_method_min_amount_by_name( $method_name = 'free_shipping' 
 }
 add_filter('woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment');
 
-function woocommerce_header_add_to_cart_fragment( $fragments = [] ) {
+function woocommerce_header_add_to_cart_fragment( $fragments = array() ) {
 
 	$value = WC()->cart->cart_contents_total;
     $value = $value + $value * 0.21;
@@ -599,20 +587,18 @@ add_action('initd', function(){
 
 //meta description for all products
 function add_meta_tags() {
+
     global $post;
+
     if ( is_product() ) {
         $meta = get_the_title() .' Speelgoedkasteel.be ★ is de online speelgoedwinkel van Vlaanderen. Vandaag besteld? In géén tijd bij u thuis - of op kantoor geleverd! Koop *product* vandaag nog.';
         echo '<meta name="description" content="' . $meta . '" />' . "\n";
-    }elseif( is_product_category() ){
+    } elseif( is_product_category() ){
         $meta = single_term_title('',false) ." Speelgoedkasteel.be ★ is de online speelgoedwinkel van Vlaanderen. Vandaag besteld? In géén tijd bij u thuis - of op kantoor geleverd! Bekijk meteen ons uitgebreid assortiment.";
         echo '<meta name="description" content="' . $meta . '" />' . "\n";
     }
+
+    get_template_part( '/inc/customizer_css' );
+
 }
 add_action( 'wp_head', 'add_meta_tags' , 2 );
-
-//declare WC support
-function aventurine_child_wc_support() {
-    add_theme_support( 'woocommerce' );
-}
-
-add_action( 'after_setup_theme', 'aventurine_child_wc_support' );

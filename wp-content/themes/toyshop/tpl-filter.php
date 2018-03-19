@@ -47,7 +47,7 @@ do_action( 'woocommerce_after_main_content' );
 			<?php $the_ons_image = get_field('logo','option');?>
 			<div class="display-table fullwidth"  data-equal="over-ons">
 				<div class="display-table-cell alignvertical">
-					<img src="<?php echo $the_ons_image['url']?>" alt="<?php $the_ons_image['alt']?>" title="<?php $the_ons_image['title']?>">
+					<img src="<?php echo @$the_ons_image['url']?>" alt="<?php echo @$the_ons_image['alt']?>" title="<?php echo @$the_ons_image['title']?>">
 				</div>
 			</div>
 		</div>
