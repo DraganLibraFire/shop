@@ -861,8 +861,16 @@
   }
 }
 @media all and (max-width: 640px) {
+  @each $header, $size in (h1: 33px, h2: 30px, h3: 23px, h4: 21px, h5: 17px, h6: 15px) {
+    body #{$header} {
+      font-size: $size;
+      line-height: $size;
+    }
+  }
   .dropdown-cart-button .dropdown .buttons{
+    flex-direction: column;
     a{
+      text-align: center;
       &:first-child{
         margin-bottom: 5px;
       }
@@ -952,18 +960,31 @@
       width: 100%;
     }
   }
+  .widget.widget_search_filter_register_widget{
+    margin-top: 0;
+  }
 }/*(max-width: 640px)*/
 @media all and (max-width: 620px) {
-  @each $header, $size in (h1: 30px, h2: 25px, h3: 21px, h4: 19px, h5: 17px, h6: 15px) {
+  @each $header, $size in (h1: 27px, h2: 24px, h3: 21px, h4: 19px, h5: 17px, h6: 15px) {
     body #{$header} {
       font-size: $size;
       line-height: $size;
     }
   }
-  [data-equal]{
-    opacity: 1 !important;
-    height: auto !important;
+  /*section:not(.related.products) {
+    [data-equal]{
+      opacity: 1 !important;
+      height: auto !important;
+    }
+  }*/
+  body:not(.woocommerce-page) .site-main article h4, body.page-template-default .site-main article h4{
+    font-size: 19px;
+    line-height: 19px;
   }
+  footer .widget-wrapper .widget-title{
+    font-size: 19px;
+  }
+
 }
 @media all and (max-width: 600px) {
   body.woocommerce{

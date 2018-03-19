@@ -573,7 +573,7 @@ body.search div ul.products {
     body.search div ul.products li.product span.price {
       width: 100%;
       display: inline-block;
-      margin-bottom: 9px; }
+      margin-bottom: 20px; }
     body.search div ul.products li.product .button.loading {
       text-align: center;
       opacity: 1; }
@@ -936,6 +936,10 @@ body .wp_autosearch_suggestions {
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
   border-radius: 15px; }
+  body .wp_autosearch_suggestions .wp_autosearch_category, body .wp_autosearch_suggestions .wp_autosearch_more {
+    background-color: #4d3d7a !important; }
+  body .wp_autosearch_suggestions .ac_over {
+    background-color: #856bc8 !important; }
   body .wp_autosearch_suggestions ul {
     height: 300px;
     overflow: auto; }
@@ -1001,27 +1005,36 @@ body .wp_autosearch_suggestions {
             font-family: "Prelo Light"; }
             .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .dropdown-header-cart p:last-child span {
               color: #ff7800; }
-        .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a {
-          font-size: 12px;
-          color: #fff;
-          background-color: #4d3d7a;
-          font-family: "Prelo Book";
-          display: inline-block;
-          padding: 9px 30px;
-          text-transform: uppercase;
-          border: 1px solid #4d3d7a;
-          line-height: 12px;
-          -webkit-border-radius: 20px;
-          -moz-border-radius: 20px;
-          -ms-border-radius: 20px;
-          border-radius: 20px;
-          transition: all 0.4s;
-          -webkit-transition: all 0.4s;
-          -moz-transition: all 0.4s;
-          -o-transition: all 0.4s; }
-          .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a:hover {
-            color: #4d3d7a;
-            background-color: #fff; }
+        .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons {
+          /*justify-content: space-between;
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;*/ }
+          .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a {
+            font-size: 12px;
+            color: #fff;
+            background-color: #4d3d7a;
+            font-family: "Prelo Book";
+            display: inline-block;
+            padding: 9px 30px;
+            text-transform: uppercase;
+            border: 1px solid #4d3d7a;
+            line-height: 12px;
+            /*    margin-left: 0;
+                margin-right: 0;*/
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            border-radius: 20px;
+            transition: all 0.4s;
+            -webkit-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            -o-transition: all 0.4s; }
+            .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .buttons a:hover {
+              color: #4d3d7a;
+              background-color: #fff; }
         .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .total .tax_label {
           display: none; }
         .site-header .widget_shopping_mini_cart.dropdown-cart .dropdown-cart-button .dropdown .total .amount {
@@ -2644,7 +2657,8 @@ div.woocommerce ul.products {
       text-align: center;
       color: #ff7800;
       font-size: 18px;
-      font-weight: 600; }
+      font-weight: 600;
+      margin-bottom: 20px; }
       body.search ul.products li.product .price del,
       body.woocommerce ul.products li.product .price del,
       div.woocommerce ul.products li.product .price del {
@@ -2728,7 +2742,7 @@ div.woocommerce ul.products {
     div.woocommerce ul.products li .one-product-inner a.added_to_cart.wc-forward {
       position: absolute;
       padding: 0;
-      bottom: 20px;
+      bottom: 25px;
       left: 0;
       right: 0;
       text-align: center;
@@ -3876,8 +3890,36 @@ margin-right: auto;*/ }
   .woocommerce-result-count {
     display: none; } }
 @media all and (max-width: 640px) {
-  .dropdown-cart-button .dropdown .buttons a:first-child {
-    margin-bottom: 5px; }
+  body h1 {
+    font-size: 33px;
+    line-height: 33px; }
+
+  body h2 {
+    font-size: 30px;
+    line-height: 30px; }
+
+  body h3 {
+    font-size: 23px;
+    line-height: 23px; }
+
+  body h4 {
+    font-size: 21px;
+    line-height: 21px; }
+
+  body h5 {
+    font-size: 17px;
+    line-height: 17px; }
+
+  body h6 {
+    font-size: 15px;
+    line-height: 15px; }
+
+  .dropdown-cart-button .dropdown .buttons {
+    flex-direction: column; }
+    .dropdown-cart-button .dropdown .buttons a {
+      text-align: center; }
+      .dropdown-cart-button .dropdown .buttons a:first-child {
+        margin-bottom: 5px; }
 
   .form-log-reg-wrapper .form-row.form-row-last, .form-log-reg-wrapper .form-row.form-row-first {
     width: 100% !important; }
@@ -3927,16 +3969,19 @@ margin-right: auto;*/ }
   .site-header .website-logo-main-wrapper .main-logo-inner {
     width: 100%; }
   .site-header .website-logo-main-wrapper .widget_shopping_mini_cart.dropdown-cart {
-    width: 100%; } }
+    width: 100%; }
+
+  .widget.widget_search_filter_register_widget {
+    margin-top: 0; } }
 /*(max-width: 640px)*/
 @media all and (max-width: 620px) {
   body h1 {
-    font-size: 30px;
-    line-height: 30px; }
+    font-size: 27px;
+    line-height: 27px; }
 
   body h2 {
-    font-size: 25px;
-    line-height: 25px; }
+    font-size: 24px;
+    line-height: 24px; }
 
   body h3 {
     font-size: 21px;
@@ -3954,9 +3999,18 @@ margin-right: auto;*/ }
     font-size: 15px;
     line-height: 15px; }
 
-  [data-equal] {
-    opacity: 1 !important;
-    height: auto !important; } }
+  /*section:not(.related.products) {
+    [data-equal]{
+      opacity: 1 !important;
+      height: auto !important;
+    }
+  }*/
+  body:not(.woocommerce-page) .site-main article h4, body.page-template-default .site-main article h4 {
+    font-size: 19px;
+    line-height: 19px; }
+
+  footer .widget-wrapper .widget-title {
+    font-size: 19px; } }
 @media all and (max-width: 600px) {
   body.woocommerce.woocommerce-page div.product div.summary h1, body.woocommerce.woocommerce-page div.product div.summary h2, body.woocommerce.woocommerce-page div.product div.summary h3, body.woocommerce.woocommerce-page div.product div.summary h4 {
     font-size: 18px;

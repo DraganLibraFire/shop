@@ -585,7 +585,7 @@ body.search{
             &.price{
               width: 100%;
               display: inline-block;
-              margin-bottom: 9px;
+              margin-bottom: 20px;
             }
           }
           .button{
@@ -1031,6 +1031,12 @@ body{
     min-width: 570px;
     margin-left: -20px !important;
     overflow: hidden;
+    .wp_autosearch_category, .wp_autosearch_more{
+      background-color: $purple_dark !important;
+    }
+    .ac_over{
+      background-color: $main_purple !important;
+    }
     @include border-radius(15px);
     ul{
       height: 300px;
@@ -1111,6 +1117,12 @@ body{
           }
         }
         .buttons{
+          /*justify-content: space-between;
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;*/
           a{
             font-size: 12px;
             color: $main_white;
@@ -1121,6 +1133,8 @@ body{
             text-transform: uppercase;
             border: 1px solid $purple_dark;
             line-height: 12px;
+        /*    margin-left: 0;
+            margin-right: 0;*/
             @include border-radius(20px);
             @include transform-transition(all 0.4s);
             &:hover{
@@ -3115,6 +3129,7 @@ div.woocommerce{
           color: $main_orange;
           font-size: 18px;
           font-weight: 600;
+          margin-bottom: 20px;
           del{
             display: inline-block;
             color: $border_product_color;
@@ -3185,7 +3200,7 @@ div.woocommerce{
         a.added_to_cart.wc-forward{
           position: absolute;
           padding: 0;
-          bottom: 20px;
+          bottom: 25px;
           left: 0;
           right: 0;
           text-align: center;
