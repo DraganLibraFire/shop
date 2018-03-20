@@ -262,14 +262,13 @@ jQuery(function($){
     });
 
     $widget_title.after('<div class="count"><span>' + cart_count + '</span></div>');
-    
-    if( typeof $total != "undefined"){
+    if( $total.length > 0){
 
-        $widget_title.after('<div class="money"><span> 0</span></div>');
+        $widget_title.after('<div class="money"><span>' + $total.html() + '</span></div>');
 
     }else{
 
-        $widget_title.after('<div class="money"><span>' + $total.html() + '</span></div>');
+        $widget_title.after('<div class="money"><span> 0</span></div>');
 
     }
 
