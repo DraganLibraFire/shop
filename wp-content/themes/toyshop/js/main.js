@@ -207,66 +207,70 @@ jQuery(function($){
     }, 500);
 
     $(document.body).on('added_to_cart', function(cart_contents, amount){
+
         $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
+
+        if($('body .site-header .widget_shopping_cart .count').length > 0){
+
+            $('body .site-header .widget_shopping_cart .count').empty().append(amount['span.count']);
+            $('body .site-header .widget_shopping_cart .money').empty().append(amount['span.money']);
+
+        }else{
+
+            $('body .site-header .widget_shopping_cart h4').after(amount['div.count']);
+            $('body .site-header .widget_shopping_cart h4').after(amount['div.money']);
+
+        }
+
     });
 
     $(document.body).on('wc_fragment_refresh', function(cart_contents, amount){
 
-        console.log(cart_contents, amount);
         $('body .free-shipping-wrapper .text-message').empty().append(amount['span.free_shipping_notice']);
+
     });
+
     $('.site-header .widget_shopping_cart').on('click', function(){
-        var wrapper = $('.site-header .widget_shopping_cart .widget_shopping_cart_content');
+        var wrapper = $('.site-header .widget_shopping_cart ');
+        var content = wrapper.find('.widget_shopping_cart_content');
         wrapper.fadeIn();
         if(wrapper.hasClass('active')){
-            wrapper.fadeOut();
+            content.slideUp();
             wrapper.removeClass('active');
+            content.removeClass('active');
         }else{
             wrapper.addClass('active');
-            wrapper.fadeIn();
+            content.addClass('active');
+            content.slideDown();
         }
 
     });
-    $( window ).on( 'load ', function(){
-        var money = $('.widget_shopping_cart_content .total .amount').html();
-        if(money){
-            money = $('.widget_shopping_cart_content .total .amount').html();
-        }else{
-            money = "0,00"
-        }
 
-        if($('.site-header .widget_shopping_cart .money').length > 0 ){
+    var cart_count = 0, cart_total = 0;
+    var $widget_shopping_cart = $(".logo-shop-details-wrapper .widget_shopping_cart");
+    var $total = $widget_shopping_cart.find('.woocommerce-mini-cart__total .woocommerce-Price-amount');
+    var $widget_title = $widget_shopping_cart.find(".widget-title");
+    var $widget_shopping_cart_content = $widget_shopping_cart.find(".widget_shopping_cart_content");
 
-            $('body .site-header .widget_shopping_cart .count').empty().append('<span>'+ money +'</span>');
+    var $cart_count_li = $widget_shopping_cart_content.find('.product_list_widget li');
 
-        }else{
-
-            $('body .site-header .widget_shopping_cart h4').after('<div class="money"><span>'+ money +'</span></div>');
-        }
+    $cart_count_li.each(function(){
+        var count_text_raw = $(this).find('.quantity').text();
+        var s = count_text_raw.split(' × ')[0];
+        var num = isNaN(parseInt(s)) ? 0 : parseInt(s);
+        cart_count += num;
     });
-    $( document.body ).on( 'added_to_cart', function(){
-        var count = $('.site-header .widget_shopping_cart .count span').html();
-        var add_count = parseInt(count) + 1 ;
-        var money = $('.widget_shopping_cart_content .total .amount').html();
-        if(money){
-            money = $('.widget_shopping_cart_content .total .amount').html();
-        }else{
-            money = "0,00"
-        }
-        if($('.site-header .widget_shopping_cart .count').length > 0 ){
 
-            $('body .site-header .widget_shopping_cart .count').empty().append('<span>'+ add_count +'</span>');
+    $widget_title.after('<div class="count"><span>' + cart_count + '</span></div>');
+    
+    if( typeof $total != "undefined"){
 
-        }
+        $widget_title.after('<div class="money"><span> 0</span></div>');
 
-        if($('.site-header .widget_shopping_cart .money').length > 0 ){
+    }else{
 
-            $('body .site-header .widget_shopping_cart .money').empty().append('<span>'+ money +'</span>');
+        $widget_title.after('<div class="money"><span>' + $total.html() + '</span></div>');
 
-        }else{
+    }
 
-            $('body .site-header .widget_shopping_cart h4').after('<div class="money"><span>'+ money +'</span></div>');
-        }
-
-    });
 });

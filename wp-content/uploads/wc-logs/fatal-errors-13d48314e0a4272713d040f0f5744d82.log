@@ -341,3 +341,13 @@ Stack trace:
 #8 C:\wamp64\www\shop\wp-includes\template-loader.php(74): include('C:\\wamp64\\www\\s...')
 #9 C:\wamp64\www\s
 
+2018-03-20T11:03:21+00:00 CRITICAL Call to undefined method WooCommerce::get_woocommerce_currency_symbol()
+
+2018-03-20T11:03:44+00:00 CRITICAL Call to undefined method WooCommerce::get_woocommerce_currency_symbol()
+
+2018-03-20T11:03:48+00:00 CRITICAL Call to undefined method WooCommerce::get_woocommerce_currency_symbol()
+
+2018-03-20T11:04:57+00:00 CRITICAL Call to undefined method WC_Cart::get_woocommerce_currency_symbol()
+
+2018-03-20T11:05:01+00:00 CRITICAL Call to undefined method WC_Cart::get_woocommerce_currency_symbol()
+

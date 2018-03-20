@@ -608,29 +608,24 @@ function always_show_cart() {
     return false;
 }
 
-add_action('wp_footer', 'custom_cart_item_count_script');
-function custom_cart_item_count_script(){
-    if( WC()->cart->is_empty() )
+add_action('woocommerce_add_to_cart_fragments', 'custom_cart_item_count_script');
+
+function custom_cart_item_count_script( $fragments = array() ){
+    $simbol = get_woocommerce_currency_symbol();
+
+    if( WC()->cart->is_empty() ){
         $cart_count = 0;
-    else
+        $cart_total = 0;
+    }else {
         $cart_count = WC()->cart->get_cart_contents_count();
-
-    if(isset($cart_count)){
-        ?>
-        <script type="text/javascript">
-            jQuery(function($){
-                var count = <?php echo $cart_count?>;
-
-                if($('.site-header .widget_shopping_cart .count').length > 0 ){
-
-                    $('body .site-header .widget_shopping_cart .count').empty().append('<span>'+ count +'</span>');
-
-                }else{
-
-                    $('body .site-header .widget_shopping_cart h4').after('<div class="count"><span>'+ count +'</span></div>');
-                }
-            });
-        </script>
-        <?php
+        $cart_total = WC()->cart->get_displayed_subtotal();
     }
+        $fragments['div.count'] = '<div class="count"><span>' . $cart_count . '</span></div>';
+        $fragments['div.money'] = '<div class="money"><span>'. $simbol . " "  . $cart_total . '</span></div>';
+        $fragments['span.count'] = '<span>' . $cart_count . '</span>';
+        $fragments['span.money'] = '<span>'. $simbol . " " . $cart_total . '</span>';
+
+        return $fragments;
+
+
 }

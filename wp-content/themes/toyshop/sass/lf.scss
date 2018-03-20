@@ -1053,6 +1053,19 @@ body{
     width: 200px;
     padding: 0 15px !important;
     cursor: pointer;
+    @include transform-transition(all 0.4s);
+    &.active{
+      background-color: $main_white;
+      .money{
+        color: $main_black;
+      }
+      .widget-title{
+        color: $main_black;
+        &:after{
+          content: url('../images/cart-black.png');
+        }
+      }
+    }
     .money{
       color: #fff;
       font-size: 20px;
@@ -1102,8 +1115,8 @@ body{
       padding: 15px;
       right: 0;
       top: 100%;
-      @include transform-transition(all 0.4s);
       display: none;
+      @include box-shadow(1px 2px 1px 0px rgba(242, 242, 242, 0.7));
       .buttons{
         text-align: right;
         margin-bottom: 0;

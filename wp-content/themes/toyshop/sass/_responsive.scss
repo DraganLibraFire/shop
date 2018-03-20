@@ -227,6 +227,27 @@
           max-width: 300px;
         }
       }
+      .widget_shopping_cart{
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        height: 140px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .widget-title{
+          margin-top: 0;
+          display: inline-block;
+        }
+        .count{
+          right: 22%;
+        }
+        .widget_shopping_cart_content{
+          width: 100%;
+        }
+      }
       .widget_shopping_mini_cart.dropdown-cart{
         max-width: 100%;
         width: 50%;
@@ -501,7 +522,7 @@
     color: $main_white;
     border: none;
   }
-  .website-logo-main-wrapper{
+  .site-header .website-logo-main-wrapper{
     display: none;
   }
   //.shop-features{
@@ -537,7 +558,50 @@
       width: 0;
       height: 0;
     }
-
+    div.menu-wrapper {
+      aside.widget_shopping_cart{
+        display: inline-block !important;
+        vertical-align: middle;
+        height: 70px;
+        margin-bottom: 0;
+        background-color: transparent;
+        width: 30px;
+        float: right;
+        .widget-title{
+          display: none;
+        }
+        .count, .money{
+          display: none !important;
+        }
+        .widget_shopping_cart_content{
+          width: 100vw;
+          right: -15px;
+        }
+        &.active{
+          &:after{
+            background: url("../images/close-white-icon.png") !important;
+            background-size: contain !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+          }
+        }
+        &:after{
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          height: 30px;
+          width: 25px;
+          display: inline-block !important;
+          background: url(../images/cart.png) !important;
+          background-size: contain !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+        }
+      }
+    }
     .widget_shopping_mini_cart.dropdown-cart{
       display: inline-block !important;
       padding: 10px 0 0 0;
