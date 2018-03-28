@@ -1,5 +1,6 @@
 jQuery(function($){
 
+
     $('.ubermenu-target').each(function(){
         var _this = $(this).find('.ubermenu-target-text');
 
@@ -136,11 +137,11 @@ jQuery(function($){
     $("input[type='number']").stepper();
 
     //$('form.searchandfilter li li label').append('<span class="search-check"><i class="fa fa-square-o" aria-hidden="true"></i></span>');
-    $(document).on("sf:init", ".searchandfilter", function(){
 
-        //var ch = jQuery(".postform").detach();
-        //jQuery(".woocommerce-ordering").prepend( ch );
-    });
+
+
+
+
 
     var $sort_select = jQuery(".sf-field-sort_order select").clone(true);
     $sort_select.on('change', function(){

@@ -1720,7 +1720,31 @@ body.home{
     vertical-align: middle;
   }
 }
+html{
+  body{
+    #content{
+      .container{
+        .sf-field-taxonomy-product_cat{
+          > ul{
+            > li{
+              > label{
+                display: none;
+              }
+              > ul.children{
+                display: block !important;
+                margin-left: 0px !important;
 
+                &:before{
+                  content: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 .widget, .home-category-wrapper{
   .widget-title{
     font-family: $headings_font;
@@ -1879,6 +1903,11 @@ body.home{
 
       }
       li{
+
+        span{
+          display: none;
+        }
+
         position: relative;
         .count{
           color: $main_orange;
@@ -1927,6 +1956,7 @@ body.home{
            li{
              padding-top: 5px;
              padding-bottom: 5px;
+
            }
            a{
              color: $main_dark;

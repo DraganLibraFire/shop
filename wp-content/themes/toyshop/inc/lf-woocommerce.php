@@ -120,9 +120,9 @@ if ( ! class_exists( 'WC_Product_Cat_List_Walker_LF', false ) ) :
 
             $output .= '"><a href="' . get_term_link( (int) $cat->term_id, $this->tree_type ) . '">' . _x( ucfirst(str_replace("-", " ", $cat->name)), 'product category name', 'woocommerce' ) . '</a>';
 
-            if ( $args['show_count'] ) {
-                $output .= ' <span class="count">(' . $cat->count . ')</span>';
-            }
+//            if ( $args['show_count'] ) {
+//                $output .= ' <span class="count">(' . $cat->count . ')</span>';
+//            }
         }
 
         /**
