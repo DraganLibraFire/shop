@@ -7,12 +7,12 @@
     "cluster.messagebus.sns.api_secret": "",
     "cluster.messagebus.sns.topic_arn": "",
     "dbcache.configuration_overloaded": false,
-    "dbcache.debug": false,
-    "dbcache.enabled": false,
-    "dbcache.engine": "file",
-    "dbcache.file.gc": 3600,
+    "dbcache.debug": "0",
+    "dbcache.enabled": "1",
+    "dbcache.engine": "redis",
+    "dbcache.file.gc": "3600",
     "dbcache.file.locking": false,
-    "dbcache.lifetime": 180,
+    "dbcache.lifetime": "180",
     "dbcache.memcached.persistent": true,
     "dbcache.memcached.aws_autodiscovery": false,
     "dbcache.memcached.servers": [
@@ -20,12 +20,12 @@
     ],
     "dbcache.memcached.username": "",
     "dbcache.memcached.password": "",
-    "dbcache.redis.persistent": true,
+    "dbcache.redis.persistent": "1",
     "dbcache.redis.servers": [
         "127.0.0.1:6379"
     ],
     "dbcache.redis.password": "",
-    "dbcache.redis.dbid": 0,
+    "dbcache.redis.dbid": "0",
     "dbcache.reject.constants": [
         "APP_REQUEST",
         "DOING_CRON",
@@ -34,13 +34,16 @@
         "XMLRPC_REQUEST"
     ],
     "dbcache.reject.cookie": [],
-    "dbcache.reject.logged": true,
+    "dbcache.reject.logged": "1",
     "dbcache.reject.sql": [
         "gdsr_",
         "wp_rg_",
-        "_wp_session_"
+        "_wp_session_",
+        "_wc_session_"
     ],
-    "dbcache.reject.uri": [],
+    "dbcache.reject.uri": [
+        ""
+    ],
     "dbcache.reject.words": [
         "^\\s*insert\\b",
         "^\\s*delete\\b",
@@ -55,12 +58,12 @@
         "\\bfound_rows\\(\\)"
     ],
     "objectcache.configuration_overloaded": false,
-    "objectcache.enabled": false,
-    "objectcache.debug": false,
-    "objectcache.enabled_for_wp_admin": true,
-    "objectcache.fallback_transients": true,
-    "objectcache.engine": "file",
-    "objectcache.file.gc": 3600,
+    "objectcache.enabled": "1",
+    "objectcache.debug": "0",
+    "objectcache.enabled_for_wp_admin": "1",
+    "objectcache.fallback_transients": "1",
+    "objectcache.engine": "redis",
+    "objectcache.file.gc": "3600",
     "objectcache.file.locking": false,
     "objectcache.memcached.servers": [
         "127.0.0.1:11211"
@@ -69,12 +72,12 @@
     "objectcache.memcached.aws_autodiscovery": false,
     "objectcache.memcached.username": "",
     "objectcache.memcached.password": "",
-    "objectcache.redis.persistent": true,
+    "objectcache.redis.persistent": "1",
     "objectcache.redis.servers": [
         "127.0.0.1:6379"
     ],
     "objectcache.redis.password": "",
-    "objectcache.redis.dbid": 0,
+    "objectcache.redis.dbid": "0",
     "objectcache.groups.global": [
         "users",
         "userlogins",
@@ -93,17 +96,17 @@
         "counts",
         "plugins"
     ],
-    "objectcache.lifetime": 180,
+    "objectcache.lifetime": "180",
     "objectcache.purge.all": false,
     "pgcache.configuration_overloaded": false,
-    "pgcache.enabled": false,
-    "pgcache.comment_cookie_ttl": 1800,
-    "pgcache.debug": false,
-    "pgcache.engine": "file_generic",
+    "pgcache.enabled": "1",
+    "pgcache.comment_cookie_ttl": "1800",
+    "pgcache.debug": "0",
+    "pgcache.engine": "redis",
     "pgcache.file.gc": 3600,
     "pgcache.file.nfs": false,
     "pgcache.file.locking": false,
-    "pgcache.lifetime": 3600,
+    "pgcache.lifetime": "3600",
     "pgcache.memcached.servers": [
         "127.0.0.1:11211"
     ],
@@ -111,18 +114,18 @@
     "pgcache.memcached.aws_autodiscovery": false,
     "pgcache.memcached.username": "",
     "pgcache.memcached.password": "",
-    "pgcache.redis.persistent": true,
+    "pgcache.redis.persistent": "1",
     "pgcache.redis.servers": [
         "127.0.0.1:6379"
     ],
     "pgcache.redis.password": "",
-    "pgcache.redis.dbid": 0,
-    "pgcache.cache.query": false,
-    "pgcache.cache.home": true,
-    "pgcache.cache.feed": false,
+    "pgcache.redis.dbid": "0",
+    "pgcache.cache.query": "0",
+    "pgcache.cache.home": "1",
+    "pgcache.cache.feed": "0",
     "pgcache.cache.nginx_handle_xml": false,
-    "pgcache.cache.ssl": true,
-    "pgcache.cache.404": false,
+    "pgcache.cache.ssl": "1",
+    "pgcache.cache.404": "0",
     "pgcache.cache.headers": [
         "Last-Modified",
         "Content-Type",
@@ -142,52 +145,70 @@
         "wp-links-opml.php",
         "wp-locations.php"
     ],
-    "pgcache.accept.qs": [],
-    "pgcache.late_init": false,
-    "pgcache.late_caching": false,
-    "pgcache.mirrors.enabled": false,
-    "pgcache.mirrors.home_urls": [],
-    "pgcache.reject.front_page": false,
-    "pgcache.reject.logged": true,
-    "pgcache.reject.logged_roles": false,
-    "pgcache.reject.roles": [],
+    "pgcache.accept.qs": [
+        ""
+    ],
+    "pgcache.late_init": "0",
+    "pgcache.late_caching": "0",
+    "pgcache.mirrors.enabled": "0",
+    "pgcache.mirrors.home_urls": [
+        ""
+    ],
+    "pgcache.reject.front_page": "0",
+    "pgcache.reject.logged": "1",
+    "pgcache.reject.logged_roles": "0",
+    "pgcache.reject.roles": [
+        ""
+    ],
     "pgcache.reject.uri": [
         "wp-.*\\.php",
         "index\\.php"
     ],
-    "pgcache.reject.categories": [],
-    "pgcache.reject.tags": [],
-    "pgcache.reject.authors": [],
-    "pgcache.reject.custom": [],
-    "pgcache.reject.ua": [],
+    "pgcache.reject.categories": [
+        ""
+    ],
+    "pgcache.reject.tags": [
+        ""
+    ],
+    "pgcache.reject.authors": [
+        ""
+    ],
+    "pgcache.reject.custom": [
+        ""
+    ],
+    "pgcache.reject.ua": [
+        ""
+    ],
     "pgcache.reject.cookie": [
         "wptouch_switch_toggle"
     ],
     "pgcache.reject.request_head": false,
-    "pgcache.purge.front_page": false,
-    "pgcache.purge.home": true,
-    "pgcache.purge.post": true,
-    "pgcache.purge.comments": false,
-    "pgcache.purge.author": false,
-    "pgcache.purge.terms": false,
-    "pgcache.purge.archive.daily": false,
-    "pgcache.purge.archive.monthly": false,
-    "pgcache.purge.archive.yearly": false,
-    "pgcache.purge.feed.blog": true,
-    "pgcache.purge.feed.comments": false,
-    "pgcache.purge.feed.author": false,
-    "pgcache.purge.feed.terms": false,
+    "pgcache.purge.front_page": "0",
+    "pgcache.purge.home": "1",
+    "pgcache.purge.post": "1",
+    "pgcache.purge.comments": "0",
+    "pgcache.purge.author": "0",
+    "pgcache.purge.terms": "0",
+    "pgcache.purge.archive.daily": "0",
+    "pgcache.purge.archive.monthly": "0",
+    "pgcache.purge.archive.yearly": "0",
+    "pgcache.purge.feed.blog": "1",
+    "pgcache.purge.feed.comments": "0",
+    "pgcache.purge.feed.author": "0",
+    "pgcache.purge.feed.terms": "0",
     "pgcache.purge.feed.types": [
         "rss2"
     ],
-    "pgcache.purge.postpages_limit": 10,
-    "pgcache.purge.pages": [],
+    "pgcache.purge.postpages_limit": "10",
+    "pgcache.purge.pages": [
+        ""
+    ],
     "pgcache.purge.sitemap_regex": "([a-z0-9_\\-]*?)sitemap([a-z0-9_\\-]*)?\\.xml",
-    "pgcache.prime.enabled": false,
-    "pgcache.prime.interval": 900,
-    "pgcache.prime.limit": 10,
+    "pgcache.prime.enabled": "0",
+    "pgcache.prime.interval": "900",
+    "pgcache.prime.limit": "10",
     "pgcache.prime.sitemap": "",
-    "pgcache.prime.post.enabled": false,
+    "pgcache.prime.post.enabled": "0",
     "pgcache.cookiegroups.enabled": false,
     "pgcache.cookiegroups.groups": {
         "mobile": {
@@ -214,12 +235,12 @@
             ]
         }
     },
-    "stats.enabled": false,
+    "stats.enabled": "0",
     "minify.configuration_overloaded": false,
-    "minify.enabled": false,
-    "minify.auto": true,
-    "minify.debug": false,
-    "minify.engine": "file",
+    "minify.enabled": "1",
+    "minify.auto": "1",
+    "minify.debug": "0",
+    "minify.engine": "redis",
     "minify.error.notification": "",
     "minify.file.gc": 86400,
     "minify.file.nfs": false,
@@ -231,47 +252,47 @@
     "minify.memcached.aws_autodiscovery": false,
     "minify.memcached.username": "",
     "minify.memcached.password": "",
-    "minify.redis.persistent": true,
+    "minify.redis.persistent": "1",
     "minify.redis.servers": [
         "127.0.0.1:6379"
     ],
     "minify.redis.password": "",
-    "minify.redis.dbid": 0,
-    "minify.rewrite": true,
+    "minify.redis.dbid": "0",
+    "minify.rewrite": "1",
     "minify.options": [],
     "minify.symlinks": [],
-    "minify.lifetime": 86400,
+    "minify.lifetime": "86400",
     "minify.upload": true,
-    "minify.html.enable": false,
+    "minify.html.enable": "1",
     "minify.html.engine": "html",
-    "minify.html.reject.feed": false,
-    "minify.html.inline.css": false,
-    "minify.html.inline.js": false,
-    "minify.html.strip.crlf": false,
+    "minify.html.reject.feed": "1",
+    "minify.html.inline.css": "1",
+    "minify.html.inline.js": "1",
+    "minify.html.strip.crlf": "1",
     "minify.html.comments.ignore": [
         "google_ad_",
         "RSPEAK_"
     ],
-    "minify.css.combine": false,
-    "minify.css.enable": true,
+    "minify.css.combine": "0",
+    "minify.css.enable": "0",
     "minify.css.engine": "css",
-    "minify.css.http2push": false,
-    "minify.css.strip.comments": false,
-    "minify.css.strip.crlf": false,
+    "minify.css.http2push": "0",
+    "minify.css.strip.comments": "0",
+    "minify.css.strip.crlf": "0",
     "minify.css.embed": false,
     "minify.css.imports": "",
     "minify.css.groups": [],
-    "minify.js.http2push": false,
-    "minify.js.enable": true,
+    "minify.js.http2push": "0",
+    "minify.js.enable": "0",
     "minify.js.engine": "js",
-    "minify.js.combine.header": false,
+    "minify.js.combine.header": "0",
     "minify.js.header.embed_type": "blocking",
     "minify.js.combine.body": false,
     "minify.js.body.embed_type": "blocking",
     "minify.js.combine.footer": false,
     "minify.js.footer.embed_type": "blocking",
-    "minify.js.strip.comments": false,
-    "minify.js.strip.crlf": false,
+    "minify.js.strip.comments": "0",
+    "minify.js.strip.crlf": "0",
     "minify.js.groups": [],
     "minify.yuijs.path.java": "java",
     "minify.yuijs.path.jar": "yuicompressor.jar",
@@ -306,17 +327,25 @@
     "minify.htmltidy.options.clean": false,
     "minify.htmltidy.options.hide-comments": true,
     "minify.htmltidy.options.wrap": 0,
-    "minify.reject.logged": false,
-    "minify.reject.ua": [],
-    "minify.reject.uri": [],
-    "minify.reject.files.js": [],
-    "minify.reject.files.css": [],
+    "minify.reject.logged": "0",
+    "minify.reject.ua": [
+        ""
+    ],
+    "minify.reject.uri": [
+        ""
+    ],
+    "minify.reject.files.js": [
+        ""
+    ],
+    "minify.reject.files.css": [
+        ""
+    ],
     "minify.cache.files": [
         ""
     ],
-    "minify.cache.files_regexp": false,
+    "minify.cache.files_regexp": "0",
     "cdn.configuration_overloaded": false,
-    "cdn.enabled": false,
+    "cdn.enabled": "0",
     "cdn.debug": false,
     "cdn.engine": "maxcdn",
     "cdn.uploads.enable": true,
@@ -440,15 +469,17 @@
         "{plugins_dir}\/wp-fb-autoconnect\/facebook-platform\/channel.html"
     ],
     "cdn.reject.ssl": false,
-    "cdnfsd.enabled": false,
+    "cdnfsd.enabled": "0",
     "cdnfsd.engine": "",
     "cdnfsd.debug": false,
     "varnish.configuration_overloaded": false,
-    "varnish.enabled": false,
+    "varnish.enabled": "0",
     "varnish.debug": false,
-    "varnish.servers": [],
+    "varnish.servers": [
+        ""
+    ],
     "browsercache.configuration_overloaded": false,
-    "browsercache.enabled": true,
+    "browsercache.enabled": "1",
     "browsercache.rewrite": false,
     "browsercache.hsts": false,
     "browsercache.no404wp": false,
@@ -645,16 +676,16 @@
         }
     },
     "common.support": "",
-    "common.track_usage": false,
+    "common.track_usage": "0",
     "common.tweeted": false,
-    "config.check": true,
+    "config.check": "1",
     "config.path": "",
     "widget.latest.items": 3,
     "widget.latest_news.items": 5,
-    "widget.pagespeed.enabled": true,
+    "widget.pagespeed.enabled": "1",
     "widget.pagespeed.key": "",
     "widget.pagespeed.key.restrict.referrer": "",
-    "widget.pagespeed.show_in_admin_bar": false,
+    "widget.pagespeed.show_in_admin_bar": "0",
     "timelimit.email_send": 180,
     "timelimit.varnish_purge": 300,
     "timelimit.cache_flush": 600,
@@ -676,5 +707,8 @@
     },
     "extensions.active_frontend": [],
     "plugin.license_key": "",
-    "plugin.type": ""
+    "plugin.type": "",
+    "fragmentcache": {
+        "engine": ""
+    }
 }

@@ -626,6 +626,4 @@ function custom_cart_item_count_script( $fragments = array() ){
         $fragments['span.money'] = '<span>'. $simbol . " " . $cart_total . '</span>';
 
         return $fragments;
-
-
 }
