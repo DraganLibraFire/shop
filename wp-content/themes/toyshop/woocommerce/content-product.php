@@ -43,14 +43,14 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 		 * @hooked woocommerce_template_loop_product_thumbnail - 10
 		 */
 		?>
-<!--		<div class="product-thumbnail" data-equal="thumbnail" >-->
-<!--			--><?php
-//			remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
-//			do_action( 'woocommerce_before_shop_loop_item_title' );
-//
-//			?>
-<!--			<img src="--><?php //echo get_the_post_thumbnail_url();?><!--" alt="--><?php //the_title();?><!--" title="--><?php //the_title();?><!--">-->
-<!--		</div>-->
+		<div class="product-thumbnail" data-equal="thumbnail" >
+			<?php
+			remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+			do_action( 'woocommerce_before_shop_loop_item_title' );
+
+			?>
+			<img src="<?php echo get_the_post_thumbnail_url();?>" alt="<?php the_title();?>" title="<?php the_title();?>">
+		</div>
 		<?php
 		/**
 		 * woocommerce_shop_loop_item_title hook.
