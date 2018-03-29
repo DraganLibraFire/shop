@@ -1497,12 +1497,6 @@ body.home .widget.widget_product_categories .product-categories li a {
   margin-bottom: 5px;
   vertical-align: middle; }
 
-html body #content .container .sf-field-taxonomy-product_cat > ul > li > ul.children {
-  display: block !important;
-  margin-left: 0px !important; }
-  html body #content .container .sf-field-taxonomy-product_cat > ul > li > ul.children:before {
-    content: none; }
-
 .widget .widget-title, .home-category-wrapper .widget-title {
   font-family: "Prelo Bold";
   font-size: 18px;
