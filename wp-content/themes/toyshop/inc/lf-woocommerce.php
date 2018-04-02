@@ -104,7 +104,7 @@ if ( ! class_exists( 'WC_Product_Cat_List_Walker_LF', false ) ) :
          * @param integer $current_object_id
          */
         public function start_el( &$output, $cat, $depth = 0, $args = array(), $current_object_id = 0 ) {
-            $output .= '<li class="cat-item cat-item-' . $cat->term_id;
+            $output .= '<li class="'. $cat->name .' cat-item cat-item-' . $cat->term_id;
 
             if ( $args['current_category'] == $cat->term_id ) {
                 $output .= ' current-cat';

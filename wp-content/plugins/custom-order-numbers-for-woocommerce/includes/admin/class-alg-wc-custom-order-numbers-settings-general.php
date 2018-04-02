@@ -2,7 +2,7 @@
 /**
  * Custom Order Numbers for WooCommerce - General Section Settings
  *
- * @version 1.1.1
+ * @version 1.1.2
  * @since   1.0.0
  * @author  Algoritmika Ltd.
  */
@@ -43,9 +43,10 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 	/**
 	 * add_settings.
 	 *
-	 * @version 1.1.1
+	 * @version 1.1.2
 	 * @since   1.0.0
 	 * @todo    (maybe) remove option to disable "Use MySQL Transaction"
+	 * @todo    (maybe) add `alg_wc_custom_order_numbers_counter_previous_order_date` as `hidden` field (for proper settings reset)
 	 */
 	function add_settings( $settings ) {
 		$settings = array_merge(
@@ -81,6 +82,19 @@ class Alg_WC_Custom_Order_Numbers_Settings_General extends Alg_WC_Custom_Order_N
 					'id'        => 'alg_wc_custom_order_numbers_counter',
 					'default'   => 1,
 					'type'      => 'number',
+				),
+				array(
+					'title'     => __( 'Sequential: Reset Counter', 'custom-order-numbers-for-woocommerce' ),
+					'desc_tip'  => __( 'This will be ignored if sequential order numbering is disabled.', 'custom-order-numbers-for-woocommerce' ),
+					'id'        => 'alg_wc_custom_order_numbers_counter_reset_enabled',
+					'default'   => 'no',
+					'type'      => 'select',
+					'options'   => array(
+						'no'      => __( 'Disabled', 'custom-order-numbers-for-woocommerce' ),
+						'daily'   => __( 'Daily', 'custom-order-numbers-for-woocommerce' ),
+						'monthly' => __( 'Monthly', 'custom-order-numbers-for-woocommerce' ),
+						'yearly'  => __( 'Yearly', 'custom-order-numbers-for-woocommerce' ),
+					),
 				),
 				array(
 					'title'     => __( 'Order Number Custom Prefix', 'custom-order-numbers-for-woocommerce' ),

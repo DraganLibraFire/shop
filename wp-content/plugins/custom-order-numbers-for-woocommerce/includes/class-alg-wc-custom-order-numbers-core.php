@@ -2,7 +2,7 @@
 /**
  * Custom Order Numbers for WooCommerce - Core Class
  *
- * @version 1.1.1
+ * @version 1.1.2
  * @since   1.0.0
  * @author  Algoritmika Ltd.
  */
@@ -35,6 +35,52 @@ class Alg_WC_Custom_Order_Numbers_Core {
 				add_action( 'save_post_shop_order', array( $this, 'save_order_number_meta_box' ), PHP_INT_MAX, 2 );
 			}
 		}
+	}
+
+	/**
+	 * maybe_reset_sequential_counter.
+	 *
+	 * @version 1.1.2
+	 * @since   1.1.2
+	 * @todo    use transactions on `alg_wc_custom_order_numbers_use_mysql_transaction_enabled`
+	 * @todo    (maybe) customizable reset value (i.e. `1`)
+	 */
+	function maybe_reset_sequential_counter( $current_order_number, $order_id ) {
+		if ( 'no' != ( $reset_period = get_option( 'alg_wc_custom_order_numbers_counter_reset_enabled', 'no' ) ) ) {
+			$previous_order_date   = get_option( 'alg_wc_custom_order_numbers_counter_previous_order_date', 0 );
+			$order                 = wc_get_order( $order_id );
+			$is_wc_version_below_3 = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+			$order_date            = ( $is_wc_version_below_3 ? $order->order_date : $order->get_date_created() );
+			$current_order_date    = strtotime( $order_date );
+			update_option( 'alg_wc_custom_order_numbers_counter_previous_order_date', $current_order_date );
+			if ( 0 != $previous_order_date ) {
+				$do_reset = false;
+				switch ( $reset_period ) {
+					case 'daily':
+						$do_reset = (
+							date( 'Y', $current_order_date ) != date( 'Y', $previous_order_date ) ||
+							date( 'm', $current_order_date ) != date( 'm', $previous_order_date ) ||
+							date( 'd', $current_order_date ) != date( 'd', $previous_order_date )
+						);
+						break;
+					case 'monthly':
+						$do_reset = (
+							date( 'Y', $current_order_date ) != date( 'Y', $previous_order_date ) ||
+							date( 'm', $current_order_date ) != date( 'm', $previous_order_date )
+						);
+						break;
+					case 'yearly':
+						$do_reset = (
+							date( 'Y', $current_order_date ) != date( 'Y', $previous_order_date )
+						);
+						break;
+				}
+				if ( $do_reset ) {
+					return 1;
+				}
+			}
+		}
+		return $current_order_number;
 	}
 
 	/**
@@ -130,10 +176,13 @@ class Alg_WC_Custom_Order_Numbers_Core {
 	/**
 	 * Renumerate orders function.
 	 *
-	 * @version 1.0.0
+	 * @version 1.1.2
 	 * @since   1.0.0
 	 */
 	public function renumerate_orders() {
+		if ( 'sequential' === get_option( 'alg_wc_custom_order_numbers_counter_type', 'sequential' ) && 'no' != get_option( 'alg_wc_custom_order_numbers_counter_reset_enabled', 'no' ) ) {
+			update_option( 'alg_wc_custom_order_numbers_counter_previous_order_date', 0 );
+		}
 		$total_renumerated = 0;
 		$last_renumerated = 0;
 		$offset = 0;
@@ -253,7 +302,7 @@ class Alg_WC_Custom_Order_Numbers_Core {
 	/**
 	 * Add/update order_number meta to order.
 	 *
-	 * @version 1.0.0
+	 * @version 1.1.2
 	 * @since   1.0.0
 	 * @todo    (maybe) check if sequential is enabled
 	 */
@@ -268,13 +317,13 @@ class Alg_WC_Custom_Order_Numbers_Core {
 				$wp_options_table = $wpdb->prefix . 'options';
 				$result_select = $wpdb->get_row( "SELECT * FROM $wp_options_table WHERE option_name = 'alg_wc_custom_order_numbers_counter'" );
 				if ( NULL != $result_select ) {
-					$current_order_number = $result_select->option_value;
+					$current_order_number = $this->maybe_reset_sequential_counter( $result_select->option_value, $order_id );
 					$result_update = $wpdb->update(
 						$wp_options_table,
 						array( 'option_value' => ( $current_order_number + 1 ) ),
 						array( 'option_name'  => 'alg_wc_custom_order_numbers_counter' )
 					);
-					if ( NULL != $result_update ) {
+					if ( NULL != $result_update || $result_select->option_value == ( $current_order_number + 1 ) ) {
 						$wpdb->query( 'COMMIT' ); // all ok
 						update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
 					} else {
@@ -286,7 +335,7 @@ class Alg_WC_Custom_Order_Numbers_Core {
 					return false;
 				}
 			} else {
-				$current_order_number = get_option( 'alg_wc_custom_order_numbers_counter', 1 );
+				$current_order_number = $this->maybe_reset_sequential_counter( get_option( 'alg_wc_custom_order_numbers_counter', 1 ), $order_id );
 				update_option( 'alg_wc_custom_order_numbers_counter', ( $current_order_number + 1 ) );
 				update_post_meta( $order_id, '_alg_wc_custom_order_number', $current_order_number );
 			}

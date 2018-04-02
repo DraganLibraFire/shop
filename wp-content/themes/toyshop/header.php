@@ -17,7 +17,22 @@
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
     <?php wp_head(); ?>
 </head>
-
+<?php
+//$taxonomy = 'product_cat'; //Choose the taxonomy
+//$terms = get_terms( $taxonomy, array('hide_empty' => true) ); //Get all the terms
+//
+//foreach ($terms as $term) { //Cycle through terms, one at a time
+//
+//// Check and see if the term is a top-level parent. If so, display it.
+//$parent = $term->parent;
+// if ( $parent=='0' ) {
+//
+//	$term_id = $term->term_id; //Define the term ID
+//	$term_link = get_term_link( $term, $taxonomy ); //Get the link to the archive page for that term
+//	$term_name = $term->name;
+//	echo '<a class="ccats" href="' . $term_link . '"><span class="labeld">' . $term_name . '</span></a><br>';
+//} }
+?>
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'shop' ); ?></a>

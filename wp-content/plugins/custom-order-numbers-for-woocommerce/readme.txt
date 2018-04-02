@@ -1,9 +1,9 @@
 === Custom Order Numbers for WooCommerce ===
 Contributors: algoritmika, anbinder
-Tags: woocommerce, custom order numbers
+Tags: woocommerce, custom order numbers, algoritmika, woo commerce, wpcodefactory
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,9 @@ You can also enable order tracking by custom number and admin order search by cu
 3. Start by visiting plugin settings at WooCommerce > Settings > Custom Order Numbers.
 
 == Changelog ==
+
+= 1.1.2 - 09/03/2018 =
+* Dev - "Sequential: Reset Counter" option added.
 
 = 1.1.1 - 13/01/2018 =
 * Dev - Confirmation (JavaScript) added for Renumerate Orders tool.
