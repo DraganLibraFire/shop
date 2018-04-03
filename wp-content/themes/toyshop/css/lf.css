@@ -1530,7 +1530,7 @@ body.home .widget.widget_product_categories .product-categories li a {
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > ul, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > ul {
           margin-left: 0; }
           .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > ul:before, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > ul:before {
-            content: none; }
+            content: none !important; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > input, .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > label, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > input, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > label {
           display: none; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > .expand-icon, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > .expand-icon {
@@ -1596,7 +1596,8 @@ body.home .widget.widget_product_categories .product-categories li a {
       padding: 0 0 5px; }
     .widget.widget_search_filter_register_widget li label, .home-category-wrapper.widget_search_filter_register_widget li label {
       position: relative;
-      cursor: pointer; }
+      cursor: pointer;
+      text-transform: capitalize; }
       .widget.widget_search_filter_register_widget li label input[type='checkbox'], .home-category-wrapper.widget_search_filter_register_widget li label input[type='checkbox'] {
         opacity: 0;
         visibility: hidden;

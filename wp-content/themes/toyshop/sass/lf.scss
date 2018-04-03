@@ -1784,7 +1784,7 @@ body.home{
           > ul{
             margin-left: 0;
             &:before{
-              content: none;
+              content: none !important;
             }
           }
           &:first-child{
@@ -1880,6 +1880,8 @@ body.home{
       label{
         position: relative;
         cursor: pointer;
+        text-transform: capitalize;
+
         input[type='checkbox']{
           opacity: 0;
           visibility: hidden;
