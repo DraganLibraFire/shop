@@ -1781,6 +1781,12 @@ body.home{
           }
         }
         > li{
+          > ul{
+            margin-left: 0;
+            :before{
+              content: none;
+            }
+          }
           &:first-child{
             > input, > label{
               display: none;
