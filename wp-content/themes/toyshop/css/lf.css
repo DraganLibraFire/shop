@@ -1519,6 +1519,8 @@ body.home .widget.widget_product_categories .product-categories li a {
         color: #303030 !important; }
       .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li {
         position: relative; }
+        .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li:first-child input, .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li:first-child label, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li:first-child input, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li:first-child label {
+          display: none; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li .expand-icon, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul li .expand-icon {
           position: absolute;
           right: 0;
@@ -1535,7 +1537,6 @@ body.home .widget.widget_product_categories .product-categories li a {
           z-index: 1; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children {
           display: none;
-          margin-left: 30px;
           position: relative; }
           .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children:before, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li .children:before {
             content: '';

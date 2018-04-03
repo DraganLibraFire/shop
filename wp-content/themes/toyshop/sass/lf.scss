@@ -1773,6 +1773,13 @@ body.home{
         }
         li{
           position: relative;
+
+          &:first-child{
+            input, label{
+              display: none;
+            }
+          }
+
           .expand-icon{
             position: absolute;
             right: 0;
@@ -1794,7 +1801,7 @@ body.home{
           }
           .children{
             display: none;
-            margin-left: 30px;
+            //margin-left: 30px;
             position: relative;
             &:before{
               content: '';
