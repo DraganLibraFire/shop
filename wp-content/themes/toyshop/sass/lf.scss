@@ -1894,6 +1894,13 @@ body.home{
   &.widget_product_categories{
 
     .product-categories{
+      > li{
+        &[class*='frisbees'],
+        &[class*='vang-werpspel']{
+          display: none;
+        }
+      }
+
       padding-left: 0;
       margin-bottom: 30px;
       > li{

@@ -87,7 +87,7 @@ class Search_Filter_Query {
 		}
 
 	}
-	function disable_canonical_redirect( $query )
+	public function disable_canonical_redirect( $query )
 	{
 		remove_filter( 'template_redirect', 'redirect_canonical' );
 	}
@@ -130,7 +130,6 @@ class Search_Filter_Query {
         {
 			$query->set($key, $val);
 		}
-
 
 		$force_is_search = $searchform->settings("force_is_search");
 		if($force_is_search==1)
@@ -279,40 +278,24 @@ class Search_Filter_Query {
         $force_is_archive = $searchandfilter->get($this->sfid)->settings("force_is_archive");
 
         global $searchandfilter;
-        if(!$searchandfilter->has_pagination_init())
-        {
+        if(!$searchandfilter->has_pagination_init()) {
             add_filter('get_pagenum_link', array($this, 'pagination_fix_pagenum'), 100);
             add_filter('paginate_links', array($this, 'pagination_fix_paginate'), 100);
 
             do_action("search_filter_pagination_init");
         }
 
-        $is_shop = false;
-
-        if(function_exists("is_shop"))
-        {
-            $is_shop = is_shop();
-        }
         //convert already init args and set under pre_get_posts
         foreach ($this->query_args as $key => $val)
         {
-            if(!$is_shop)
-            {//regular query
-                $query->set($key, $val);
-            }
-            else
-            {
-                //in woocommerce, don't set paged for page 1 - otherwise page description will be hidden
-                if(($key=="paged")&&($val!=1))
-                {
-                    $query->set($key, $val);
-                }
-                else if($key!="paged")
-                {
-                    $query->set($key, $val);
-                }
-            }
+	        $query->set($key, $val);
         }
+
+	    if(has_filter('sf_main_query_pre_get_posts')) {
+		    $query = apply_filters('sf_main_query_pre_get_posts', $query, $this->sfid);
+	    }
+
+
 
         if($force_is_search==1)
         {
@@ -324,6 +307,7 @@ class Search_Filter_Query {
             $query->set('is_archive', true);
             $query->is_archive = true;
         }
+
     }
 	public function setup_edd_query($args)
 	{
@@ -372,14 +356,20 @@ class Search_Filter_Query {
 	{
 		global $wpdb;
 		global $searchandfilter;
-		
+
 		if($this->has_prep_query==false)
 		{//only run once
 			
 			$this->has_prep_query = true;
-			//apply filter logic from cache, and `sf_edit_query_args` filter
 
+			//apply filter logic from cache, and `sf_edit_query_args` filter
 			$this->query_args = $this->cache->filter_query_args($this->query_args, $all_terms);
+
+			//$this->query_args['post__in'] = array(10844, 11025, 11032, 11035 );
+
+			if(has_filter("sf_query_post__in")) {
+				$this->query_args['post__in'] = apply_filters('sf_query_post__in', $this->query_args['post__in'], $this->sfid);
+			}
 
             if(($all_terms==true) && ($this->has_prep_terms==false)) {
                 $this->has_prep_terms = true;
@@ -444,8 +434,8 @@ class Search_Filter_Query {
 			remove_filter( 'post_type_link', array($this, 'maintain_search_settings'), 20);
 		}
 	}
-	
-	function maintain_search_settings($url) {
+
+	public function maintain_search_settings($url) {
 		
 		$tGET = $_GET;
 		unset($tGET['action']);
@@ -467,8 +457,9 @@ class Search_Filter_Query {
 		return add_query_arg($tGET, $url);
 	}
 	
-	///grabs all post IDs for the filter name/term - possibly do 1 query for all??
-	
+	// grabs all post IDs for the filter name/term - possibly do 1 query for all??
+
+
 	public function sf_filter_query_args($query_args, $sfid) {
 		
 		if($this->sfid==$sfid)
@@ -506,7 +497,7 @@ class Search_Filter_Query {
 		$args = $this->filter_query_inherited_defaults($args);
 		//$args = $this->filter_query_hidden($args);
 
-		
+
 		return $args;
 	}
 	
@@ -638,7 +629,7 @@ class Search_Filter_Query {
 		return $args;
 	}
 
-	function filter_query_search_term($args)
+	public function filter_query_search_term($args)
 	{
 		global $wp_query;
 		global $searchandfilter;
@@ -652,8 +643,8 @@ class Search_Filter_Query {
 		
 		return $args;
 	}
-	
-	function filter_query_post_types($args)
+
+	public function filter_query_post_types($args)
 	{
 		global $wp_query;
 		global $searchandfilter;
@@ -735,10 +726,10 @@ class Search_Filter_Query {
 		
 		return $args;
 	}
-	
-	
-	
-	function filter_query_author($args)
+
+
+
+	public function filter_query_author($args)
 	{
 		global $wp_query;
 		
@@ -758,8 +749,8 @@ class Search_Filter_Query {
 		
 		return $args;
 	}
-	
-	function filter_query_posts_per_page($args)
+
+	public function filter_query_posts_per_page($args)
 	{
 		if(isset($_GET['_sf_ppp']))
 		{
@@ -768,7 +759,7 @@ class Search_Filter_Query {
 		
 		return $args;
 	}
-	function filter_query_sort_order($args)
+	public function filter_query_sort_order($args)
 	{
 		global $wp_query;
 		
@@ -898,7 +889,7 @@ class Search_Filter_Query {
 		return $args;
 	}
 
-	function filter_query_post_date($args)
+	public function filter_query_post_date($args)
 	{
 		global $wp_query;
 		
@@ -988,8 +979,8 @@ class Search_Filter_Query {
 		}
 		return false;
 	}
-	
-	function getDateDMY($date, $date_format)
+
+	public function getDateDMY($date, $date_format)
 	{
 		if($date_format=="m/d/Y")
 		{
@@ -1018,14 +1009,14 @@ class Search_Filter_Query {
 		
 		return $rdate;
 	}
-	
-	function get_query_object()
+
+	public function get_query_object()
 	{
 		return $this->the_results(true);
 	}
 
 
-	function the_results($get_query = false)
+	public function the_results($get_query = false)
 	{
 		global $searchandfilter;
 		
@@ -1074,6 +1065,15 @@ class Search_Filter_Query {
         {
             $query = new WP_Query($args);
 
+	        //echo "\r\n-------------------------------------\r\n\r\n";
+	        //var_dump($args);
+	        //echo implode(",", $args['post__in']);
+	        //echo "\r\n-------------------------------------\r\n\r\n";
+	        //var_dump($query);
+	        //var_dump($query->query);
+	        //var_dump($query->query_vars);
+
+	        //exit;
             /*if(($use_transients==1)&&($query_str=="")) {
                 Search_Filter_Wp_Cache::set_transient( $cache_key, $query);
             }*/
@@ -1131,21 +1131,21 @@ class Search_Filter_Query {
 		
 		
 	}
-	
-	function pagination_fix_pagenum($url)
+
+	public function pagination_fix_pagenum($url)
 	{
 
 		//$new_url = $this->pagination_fix(remove_query_arg("sf_paged", $url));
 		$new_url = $this->pagination_fix($url);
 		return $new_url;
 	}
-	function pagination_fix_paginate($url)
+	public function pagination_fix_paginate($url)
 	{
 		$new_url = $this->pagination_fix($url);
 		return $new_url;
 	}
-	
-	function get_page_no_from_url($url)
+
+	public function get_page_no_from_url($url)
 	{
 		$url = str_replace("&#038;", "&", $url);
 		$url = str_replace("#038;", "&", $url);
@@ -1184,9 +1184,10 @@ class Search_Filter_Query {
 		return $sf_page_no;
 		
 	}
-	function get_results_url($searchform)
+	public function get_results_url($searchform)
 	{
 		$display_results_as = $searchform->settings('display_results_as');
+		$enable_taxonomy_archives = $searchform->settings("enable_taxonomy_archives");
 
 		$results_url = "";
 
@@ -1221,11 +1222,11 @@ class Search_Filter_Query {
                 $results_url = apply_filters('sf_archive_results_url', $results_url, $this->sfid, $page_slug);
             }
 		}
-		else if(($display_results_as=="custom_woocommerce_store")&&(function_exists('woocommerce_get_page_id')))
+		else if(($display_results_as=="custom_woocommerce_store")&&(Search_Filter_Helper::wc_get_page_id()))
 		{
 			if(get_option('permalink_structure'))
 			{
-				$results_url = get_permalink( woocommerce_get_page_id( 'shop' ));
+				$results_url = get_permalink( Search_Filter_Helper::wc_get_page_id( 'shop' ));
 			}
 			else
 			{
@@ -1236,7 +1237,7 @@ class Search_Filter_Query {
 
             $searchform->query()->remove_permalink_filters();
             if (get_option('permalink_structure')) {
-                $results_url = get_permalink(woocommerce_get_page_id('shop'));
+                $results_url = get_permalink( Search_Filter_Helper::wc_get_page_id('shop') );
             }
             $searchform->query()->add_permalink_filters();
 
@@ -1244,7 +1245,7 @@ class Search_Filter_Query {
             $has_tax_in_fields = false;
             $is_tax_archive = false;
 
-            if (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type)) {
+            if (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type, false)) {
                 $is_tax_archive = true;
                 global $searchandfilter;
                 $term = $searchandfilter->get_queried_object();
@@ -1252,9 +1253,10 @@ class Search_Filter_Query {
                 if (in_array("_sft_" . $term->taxonomy, $filters)) {
                     $has_tax_in_fields = true;
                 }
+
             }
 
-            if (($enable_taxonomy_archives == 1) && ($has_tax_in_fields == false) && ($is_tax_archive)) {
+            if ( /* ($enable_taxonomy_archives == 1)  && ($has_tax_in_fields == true)  && */ ($is_tax_archive)) {
 
                 $results_url = get_term_link($term);
             }
@@ -1267,14 +1269,14 @@ class Search_Filter_Query {
 			if(is_array($searchform->settings('post_types')))
 			{
 				$post_types = array_keys($searchform->settings('post_types'));
-				if(isset($post_types[0]))
-				{
+
+				if(isset($post_types[0])) {
+
                     $is_tax_archive = false;
                     $post_type = $post_types[0];
                     $has_tax_in_fields = false;
 
-                    if(Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type))
-                    {
+                    if(Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type)) {
                         $is_tax_archive = true;
                         global $searchandfilter;
                         $term = $searchandfilter->get_queried_object();
@@ -1282,22 +1284,19 @@ class Search_Filter_Query {
                         if (in_array("_sft_" . $term->taxonomy, $filters)) {
                             $has_tax_in_fields = true;
                         }
-
-
                     }
 
-                    if (($enable_taxonomy_archives==1) && ($has_tax_in_fields==false) && ($is_tax_archive) ) {
+                    if ( /* ($enable_taxonomy_archives==1)  && ($has_tax_in_fields==true)  && */ ($is_tax_archive) ) {
 
                         $results_url = get_term_link($term);
                     }
                     else {
 
-
-                        ///////////////////////////
-                        if (($enable_taxonomy_archives==1) && ($is_tax_archive) ) {
-                            $results_url = get_term_link($term);
-                        }
-                        else {
+                    	///////////////////////////
+                        //if (($enable_taxonomy_archives==1) && ($is_tax_archive) ) {
+                        //    $results_url = get_term_link($term);
+                        //}
+                        //else {
                             if ($post_type == "post") {
                                 if (get_option('show_on_front') == 'page') {
                                     $results_url = get_permalink(get_option('page_for_posts'));
@@ -1307,7 +1306,7 @@ class Search_Filter_Query {
                             } else {
                                 $results_url = get_post_type_archive_link($post_type);
                             }
-                        }
+                        //}
 
                     }
 				}
@@ -1336,7 +1335,7 @@ class Search_Filter_Query {
 		
 		return $results_url;
 	}
-	function add_paged_to_url($url, $page_no)
+	public function add_paged_to_url($url, $page_no)
 	{
 		if($page_no>1)
 		{
@@ -1345,8 +1344,8 @@ class Search_Filter_Query {
 		
 		return $url;		
 	}
-	
-	function add_url_args($source_url, $dest_url, $display_results_as)
+
+	public function add_url_args($source_url, $dest_url, $display_results_as)
 	{
 		$url_query = urldecode(parse_url($source_url, PHP_URL_QUERY));
 		$url_args = array();
@@ -1382,8 +1381,8 @@ class Search_Filter_Query {
 		//add_query_arg("sf_paged", $page_no, $url);
 		
 		return $dest_url;
-	}	
-	function pagination_fix($url)
+	}
+	public function pagination_fix($url)
 	{
 		global $searchandfilter;
 		
@@ -1401,7 +1400,6 @@ class Search_Filter_Query {
 
 		//remove args we know we don't want
 		$sf_url = $results_url;
-		//echo "SF URL: $results_url<br /><br /><br />";
 		
 		//add args from original URL to the url
 		$display_results_as = $searchform->settings('display_results_as');
@@ -1413,7 +1411,7 @@ class Search_Filter_Query {
 		return $sf_url;
 	}
 
-	function get_url_var($url, $name)
+	public function get_url_var($url, $name)
 	{
 		$strURL = $url;
 		$arrVals = explode("/",$strURL);
@@ -1425,8 +1423,8 @@ class Search_Filter_Query {
 		$place = $found + 1;
 		return $arrVals[$place];
 	}
-	
-	function has_url_var($url, $name)
+
+	public function has_url_var($url, $name)
 	{
 		$strURL = $url;
 		$arrVals = explode("/",$strURL);
@@ -1440,8 +1438,8 @@ class Search_Filter_Query {
 		}
 		return false;
 	}
-	
-	function filter_settings($args)
+
+	public function filter_settings($args)
 	{
 		global $searchandfilter;
 		$searchform = $searchandfilter->get($this->sfid);
@@ -1453,7 +1451,7 @@ class Search_Filter_Query {
 		{
 			$post_status = $searchform->settings('post_status');
 			$args['post_status'] = array_map("esc_attr", array_keys($post_status));
-			
+
 			$post_types = $searchform->settings('post_types');
 			if($post_types!="")
 			{
@@ -1692,8 +1690,8 @@ class Search_Filter_Query {
 		
 		return $args;
 	}
-	
-	function lang_object_ids($ids_array, $type)
+
+	public function lang_object_ids($ids_array, $type)
 	{
 		if(Search_Filter_Helper::has_wpml())
 		{

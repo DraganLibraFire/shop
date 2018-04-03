@@ -261,12 +261,8 @@ class Search_Filter_Display_Shortcode {
 
     public function enqueue_scripts()
     {
-        $load_jquery_i18n = get_option( 'search_filter_load_jquery_i18n' );
-        $combobox_script = get_option( 'search_filter_combobox_script' );
-        if($combobox_script=="")
-        {
-            $combobox_script = "chosen";
-        }
+        $load_jquery_i18n = Search_Filter_Helper::get_option( 'load_jquery_i18n' );
+        $combobox_script = Search_Filter_Helper::get_option( 'combobox_script' );
 
         wp_enqueue_script( $this->plugin_slug . '-plugin-build' );
         wp_enqueue_script( $this->plugin_slug . '-plugin-'.$combobox_script );
@@ -284,8 +280,8 @@ class Search_Filter_Display_Shortcode {
         $time_start = microtime(true);
         $total_start = $time_start;
 
-        $lazy_load_js 				= get_option( 'search_filter_lazy_load_js' );
-        $load_js_css 				= get_option( 'search_filter_load_js_css' );
+        $lazy_load_js 				= Search_Filter_Helper::get_option( 'lazy_load_js' );
+        $load_js_css 				= Search_Filter_Helper::get_option( 'load_js_css' );
 
         if($lazy_load_js===false)
         {
@@ -548,7 +544,7 @@ class Search_Filter_Display_Shortcode {
                         {//use the results_url defined by the user
 
                         }
-                        else if(($display_results_as=="custom_woocommerce_store")&&(function_exists('woocommerce_get_page_id'))) {
+                        else if(($display_results_as=="custom_woocommerce_store")&&(Search_Filter_Helper::wc_get_page_id())) {
                             //find woocommerce shop page
 
                             $post_type = "product";
@@ -556,7 +552,7 @@ class Search_Filter_Display_Shortcode {
 
                             $searchform->query()->remove_permalink_filters();
                             if (get_option('permalink_structure')) {
-                                $results_url = get_permalink(woocommerce_get_page_id('shop'));
+                                $results_url = get_permalink(Search_Filter_Helper::wc_get_page_id('shop'));
                             }
                             $searchform->query()->add_permalink_filters();
 
@@ -564,7 +560,7 @@ class Search_Filter_Display_Shortcode {
                             $has_tax_in_fields = false;
                             $is_tax_archive = false;
 
-                            if (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type)) {
+                            if (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type, false)) {
                                 $is_tax_archive = true;
                                 $term = $searchandfilter->get_queried_object();
                                 $filters = $searchform->get_filters();
@@ -648,7 +644,13 @@ class Search_Filter_Display_Shortcode {
                             if(isset($settings['post_types'])) {
                                 $post_types = array_keys($settings['post_types']);
                                 if (isset($post_types[0])) {
-                                    if (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_types[0])) {
+                                	
+	                                $single = true;
+	                                if($display_results_as == "custom_woocommerce_store"){
+		                                $single = false;
+	                                }
+
+                                    if (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_types[0], $single)) {
                                         $term = $searchandfilter->get_queried_object();
                                         $taxonomy = $term->taxonomy;
                                         $form_attributes['data-current-taxonomy-archive'] = $taxonomy;
@@ -950,6 +952,10 @@ class Search_Filter_Display_Shortcode {
                 if($field_data['combo_box']==1)
                 {
                     $addAttributes .= ' data-sf-combobox="1"';
+
+	                if(!empty($field_data['no_results_message'])){
+		                $addAttributes .= ' data-sf-combobox-nrm="'.esc_attr($field_data['no_results_message']).'"';
+	                }
                 }
             }
         }
@@ -1046,10 +1052,11 @@ class Search_Filter_Display_Shortcode {
             if(Search_Filter_Wp_Data::is_taxonomy_archive())
             {
                 $term =	$searchandfilter->get_queried_object();
-                $taxonomy_name = $term->taxonomy;
-                if($field_taxonomy==$taxonomy_name)
-                {
-                    $addAttributes .= " data-sf-taxonomy-archive='1'";
+                if(isset($term->taxonomy)) {
+	                $taxonomy_name = $term->taxonomy;
+	                if ( $field_taxonomy == $taxonomy_name ) {
+		                $addAttributes .= " data-sf-taxonomy-archive='1'";
+	                }
                 }
             }
         }

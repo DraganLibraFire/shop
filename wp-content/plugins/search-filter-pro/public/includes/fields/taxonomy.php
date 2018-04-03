@@ -35,7 +35,8 @@ class Search_Filter_Field_Taxonomy extends Search_Filter_Field_Base {
 			'order_dir'				=> '',
 			'exclude_ids'			=> '',
 			'sync_include_exclude'	=> '',
-			'combo_box'				=> ''
+			'combo_box'				=> '',
+			'no_results_message'	=> ''
 		);
 		
 		$values = array_replace($defaults, $field_data);
@@ -219,9 +220,7 @@ class Search_Filter_Field_Taxonomy extends Search_Filter_Field_Base {
 			/* setup defaults */
 			$args['title_li'] = '';
 			$args['defaults'] = "";
-			
-			//var_dump($fields_defaults);
-			
+
 			if($values['input_type']=="select")
 			{
 				$attributes = array();
@@ -229,6 +228,11 @@ class Search_Filter_Field_Taxonomy extends Search_Filter_Field_Base {
 				if($values['combo_box']==1)
 				{
 					$attributes['data-combobox'] = '1';
+
+					if(!empty($values['no_results_message'])){
+						$attributes['data-combobox-nrm'] = $values['no_results_message'];
+					}
+
 				}			
 				$args['show_default_option_sf'] = true;
 				
@@ -285,6 +289,9 @@ class Search_Filter_Field_Taxonomy extends Search_Filter_Field_Base {
 				if($values['combo_box']==1)
 				{
 					$attributes['data-combobox'] = '1';
+					if(!empty($values['no_results_message'])){
+						$attributes['data-combobox-nrm'] = $values['no_results_message'];
+					}
 				}	
 				
 				$attributes['data-placeholder'] = $values['all_items_label'];

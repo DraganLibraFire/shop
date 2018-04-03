@@ -104,7 +104,7 @@ if ( ! class_exists( 'WC_Product_Cat_List_Walker_LF', false ) ) :
          * @param integer $current_object_id
          */
         public function start_el( &$output, $cat, $depth = 0, $args = array(), $current_object_id = 0 ) {
-            $output .= '<li class="'. $cat->name .' cat-item cat-item-' . $cat->term_id;
+            $output .= '<li class="'. $cat->slug .' cat-item cat-item-' . $cat->term_id;
 
             if ( $args['current_category'] == $cat->term_id ) {
                 $output .= ' current-cat';
@@ -206,6 +206,15 @@ class WC_Widget_Product_Categories_LF extends WC_Widget {
                 'std'   => __( 'Product categories ADADAS', 'woocommerce' ),
                 'label' => __( 'Title', 'woocommerce' ),
             ),
+            'cat_parent'  => array(
+                'type'  => 'select',
+                'std'   => __( 'Product category parent', 'woocommerce' ),
+                'label' => __( 'Parent', 'woocommerce' ),
+                'options' => array(
+                    'order' => __( 'Category order', 'woocommerce' ),
+                    'name'  => __( 'Name', 'woocommerce' ),
+                ),
+            ),
             'orderby' => array(
                 'type'  => 'select',
                 'std'   => 'name',
@@ -291,6 +300,7 @@ class WC_Widget_Product_Categories_LF extends WC_Widget {
         $this->cat_ancestors = array();
 
         if ( is_tax( 'product_cat' ) ) {
+
             $this->current_cat   = $wp_query->queried_object;
             $this->cat_ancestors = get_ancestors( $this->current_cat->term_id, 'product_cat' );
 
@@ -365,10 +375,10 @@ class WC_Widget_Product_Categories_LF extends WC_Widget {
             }
         } elseif ( $show_children_only ) {
             $dropdown_args['depth']        = 1;
-            $dropdown_args['child_of']     = 0;
+            $dropdown_args['child_of']     = 4715;
             $dropdown_args['hierarchical'] = 1;
             $list_args['depth']            = 1;
-            $list_args['child_of']         = 0;
+            $list_args['child_of']         = 4715;
             $list_args['hierarchical']     = 1;
         } // End if().
 

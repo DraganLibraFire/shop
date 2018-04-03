@@ -1608,6 +1608,8 @@ body.home .widget.widget_product_categories .product-categories li a {
 .widget.widget_product_categories .product-categories, .home-category-wrapper.widget_product_categories .product-categories {
   padding-left: 0;
   margin-bottom: 30px; }
+  .widget.widget_product_categories .product-categories > li[class*='frisbees'], .widget.widget_product_categories .product-categories > li[class*='vang-werpspel'], .home-category-wrapper.widget_product_categories .product-categories > li[class*='frisbees'], .home-category-wrapper.widget_product_categories .product-categories > li[class*='vang-werpspel'] {
+    display: none; }
   .widget.widget_product_categories .product-categories > li, .home-category-wrapper.widget_product_categories .product-categories > li {
     border-bottom: 1px solid #c4c4c4;
     padding-top: 12px;
