@@ -1787,10 +1787,11 @@ body.home{
             }
           }
 
-          &:first-child{
+          &:first-of-type{
             input, label{
               display: none;
             }
+
           }
 
           border-bottom: 1px solid $border_color;
