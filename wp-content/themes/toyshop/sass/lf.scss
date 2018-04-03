@@ -1781,13 +1781,9 @@ body.home{
           }
         }
         > li{
-          ul{
-            li{
-              &:first-child{
-                input, label{
-                  display: none;
-                }
-              }
+          &:first-child{
+            > input, > label{
+              display: none;
             }
           }
 
