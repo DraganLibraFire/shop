@@ -1781,17 +1781,14 @@ body.home{
           }
         }
         > li{
-          &:first-child{
-            input, label{
-              display: none;
+          ul{
+            li{
+              &:first-child{
+                input, label{
+                  display: none;
+                }
+              }
             }
-          }
-
-          &:first-of-type{
-            input, label{
-              display: none;
-            }
-
           }
 
           border-bottom: 1px solid $border_color;
