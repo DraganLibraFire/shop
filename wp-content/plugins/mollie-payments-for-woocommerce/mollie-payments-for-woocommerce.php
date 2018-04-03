@@ -3,7 +3,7 @@
  * Plugin Name: Mollie Payments for WooCommerce
  * Plugin URI: https://github.com/mollie/WooCommerce
  * Description: Accept payments in WooCommerce with the official Mollie plugin
- * Version: 2.8.2
+ * Version: 2.9.0
  * Author: Mollie
  * Author URI: https://www.mollie.com
  * Requires at least: 3.8
@@ -97,7 +97,7 @@ function mollie_wc_plugin_inactive() {
 	}
 
 	if ( ! is_admin() ) {
-		return;
+		return false;
 	}
 
 	if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
@@ -105,6 +105,7 @@ function mollie_wc_plugin_inactive() {
 		echo '<div class="error"><p>';
 		echo sprintf( esc_html__( '%1$sMollie Payments for WooCommerce is inactive.%2$s The %3$sWooCommerce plugin%4$s must be active for it to work. Please %5$sinstall & activate WooCommerce &raquo;%6$s', 'mollie-payments-for-woocommerce' ), '<strong>', '</strong>', '<a href="https://wordpress.org/plugins/woocommerce/">', '</a>', '<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">', '</a>' );
 		echo '</p></div>';
+		return false;
 	}
 
 	if ( version_compare( get_option( 'woocommerce_db_version' ), '2.2', '<' ) ) {
@@ -112,6 +113,7 @@ function mollie_wc_plugin_inactive() {
 		echo '<div class="error"><p>';
 		echo sprintf( esc_html__( '%1$sMollie Payments for WooCommerce is inactive.%2$s This version requires WooCommerce 2.2 or newer. Please %3$supdate WooCommerce to version 2.2 or newer &raquo;%4$s', 'mollie-payments-for-woocommerce' ), '<strong>', '</strong>', '<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">', '</a>' );
 		echo '</p></div>';
+		return false;
 
 	}
 }

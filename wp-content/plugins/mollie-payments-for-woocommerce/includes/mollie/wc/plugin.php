@@ -7,7 +7,7 @@ class Mollie_WC_Plugin
 {
     const PLUGIN_ID      = 'mollie-payments-for-woocommerce';
     const PLUGIN_TITLE   = 'Mollie Payments for WooCommerce';
-    const PLUGIN_VERSION = '2.8.2';
+    const PLUGIN_VERSION = '2.9.0';
 
     const DB_VERSION     = '1.0';
     const DB_VERSION_PARAM_NAME = 'mollie-db-version';
@@ -28,6 +28,7 @@ class Mollie_WC_Plugin
         'Mollie_WC_Gateway_Creditcard',
         'Mollie_WC_Gateway_DirectDebit',
         'Mollie_WC_Gateway_Ideal',
+        'Mollie_WC_Gateway_IngHomePay',
         'Mollie_WC_Gateway_Kbc',
         'Mollie_WC_Gateway_MisterCash',
         'Mollie_WC_Gateway_PayPal',

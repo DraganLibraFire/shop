@@ -38,6 +38,13 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
      */
     public $max_amount = 0;
 
+	/**
+	 * Recurring total, zero does not define a recurring total
+	 *
+	 * @var int
+	 */
+	public $recurring_total = 0;
+
     /**
      *
      */
@@ -245,35 +252,46 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
         return true;
     }
 
-    /**
-     * Check if the gateway is available for use
-     *
-     * @return bool
-     */
-    public function is_available()
-    {
-        if (!parent::is_available())
-        {
-            return false;
-        }
+	/**
+	 * Check if the gateway is available for use
+	 *
+	 * @return bool
+	 */
+	public function is_available() {
 
-        if (WC()->cart && $this->get_order_total() > 0)
-        {
-            // Validate min amount
-            if (0 < $this->min_amount && $this->min_amount > $this->get_order_total())
-            {
-                return false;
-            }
+		// In WooCommerce check if the gateway is available for use (WooCommerce settings)
+		if ( $this->enabled != 'yes' ) {
 
-            // Validate max amount
-            if (0 < $this->max_amount && $this->max_amount < $this->get_order_total())
-            {
-                return false;
-            }
-        }
+			return false;
+		}
 
-        return true;
-    }
+		// Only in WooCommerce checkout, check min/max amounts
+		if ( WC()->cart ) {
+
+			// Get the regular order total for this order
+			$order_total = $this->get_order_total();
+
+			// If WooCommerce Subscriptions is installed, get the recurring order total
+			if ( class_exists( 'WC_Subscriptions_Product' ) ) {
+				$order_total = $this->get_recurring_total();
+			}
+
+			// If order total is more then zero, check min/max amounts
+			if ( $order_total > 0 ) {
+				// Validate min amount
+				if ( 0 < $this->min_amount && $this->min_amount > $order_total ) {
+					return false;
+				}
+
+				// Validate max amount
+				if ( 0 < $this->max_amount && $this->max_amount < $order_total ) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 
     /**
      * Will the payment confirmation be delivered after a couple of days.
@@ -603,8 +621,9 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
      * @param WC_Order $order
      * @param string $new_status
      * @param string $note
+     * @param bool $restore_stock
      */
-    public function updateOrderStatus (WC_Order $order, $new_status, $note = '')
+    public function updateOrderStatus (WC_Order $order, $new_status, $note = '', $restore_stock = true )
     {
         $order->update_status($new_status, $note);
 
@@ -613,12 +632,14 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
 		    switch ($new_status)
 		    {
 			    case self::STATUS_ON_HOLD:
-				    if (!get_post_meta($order->id, '_order_stock_reduced', $single = true))
-				    {
-					    // Reduce order stock
-					    $order->reduce_order_stock();
 
-					    Mollie_WC_Plugin::debug(__METHOD__ . ":  Stock for order {$order->id} reduced.");
+				    if ( $restore_stock == true ) {
+					    if ( ! get_post_meta( $order->id, '_order_stock_reduced', $single = true ) ) {
+						    // Reduce order stock
+						    $order->reduce_order_stock();
+
+						    Mollie_WC_Plugin::debug( __METHOD__ . ":  Stock for order {$order->id} reduced." );
+					    }
 				    }
 
 				    break;
@@ -642,12 +663,14 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
 		    switch ($new_status)
 		    {
 			    case self::STATUS_ON_HOLD:
-				    if ( ! $order->get_meta( '_order_stock_reduced', true ) )
-				    {
-					    // Reduce order stock
-					    wc_reduce_stock_levels( $order->get_id() );
 
-					    Mollie_WC_Plugin::debug(__METHOD__ . ":  Stock for order {$order->get_id()} reduced.");
+				    if ( $restore_stock == true ) {
+					    if ( ! $order->get_meta( '_order_stock_reduced', true ) ) {
+						    // Reduce order stock
+						    wc_reduce_stock_levels( $order->get_id() );
+
+						    Mollie_WC_Plugin::debug( __METHOD__ . ":  Stock for order {$order->get_id()} reduced." );
+					    }
 				    }
 
 				    break;
@@ -735,12 +758,14 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
             return;
         }
 
-        // Order does not need a payment
-        if (!$this->orderNeedsPayment($order))
-        {
-            $this->handlePayedOrderWebhook($order, $payment);
-            return;
-        }
+	    // Order does not need a payment
+	    if ( ! $this->orderNeedsPayment( $order ) &&
+	         ( $payment->status != 'charged_back' )
+	    ) {
+		    $this->handlePayedOrderWebhook( $order, $payment );
+
+		    return;
+	    }
 
 	    if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 		    Mollie_WC_Plugin::debug($this->id . ": Mollie payment {$payment->id} (" . $payment->mode . ") webhook call for order {$order->id}.", true);
@@ -748,7 +773,7 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
 		    Mollie_WC_Plugin::debug($this->id . ": Mollie payment {$payment->id} (" . $payment->mode . ") webhook call for order {$order->get_id()}.", true);
 	    }
 
-        $method_name = 'onWebhook' . ucfirst($payment->status);
+        $method_name = 'onWebhook' . str_replace( '_', '', ucfirst($payment->status));
 
         if (method_exists($this, $method_name))
         {
@@ -957,6 +982,54 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
 	    Mollie_WC_Plugin::getDataHelper()->unsetCancelledMolliePaymentId( $order_id );
 
     }
+
+	/**
+	 * @param WC_Order                  $order
+	 * @param Mollie_API_Object_Payment $payment
+	 */
+	protected function onWebhookChargedback( WC_Order $order, Mollie_API_Object_Payment $payment ) {
+
+		// Get order ID in the correct way depending on WooCommerce version
+		if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+			$order_id = $order->id;
+		} else {
+			$order_id = $order->get_id();
+		}
+
+		// Add messages to log
+		Mollie_WC_Plugin::debug( __METHOD__ . ' called for order ' . $order_id );
+
+		// New order status
+		$new_order_status = self::STATUS_ON_HOLD;
+
+		// Overwrite plugin-wide
+		$new_order_status = apply_filters( Mollie_WC_Plugin::PLUGIN_ID . '_order_status_on_hold', $new_order_status );
+
+		// Overwrite gateway-wide
+		$new_order_status = apply_filters( Mollie_WC_Plugin::PLUGIN_ID . '_order_status_on_hold_' . $this->id, $new_order_status );
+
+		$paymentMethodTitle = $this->getPaymentMethodTitle( $payment );
+
+		// Update order status for order with charged_back payment, don't restore stock
+		$this->updateOrderStatus(
+			$order,
+			$new_order_status,
+			sprintf(
+			/* translators: Placeholder 1: payment method title, placeholder 2: payment ID */
+				__( '%s payment charged back via Mollie (%s). You will need to manually review the payment and adjust product stocks if you use them.', 'mollie-payments-for-woocommerce' ),
+				$paymentMethodTitle,
+				$payment->id . ( $payment->mode == 'test' ? ( ' - ' . __( 'test mode', 'mollie-payments-for-woocommerce' ) ) : '' )
+			),
+			$restore_stock = false
+		);
+
+		// Send a "Failed order" email to notify the admin
+		$emails = WC()->mailer()->get_emails();
+		if ( ! empty( $emails ) && ! empty( $order_id ) ) {
+			$emails['WC_Email_Failed_Order']->trigger( $order_id );
+		}
+
+	}
 
 	/**
 	 * @param WC_Order $order
@@ -1351,7 +1424,8 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
     {
         $site_url   = get_site_url();
 
-        $return_url = WC()->api_request_url('mollie_return');
+	    $return_url = WC()->api_request_url( 'mollie_return' );
+	    $return_url = $this->removeTrailingSlashAfterParamater( $return_url );
 
 	    if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 		    $return_url = add_query_arg(array(
@@ -1379,7 +1453,8 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
     {
         $site_url    = get_site_url();
 
-        $webhook_url = WC()->api_request_url(strtolower(get_class($this)));
+	    $webhook_url = WC()->api_request_url( strtolower( get_class( $this ) ) );
+	    $webhook_url = $this->removeTrailingSlashAfterParamater( $webhook_url );
 
 	    if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 		    $webhook_url = add_query_arg(array(
@@ -1398,6 +1473,22 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
 
         return apply_filters(Mollie_WC_Plugin::PLUGIN_ID . '_webhook_url', $webhook_url, $order);
     }
+
+	/**
+	 * Remove a trailing slash after a query string if there is one in the WooCommerce API request URL.
+	 * For example WMPL adds a query string with trailing slash like /?lang=de/ to WC()->api_request_url.
+	 * This causes issues when we append to that URL with add_query_arg.
+	 *
+	 * @return string
+	 */
+	protected function removeTrailingSlashAfterParamater( $url ) {
+
+		if ( strpos( $url, '?' ) ) {
+			$url = untrailingslashit( $url );
+		}
+
+		return $url;
+	}
 
     /**
      * Check if any multi language plugins are enabled and return the correct site url.
@@ -1533,6 +1624,24 @@ abstract class Mollie_WC_Gateway_Abstract extends WC_Payment_Gateway
 	protected function is_subscription( $order_id )
 	{
 		return ( function_exists( 'wcs_order_contains_subscription' ) && ( wcs_order_contains_subscription( $order_id ) || wcs_is_subscription( $order_id ) || wcs_order_contains_renewal( $order_id ) ) );
+	}
+
+	/**
+	 * @return mixed
+	 */
+	protected function get_recurring_total() {
+
+		if ( isset( WC()->cart ) ) {
+
+			foreach ( WC()->cart->cart_contents as $item_key => $item ) {
+				$item_quantity        = $item['quantity'];
+				$item_price           = WC_Subscriptions_Product::get_price( $item['product_id'] );
+				$item_recurring_total = $item_quantity * $item_price;
+				$this->recurring_total += $item_recurring_total;
+			}
+		}
+
+		return $this->recurring_total;
 	}
 
 

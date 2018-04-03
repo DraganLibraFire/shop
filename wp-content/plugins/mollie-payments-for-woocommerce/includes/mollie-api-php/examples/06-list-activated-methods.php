@@ -8,9 +8,9 @@ try
 	/*
 	 * Initialize the Mollie API library with your API key.
 	 *
-	 * See: https://www.mollie.com/beheer/account/profielen/
+	 * See: https://www.mollie.com/dashboard/settings/profiles
 	 */
-	include "initialize.php";
+	require "initialize.php";
 
 	/*
 	 * Get all the activated methods for this API key.

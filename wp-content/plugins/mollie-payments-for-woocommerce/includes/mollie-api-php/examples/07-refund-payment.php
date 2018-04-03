@@ -7,9 +7,9 @@ try
 	/*
 	 * Initialize the Mollie API library with your API key.
 	 *
-	 * See: https://www.mollie.com/beheer/account/profielen/
+	 * See: https://www.mollie.com/dashboard/settings/profiles
 	 */
-	include "initialize.php";
+	require "initialize.php";
 
 	/*
 	 * Retrieve the payment you want to refund from the API.
@@ -25,7 +25,7 @@ try
 		/*
 		 * Refund € 15,00 of the payment.
 		 *
-		 * https://www.mollie.com/en/docs/refunds#refund-create
+		 * https://www.mollie.com/en/docs/reference/refunds/create
 		 */
 		$refund = $mollie->payments->refund($payment, 15.00);
 

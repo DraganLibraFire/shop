@@ -8,7 +8,7 @@ try
 	/*
 	 * Initialize the Mollie API library with your API key or OAuth access token.
 	 */
-	include "initialize.php";
+	require "initialize.php";
 
 	/*
 	 * Retrieve the last created customer for this example.
@@ -46,10 +46,11 @@ try
 	 */
 	database_write($order_id, $payment->status);
 
-	/*
-	 * Send the customer off to complete the payment.
-	 */
-	header("Location: " . $payment->getPaymentUrl());
+    /*
+     * Send the customer off to complete the payment.
+     * This request should always be a GET, thus we enforce 303 http response code
+     */
+	header("Location: " . $payment->getPaymentUrl(), true, 303);
 }
 catch (Mollie_API_Exception $e)
 {

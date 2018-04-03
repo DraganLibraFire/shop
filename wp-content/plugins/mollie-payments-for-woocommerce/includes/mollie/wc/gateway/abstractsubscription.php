@@ -188,6 +188,7 @@ abstract class Mollie_WC_Gateway_AbstractSubscription extends Mollie_WC_Gateway_
 			$methods_needing_update = array (
 				'mollie_wc_gateway_directdebit',
 				'mollie_wc_gateway_ideal',
+				'mollie_wc_gateway_inghomepay',
 				'mollie_wc_gateway_mistercash',
 				'mollie_wc_gateway_bancontact',
 				'mollie_wc_gateway_sofort',
@@ -284,7 +285,7 @@ abstract class Mollie_WC_Gateway_AbstractSubscription extends Mollie_WC_Gateway_
                     Mollie_WC_Plugin::debug($this->id . ': Valid mandate ' . $renewal_order_id);
                     $payment = Mollie_WC_Plugin::getApiHelper()->getApiClient($test_mode)->payments->create($data);
                 } else {
-                    Mollie_WC_Plugin::debug($this->id . 'Payment problem ' . $renewal_order_id);
+                    Mollie_WC_Plugin::debug($this->id . ': Payment problem ' . $renewal_order_id);
                     throw new Mollie_API_Exception(__('Payment cannot be processed, no valid mandate.', 'mollie-payments-for-woocommerce-mandate-problem'));
                 }
             }

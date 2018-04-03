@@ -8,9 +8,9 @@ try
 	/*
 	 * Initialize the Mollie API library with your API key.
 	 *
-	 * See: https://www.mollie.com/beheer/account/profielen/
+	 * See: https://www.mollie.com/dashboard/settings/profiles
 	 */
-	include "initialize.php";
+	require "initialize.php";
 
 	/*
 	 * First, let the customer pick the bank in a simple HTML form. This step is actually optional.
@@ -74,10 +74,11 @@ try
 	 */
 	database_write($order_id, $payment->status);
 
-	/*
-	 * Send the customer off to complete the payment.
-	 */
-	header("Location: " . $payment->getPaymentUrl());
+    /*
+     * Send the customer off to complete the payment.
+     * This request should always be a GET, thus we enforce 303 http response code
+     */
+	header("Location: " . $payment->getPaymentUrl(), true, 303);
 }
 catch (Mollie_API_Exception $e)
 {

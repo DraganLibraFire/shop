@@ -259,13 +259,20 @@ class Mollie_API_Object_Payment
 	public $links;
 
 	/**
+	* Whether or not this payment can be cancelled.
+	*
+	* @var bool|null
+	*/
+	public $canBeCancelled;
+
+	/**
 	 * Is this payment cancelled?
 	 *
 	 * @return bool
 	 */
 	public function isCancelled ()
 	{
-		return $this->status == self::STATUS_CANCELLED;
+		return $this->status === self::STATUS_CANCELLED;
 	}
 
 	/**
@@ -275,7 +282,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isExpired ()
 	{
-		return $this->status == self::STATUS_EXPIRED;
+		return $this->status === self::STATUS_EXPIRED;
 	}
 
 	/**
@@ -285,7 +292,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isOpen ()
 	{
-		return $this->status == self::STATUS_OPEN;
+		return $this->status === self::STATUS_OPEN;
 	}
 
 	/**
@@ -295,7 +302,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isPending ()
 	{
-		return $this->status == self::STATUS_PENDING;
+		return $this->status === self::STATUS_PENDING;
 	}
 
 	/**
@@ -318,7 +325,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isPaidOut ()
 	{
-		return $this->status == self::STATUS_PAIDOUT;
+		return $this->status === self::STATUS_PAIDOUT;
 	}
 
 	/**
@@ -328,7 +335,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isRefunded ()
 	{
-		return $this->status == self::STATUS_REFUNDED;
+		return $this->status === self::STATUS_REFUNDED;
 	}
 
 	/**
@@ -338,7 +345,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isChargedBack ()
 	{
-		return $this->status == self::STATUS_CHARGED_BACK;
+		return $this->status === self::STATUS_CHARGED_BACK;
 	}
 
 	/**
@@ -348,7 +355,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function isFailed ()
 	{
-		return $this->status == self::STATUS_FAILED;
+		return $this->status === self::STATUS_FAILED;
 	}
 
 	/**
@@ -369,7 +376,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function hasRecurringTypeFirst ()
 	{
-		return $this->recurringType == self::RECURRINGTYPE_FIRST;
+		return $this->recurringType === self::RECURRINGTYPE_FIRST;
 	}
 
 	/**
@@ -380,7 +387,7 @@ class Mollie_API_Object_Payment
 	 */
 	public function hasRecurringTypeRecurring ()
 	{
-		return $this->recurringType == self::RECURRINGTYPE_RECURRING;
+		return $this->recurringType === self::RECURRINGTYPE_RECURRING;
 	}
 
 	/**
@@ -423,7 +430,7 @@ class Mollie_API_Object_Payment
 	{
 		if ($this->amountRefunded)
 		{
-			return floatval($this->amountRefunded);
+			return (float) $this->amountRefunded;
 		}
 
 		return 0.0;
@@ -439,7 +446,7 @@ class Mollie_API_Object_Payment
 	{
 		if ($this->amountRemaining)
 		{
-			return floatval($this->amountRemaining);
+			return (float) $this->amountRemaining;
 		}
 
 		return 0.0;

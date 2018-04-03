@@ -23,13 +23,13 @@ msgstr "Twenty Seventeen"
 msgid "Footer"
 msgstr "Footer"
 
-#: functions.php:317
-msgid "Add widgets here to appear in your sidebar on blog posts and archive pages."
-msgstr "Voeg hier widgets toe in de sidebar op blog berichten en archiefpagina's."
-
 #: functions.php:315 sidebar.php:18
 msgid "Blog Sidebar"
 msgstr "Blog Sidebar"
+
+#: functions.php:317
+msgid "Add widgets here to appear in your sidebar on blog posts and archive pages."
+msgstr "Voeg hier widgets toe in de sidebar op blog berichten en archiefpagina's."
 
 #: template-parts/header/site-branding.php:34
 #: template-parts/navigation/navigation-top.php:27
@@ -59,13 +59,13 @@ msgstr "Pauzeer achtergrondvideo"
 msgid "Play background video"
 msgstr "Speel achtergrondvideo"
 
-#: inc/template-tags.php:150
-msgid "Front Page Section %1$s Placeholder"
-msgstr "Voorpagina sectie %1$s placeholder"
-
 #: inc/customizer.php:80
 msgid "When the two-column layout is assigned, the page title is in one column and content is in the other."
 msgstr "Wanneer de lay-out op twee kolommen gezet wordt, bevindt de titel van de pagina zich in de ene kolom en de inhoud in de andere."
+
+#: inc/template-tags.php:150
+msgid "Front Page Section %1$s Placeholder"
+msgstr "Voorpagina sectie %1$s placeholder"
 
 #: single.php:32
 msgid "Next Post"
@@ -98,10 +98,6 @@ msgstr "<span class=\"screen-reader-text\">Geplaatst op</span> %s"
 msgid "by %s"
 msgstr "door %s"
 
-#: inc/icon-functions.php:44
-msgid "Please define an SVG icon filename."
-msgstr "Gelieve een bestandsnaam voor een SVG icoon te geven."
-
 #: inc/icon-functions.php:39
 msgid "Please define default parameters in the form of an array."
 msgstr "Gelieve standaard parameters te definiëren in de vorm van een array."
@@ -110,18 +106,9 @@ msgstr "Gelieve standaard parameters te definiëren in de vorm van een array."
 msgid "Select pages to feature in each area from the dropdowns. Add an image to a section by setting a featured image in the page editor. Empty sections will not be displayed."
 msgstr "Selecteer voor elk gebied een pagina uit het dropdown menu. Voeg een afbeelding toe aan een gebied door een uitgelichte afbeelding in te stellen in de pagina editor. Lege gebieden worden niet getoond."
 
-#. translators: %d is the front page section number
-#: inc/customizer.php:107
-msgid "Front Page Section %d Content"
-msgstr "Startpagina sectie %d inhoud"
-
 #: inc/customizer.php:83 inc/customizer.php:132
 msgid "Two Column"
 msgstr "Twee kolommen"
-
-#: inc/customizer.php:82 inc/customizer.php:131
-msgid "One Column"
-msgstr "Eén kolom"
 
 #: inc/customizer.php:77
 msgid "Page Layout"
@@ -143,6 +130,19 @@ msgstr "Licht"
 msgid "Color Scheme"
 msgstr "Kleurschema"
 
+#: inc/icon-functions.php:44
+msgid "Please define an SVG icon filename."
+msgstr "Gelieve een bestandsnaam voor een SVG icoon te geven."
+
+#. translators: %d is the front page section number
+#: inc/customizer.php:107
+msgid "Front Page Section %d Content"
+msgstr "Startpagina sectie %d inhoud"
+
+#: inc/customizer.php:82 inc/customizer.php:131
+msgid "One Column"
+msgstr "Eén kolom"
+
 #: inc/custom-header.php:49
 msgid "Default Header Image"
 msgstr "Standaard header afbeelding"
@@ -150,10 +150,6 @@ msgstr "Standaard header afbeelding"
 #: functions.php:335
 msgid "Footer 2"
 msgstr "Footer 2"
-
-#: functions.php:327 functions.php:337
-msgid "Add widgets here to appear in your footer."
-msgstr "Voeg hier widgets toe om in de footer te tonen."
 
 #: functions.php:325
 msgid "Footer 1"
@@ -167,14 +163,18 @@ msgctxt "Libre Franklin font: on or off"
 msgid "on"
 msgstr "aan"
 
+#: comments.php:60
+msgid "Reply"
+msgstr "Antwoord"
+
+#: functions.php:327 functions.php:337
+msgid "Add widgets here to appear in your footer."
+msgstr "Voeg hier widgets toe om in de footer te tonen."
+
 #: functions.php:63 functions.php:183
 #: template-parts/navigation/navigation-top.php:12
 msgid "Top Menu"
 msgstr "Topmenu"
-
-#: comments.php:60
-msgid "Reply"
-msgstr "Antwoord"
 
 #: template-parts/post/content-none.php:27
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
@@ -183,6 +183,24 @@ msgstr "Het lijkt dat we niet kunnen vinden wat u zoekt. Misschien kan de zoekfu
 #: search.php:50
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr "Helaas, niets komt overeen met uw zoektermen. Probeer opnieuw met andere zoektermen."
+
+#: comments.php:67 single.php:32
+msgid "Next"
+msgstr "Volgende"
+
+#: comments.php:66 single.php:31
+msgid "Previous"
+msgstr "Vorige"
+
+#: searchform.php:20
+msgctxt "submit button"
+msgid "Search"
+msgstr "Zoek"
+
+#: searchform.php:19
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "Zoek &hellip;"
 
 #: template-parts/post/content-none.php:23
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
@@ -195,24 +213,6 @@ msgstr "Niets gevonden"
 #: single.php:31
 msgid "Previous Post"
 msgstr "Vorig bericht"
-
-#: comments.php:66 single.php:31
-msgid "Previous"
-msgstr "Vorige"
-
-#: comments.php:67 single.php:32
-msgid "Next"
-msgstr "Volgende"
-
-#: searchform.php:20
-msgctxt "submit button"
-msgid "Search"
-msgstr "Zoek"
-
-#: searchform.php:19
-msgctxt "placeholder"
-msgid "Search &hellip;"
-msgstr "Zoek &hellip;"
 
 #: searchform.php:17
 msgctxt "label"
@@ -236,10 +236,6 @@ msgstr "<span class=\"screen-reader-text\">\"%s\" </span>verder lezen"
 #: inc/customizer.php:49
 msgid "Dark"
 msgstr "Donker"
-
-#: inc/back-compat.php:39 inc/back-compat.php:51 inc/back-compat.php:66
-msgid "Twenty Seventeen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
-msgstr "Twenty Seventeen vereist minstens WordPress versie 4.7. Je gebruikt versie %s. Gelieve te upgraden en probeer dan opnieuw."
 
 #. translators: %s: Name of current post
 #: inc/template-tags.php:116
@@ -270,10 +266,6 @@ msgstr "Submenu inklappen"
 msgid "Expand child menu"
 msgstr "Submenu uitklappen"
 
-#: functions.php:64 functions.php:194
-msgid "Social Links Menu"
-msgstr "Sociale links menu"
-
 #: template-parts/footer/site-info.php:13
 msgid "Proudly powered by %s"
 msgstr "Ondersteund door %s"
@@ -283,10 +275,6 @@ msgstr "Ondersteund door %s"
 #: template-parts/footer/site-info.php:13
 msgid "https://wordpress.org/"
 msgstr "https://nl-be.wordpress.org/"
-
-#: footer.php:25
-msgid "Footer Social Links Menu"
-msgstr "Footer sociale links menu"
 
 #: comments.php:75
 msgid "Comments are closed."
@@ -310,10 +298,6 @@ msgstr "Een antwoord op &ldquo;%s&rdquo;"
 msgid "Page"
 msgstr "Pagina"
 
-#: 404.php:21
-msgid "Oops! That page can&rsquo;t be found."
-msgstr "Oeps! Die pagina werd niet gevonden."
-
 #: 404.php:24
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr "Het lijkt dat hier niets gevonden wordt. Probeer eens met een zoekopdracht?"
@@ -325,6 +309,22 @@ msgstr "Vorige pagina"
 #: archive.php:46 index.php:51 search.php:44
 msgid "Next page"
 msgstr "Volgende pagina"
+
+#: inc/back-compat.php:39 inc/back-compat.php:51 inc/back-compat.php:66
+msgid "Twenty Seventeen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
+msgstr "Twenty Seventeen vereist minstens WordPress versie 4.7. Je gebruikt versie %s. Gelieve te upgraden en probeer dan opnieuw."
+
+#: functions.php:64 functions.php:194
+msgid "Social Links Menu"
+msgstr "Sociale links menu"
+
+#: footer.php:25
+msgid "Footer Social Links Menu"
+msgstr "Footer sociale links menu"
+
+#: 404.php:21
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Oeps! Die pagina werd niet gevonden."
 
 #. Author of the plugin/theme
 msgid "the WordPress team"

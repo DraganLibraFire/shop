@@ -4,7 +4,7 @@ Tags: mollie, payments, woocommerce, payment gateway, e-commerce, credit card, i
 Requires at least: 3.8
 Tested up to: 4.9
 Requires PHP: 5.3
-Stable tag: 2.8.2
+Stable tag: 2.9.0
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,6 +38,7 @@ Alternative payment methods:
 
 * iDEAL (Netherlands)
 * Bancontact (Belgium)
+* ING Home'Pay (Belgium)
 * PayPal (International)
 * SOFORTbanking (EU)
 * Belfius (Belgium)
@@ -55,7 +56,7 @@ Please go to the [signup page](https://www.mollie.com/signup) to create a new Mo
 = FEATURES =
 
 * Support for all available Mollie payment methods
-* Compatible with WooCommerce Subscriptions for recurring payments (credit card, iDEAL, SEPA Direct Debit)
+* Compatible with WooCommerce Subscriptions for recurring payments (credit card, iDEAL, SEPA Direct Debit and more)
 * Transparent pricing. No startup fees, no monthly fees, and no gateway fees. No hidden fees, period.
 * Edit the order, title and description of every payment method in WooCommerce checkout
 * Support for full and partial payment refunds (WooCommerce 2.2+)
@@ -108,6 +109,10 @@ To download translations manually:
 
 If you want to help translate the plugin, read the instructions in the [Translate strings instructions](https://make.wordpress.org/polyglots/handbook/tools/glotpress-translate-wordpress-org/#translating-strings).
 
+= Can I add payment fees to payment methods? =
+
+Yes, you can with a separate plugin. At the moment we have tested and can recommend [Payment Gateway Based Fees and Discounts for WooCommerce](https://wordpress.org/plugins/checkout-fees-for-woocommerce/). Other plugins might also work. For more specific information, also see [helpful snippets](https://github.com/mollie/WooCommerce/wiki/Helpful-snippets#add-payment-fee-to-payment-methods).
+
 = Why do orders with payment method BankTransfer and Direct Debit get the status 'on-hold'? =
 
 These payment methods take longer than a few hours to complete. The order status is set to 'on-hold' to prevent the WooCommerce setting 'Hold stock (minutes)' (https://docs.woothemes.com/document/configuring-woocommerce-settings/#inventory-options) will 
@@ -158,6 +163,17 @@ Please contact info@mollie.com if you need help installing the Mollie WooCommerc
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 2.9.0 - 13/02/2018 =
+
+* New - Added support for new payment method: [ING Home'Pay](https://www.mollie.com/en/payments/ing-homepay)
+* New - Updated Mollie API PHP to 1.9.6 (ING Home'Pay support)
+
+* Fix - Check that Mollie customerID is known on current API key, solves issues for admins that switched from test to live
+* Fix - Charged back payments now update the order status to On Hold and add an order note in WooCommerce, stock is not updated
+* Fix - For 'Payment screen language' set default to 'Detect using browser language' as it is usually more accurate
+* Fix - For subscriptions also compare recurring total amount to payment method maximums, not only the order/cart total
+* Fix - Improve WPML compatibility by removing duplicate trailing slash in WooCommerce API request URL
 
 = 2.8.2 - 15/01/2018 =
 

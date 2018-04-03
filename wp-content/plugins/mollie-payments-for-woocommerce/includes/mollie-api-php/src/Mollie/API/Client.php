@@ -34,7 +34,7 @@ class Mollie_API_Client
 	/**
 	 * Version of our client.
 	 */
-	const CLIENT_VERSION = "1.9.1";
+	const CLIENT_VERSION = "1.9.6";
 
 	/**
 	 * Endpoint of the remote API.
@@ -191,22 +191,22 @@ class Mollie_API_Client
 		$this->getCompatibilityChecker()
 			->checkCompatibility();
 
-		$this->payments				= new Mollie_API_Resource_Payments($this);
+		$this->payments			= new Mollie_API_Resource_Payments($this);
 		$this->payments_refunds		= new Mollie_API_Resource_Payments_Refunds($this);
-		$this->issuers				 = new Mollie_API_Resource_Issuers($this);
-		$this->methods				 = new Mollie_API_Resource_Methods($this);
-		$this->customers			   = new Mollie_API_Resource_Customers($this);
-		$this->customers_payments	  = new Mollie_API_Resource_Customers_Payments($this);
-		$this->customers_mandates	  = new Mollie_API_Resource_Customers_Mandates($this);
-		$this->customers_subscriptions = new Mollie_API_Resource_Customers_Subscriptions($this);
+		$this->issuers			= new Mollie_API_Resource_Issuers($this);
+		$this->methods			= new Mollie_API_Resource_Methods($this);
+		$this->customers		= new Mollie_API_Resource_Customers($this);
+		$this->customers_payments	= new Mollie_API_Resource_Customers_Payments($this);
+		$this->customers_mandates	= new Mollie_API_Resource_Customers_Mandates($this);
+		$this->customers_subscriptions	= new Mollie_API_Resource_Customers_Subscriptions($this);
 
 		// OAuth2 endpoints
-		$this->permissions	  = new Mollie_API_Resource_Permissions($this);
-		$this->organizations	= new Mollie_API_Resource_Organizations($this);
-		$this->refunds		  = new Mollie_API_Resource_Refunds($this);
-		$this->profiles		 = new Mollie_API_Resource_Profiles($this);
-		$this->profiles_apikeys = new Mollie_API_Resource_Profiles_APIKeys($this);
-		$this->settlements	  = new Mollie_API_Resource_Settlements($this);
+		$this->permissions		= new Mollie_API_Resource_Permissions($this);
+		$this->organizations		= new Mollie_API_Resource_Organizations($this);
+		$this->refunds			= new Mollie_API_Resource_Refunds($this);
+		$this->profiles			= new Mollie_API_Resource_Profiles($this);
+		$this->profiles_apikeys		= new Mollie_API_Resource_Profiles_APIKeys($this);
+		$this->settlements		= new Mollie_API_Resource_Settlements($this);
 
 		$curl_version = curl_version();
 
@@ -304,7 +304,7 @@ class Mollie_API_Client
 	 */
 	public function setPemPath ($pem_path)
 	{
-		$this->pem_path = strval($pem_path);
+		$this->pem_path = (string) $pem_path;
 	}
 
 	/**
@@ -314,16 +314,17 @@ class Mollie_API_Client
 	 * @see $payments
 	 * @see $isuers
 	 *
-	 * @param $http_method
-	 * @param $api_method
-	 * @param $http_body
+	 * @param string $http_method
+	 * @param string $api_method
+	 * @param string $http_body
+     * @param int $retries Number of times to retry the HTTP call. Will only be retried if there was a connection error.
 	 *
 	 * @return string
 	 * @throws Mollie_API_Exception
 	 *
 	 * @codeCoverageIgnore
 	 */
-	public function performHttpCall ($http_method, $api_method, $http_body = NULL)
+	public function performHttpCall ($http_method, $api_method, $http_body = NULL, $retries = 3)
 	{
 		if (empty($this->api_key))
 		{
@@ -352,7 +353,7 @@ class Mollie_API_Client
 		curl_setopt($this->ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($this->ch, CURLOPT_ENCODING, "");
 
-		$user_agent = join(' ', $this->version_strings);
+		$user_agent = implode(' ', $this->version_strings);
 
 		if ($this->usesOAuth())
 		{
@@ -388,14 +389,34 @@ class Mollie_API_Client
 
 		$body = curl_exec($this->ch);
 
-		$this->last_http_response_status_code = (int) curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+		$this->last_http_response_status_code = (int)curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
 
-		if (curl_errno($this->ch))
-		{
-			$message = "Unable to communicate with Mollie (".curl_errno($this->ch)."): " . curl_error($this->ch) . ".";
+		if (curl_errno($this->ch)) {
+
+			static $connectionErrors = array(
+				CURLE_COULDNT_RESOLVE_HOST => true,
+				CURLE_COULDNT_CONNECT => true,
+				CURLE_SSL_CONNECT_ERROR => true,
+				CURLE_GOT_NOTHING => true,
+			);
+
+			/*
+			 * If there is a connection error, retry (using a fresh connection).
+			 */
+			if (array_key_exists(curl_errno($this->ch), $connectionErrors) && $retries > 0) {
+				$this->closeTcpConnection();
+				return $this->performHttpCall($http_method, $api_method, $http_body, $retries - 1);
+			}
+
+			$exception = Mollie_API_Exception_ConnectionError::fromCurlFailure($this->ch);
 
 			$this->closeTcpConnection();
-			throw new Mollie_API_Exception($message);
+
+			/*
+			 * We intentionally throw the exception after creating it and closing the connection because closing the
+			 * connection will reset the cull resource to null.
+			 */
+			throw $exception;
 		}
 
 		if (!function_exists("curl_reset"))
