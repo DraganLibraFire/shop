@@ -1774,12 +1774,6 @@ body.home{
         li{
           position: relative;
 
-          &:first-child{
-            input, label{
-              display: none;
-            }
-          }
-
           .expand-icon{
             position: absolute;
             right: 0;
@@ -1787,6 +1781,18 @@ body.home{
           }
         }
         > li{
+          &:first-child{
+            input, label{
+              display: none;
+            }
+          }
+
+          &:first-child{
+            input, label{
+              display: none;
+            }
+          }
+
           border-bottom: 1px solid $border_color;
           padding-top: 12px;
           padding-bottom: 15px;
