@@ -1533,6 +1533,8 @@ body.home .widget.widget_product_categories .product-categories li a {
             content: none !important; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > input, .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > label, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > input, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > label {
           display: none; }
+        .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > ul, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:first-child > ul {
+          display: block !important; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > .expand-icon, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li > .expand-icon {
           top: 15px; }
         .widget.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:last-child, .home-category-wrapper.widget_search_filter_register_widget .searchandfilter .sf-field-taxonomy-product_cat > ul > li:last-child {

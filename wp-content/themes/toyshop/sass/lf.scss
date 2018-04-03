@@ -1791,6 +1791,10 @@ body.home{
             > input, > label{
               display: none;
             }
+
+            > ul{
+              display: block !important;
+            }
           }
 
           border-bottom: 1px solid $border_color;
