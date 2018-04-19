@@ -1,11 +1,11 @@
 <div class="woo-account-header">
 	<div class="woo-account-header-title">
-		<h4><?php _e('My <span>Account</span>','shop') ?></h4>
+		<h4><?php _e('Mijn <span>Account</span>','shop') ?></h4>
 	</div>
 	<div class="woo-account-inner-header clearfix">
 		<div class="woo-account-user-email">
 			<span>
-				<?php _e('Hello,', 'shop'); ?>
+				<?php _e('Hallo,', 'shop'); ?>
 			</span>
 			<span class="user-email">
 				<?php echo $current_user->user_email ;?>

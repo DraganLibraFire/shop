@@ -63,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php endif; ?>
 				<p class="form-row form-row-last">
-					<label for="reg_password2"><?php _e( 'Confirm Password', 'woocommerce' ); ?> <span class="required">*</span></label>
+					<label for="reg_password2"><?php _e( 'Bevestig wachtwoord', 'woocommerce' ); ?> <span class="required">*</span></label>
 					<input type="password" class="input-text" name="password2" id="reg_password2" value="<?php if ( ! empty( $_POST['password2'] ) ) echo esc_attr( $_POST['password2'] ); ?>" />
 				</p>
 				<p class="form-row form-row-first">

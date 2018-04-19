@@ -18,7 +18,7 @@ get_header(); ?>
 				<div class="page-content">
 					<?php the_field('404_content', 'option')?>
 				</div><!-- .page-content -->
-				<a class="button purple" href="<?php echo home_url()?>"> Back to home</a>
+				<a class="button purple" href="<?php echo home_url()?>"> <?php _e('Naar de homepagina', 'shop'); ?></a>
 			</section><!-- .error-404 -->
 
 		</main><!-- #main -->
