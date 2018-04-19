@@ -570,16 +570,37 @@ class Mollie_WC_Helper_Data
 	    } else {
 		    $customer    = new WC_Customer( $user_id );
 		    $customer_id = $customer->get_meta( 'mollie_customer_id' );
+
+		    // If there is no Mollie Customer ID set, check the most recent active subscription
+		    if ( empty( $customer_id ) ) {
+
+			    $customer_latest_subscription = wc_get_orders( array (
+				    'limit'    => 1,
+				    'customer' => $user_id,
+				    'type'     => 'shop_subscription',
+				    'status'   => 'wc-active',
+			    ) );
+
+			    if ( ! empty( $customer_latest_subscription ) ) {
+				    $customer_id = get_post_meta( $customer_latest_subscription[0]->get_id(), '_mollie_customer_id', $single = true );
+
+				    // Store this customer ID as user meta too
+				    $this->setUserMollieCustomerId( $user_id, $customer_id );
+			    }
+
+		    }
 	    }
 
-	    // Check that customer ID is valid for this API key
-	    try {
-		    $this->api_helper->getApiClient( $test_mode )->customers->get( $customer_id );
-	    }
-	    catch ( Exception $e ) {
-		    Mollie_WC_Plugin::debug( __FUNCTION__ . ": Mollie Customer ID " . $customer_id . " not valid for this API key, try to create a new one (" . ( $test_mode ? 'test' : 'live' ) . ")." );
-		    $customer_id = '';
+	    // If there is a Mollie Customer ID set, check that customer ID is valid for this API key
+	    if ( ! empty( $customer_id ) ) {
 
+		    try {
+			    $this->api_helper->getApiClient( $test_mode )->customers->get( $customer_id );
+		    }
+		    catch ( Exception $e ) {
+			    Mollie_WC_Plugin::debug( __FUNCTION__ . ": Mollie Customer ID ($customer_id) not valid for user $user_id on this API key, try to create a new one (" . ( $test_mode ? 'test' : 'live' ) . ")." );
+			    $customer_id = '';
+		    }
 	    }
 
 	    // If there is no Mollie Customer ID set, try to create a new Mollie Customer
@@ -608,7 +629,9 @@ class Mollie_WC_Helper_Data
 
                 $customer_id = $customer->id;
 
-	            Mollie_WC_Plugin::debug( __FUNCTION__ . ": Created a Mollie Customer for WordPress user with ID $user_id (" . ( $test_mode ? 'test' : 'live' ) . ")." );
+	            Mollie_WC_Plugin::debug( __FUNCTION__ . ": Created a Mollie Customer ($customer_id) for WordPress user with ID $user_id (" . ( $test_mode ? 'test' : 'live' ) . ")." );
+
+	            return $customer_id;
 
             }
             catch (Exception $e)
@@ -616,6 +639,8 @@ class Mollie_WC_Helper_Data
 	            Mollie_WC_Plugin::debug( __FUNCTION__ . ": Could not create Mollie Customer for WordPress user with ID $user_id (" . ( $test_mode ? 'test' : 'live' ) . "): " . $e->getMessage() . ' (' . get_class( $e ) . ')' );
             }
         }
+
+	    Mollie_WC_Plugin::debug( __FUNCTION__ . ": Mollie Customer ID ($customer_id) found and valid for user $user_id on this API key. (" . ( $test_mode ? 'test' : 'live' ) . ")." );
 
         return $customer_id;
     }

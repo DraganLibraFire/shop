@@ -4,7 +4,7 @@
  * Plugin Name: Post SMTP
  * Plugin URI: https://wordpress.org/plugins/post-smtp/
  * Description: Email not reliable? Post SMTP is the first and only WordPress SMTP plugin to implement OAuth 2.0 for Gmail, Hotmail and Yahoo Mail. Setup is a breeze with the Configuration Wizard and integrated Port Tester. Enjoy worry-free delivery even if your password changes!
- * Version: 1.8.3
+ * Version: 1.8.4
  * Author: Jason Hendriks, Yehuda Hassine
  * Text Domain: post-smtp
  * Author URI: https://postmansmtp.com
@@ -36,6 +36,7 @@
  */
 
 define( 'POST_BASE', __FILE__ );
+define( 'POST_PATH', __DIR__ );
 
 if ( in_array( 'postman-smtp/postman-smtp.php', (array) get_option( 'active_plugins', array() ) ) ) {
 	add_action( 'admin_init', 'post_smtp_plugin_deactivate' );
@@ -57,6 +58,33 @@ function post_smtp_plugin_admin_notice() {
 }
 
 /**
+ * @todo
+ */
+function post_dismiss_not_configured() {
+	?>
+	<script>
+		(function($) {
+			$(document).on('click','.postman-not-configured-notice .notice-dismiss', function(e) {
+				e.preventDefault();
+
+				var $this = $(this);
+				var args = {
+					action: 'dismiss_version_notify',
+					security: $('.postman-not-configured-notice').find('.security').val(),
+					version: 'not_configured',
+				};
+
+				$.post(ajaxurl, args, function() {
+					$this.parent().slideUp();
+				});
+			});
+		})(jQuery);
+	</script>
+<?php
+}
+add_action( 'admin_footer', 'post_dismiss_not_configured' );
+
+/**
  * Create the main Postman class to start Postman
  *
  * @param unknown $startingMemory
@@ -71,5 +99,5 @@ function post_start( $startingMemory ) {
  */
 function post_setupPostman() {
 	require_once 'Postman/Postman.php';
-	$kevinCostner = new Postman( __FILE__, '1.8.3' );
+	$kevinCostner = new Postman( __FILE__, '1.8.4' );
 }

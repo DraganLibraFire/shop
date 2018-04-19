@@ -2,6 +2,14 @@
 
 class Mollie_WC_Gateway_DirectDebit extends Mollie_WC_Gateway_Abstract {
 	/**
+	 *
+	 */
+	public function __construct ()
+	{
+		parent::__construct();
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getMollieMethodId() {

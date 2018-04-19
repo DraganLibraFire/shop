@@ -7,7 +7,7 @@ class Mollie_WC_Plugin
 {
     const PLUGIN_ID      = 'mollie-payments-for-woocommerce';
     const PLUGIN_TITLE   = 'Mollie Payments for WooCommerce';
-    const PLUGIN_VERSION = '2.9.0';
+    const PLUGIN_VERSION = '3.0.1';
 
     const DB_VERSION     = '1.0';
     const DB_VERSION_PARAM_NAME = 'mollie-db-version';
@@ -188,11 +188,17 @@ class Mollie_WC_Plugin
 		// Listen to return URL call
 		add_action( 'woocommerce_api_mollie_return', array ( __CLASS__, 'onMollieReturn' ) );
 
-		// On order details
+		// Show Mollie instructions on order details page
 		add_action( 'woocommerce_order_details_after_order_table', array ( __CLASS__, 'onOrderDetails' ), 10, 1 );
 
-
+		// Disable SEPA as payment option in WooCommerce checkout
 		add_filter( 'woocommerce_available_payment_gateways', array ( __CLASS__, 'disableSEPAInCheckout' ), 10, 1 );
+
+		// Disable Mollie methods on some pages
+		add_filter( 'woocommerce_available_payment_gateways', array ( __CLASS__, 'disableMollieOnPaymentMethodChange' ), 10, 1 );
+
+		// Set order to paid and processed when eventually completed without Mollie
+		add_action( 'woocommerce_payment_complete', array ( __CLASS__, 'setOrderPaidByOtherGateway' ), 10, 1 );
 
 		self::initDb();
 		self::schedulePendingPaymentOrdersExpirationCheck();
@@ -507,6 +513,61 @@ class Mollie_WC_Plugin
 		}
 
 		return $available_gateways;
+	}
+
+	/**
+	 * Don't show Mollie Payment Methods in WooCommerce Account > Subscriptions
+	 */
+	public static function disableMollieOnPaymentMethodChange( $available_gateways ) {
+
+		// Can't use $wp->request or is_wc_endpoint_url() to check if this code only runs on /subscriptions and /view-subscriptions,
+		// because slugs/endpoints can be translated (with WPML) and other plugins.
+		// So disabling on is_account_page and $_GET['change_payment_method'] for now.
+
+		if ( is_account_page() || ! empty( $_GET['change_payment_method'] ) ) {
+			foreach ( $available_gateways as $key => $value ) {
+				if ( strpos( $key, 'mollie_' ) !== false ) {
+					unset( $available_gateways[ $key ] );
+				}
+			}
+
+		}
+
+		return $available_gateways;
+	}
+
+	/**
+	 * If an order is paid with another payment method (gateway) after a first payment was
+	 * placed with Mollie, set a flag, so status updates (like expired) aren't processed by
+	 * Mollie Payments for WooCommerce.
+	 */
+	public static function setOrderPaidByOtherGateway( $order_id ) {
+
+		$order = wc_get_order( $order_id );
+
+		if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+
+			$mollie_payment_id    = get_post_meta( $order_id, '_mollie_payment_id', $single = true );
+			$order_payment_method = get_post_meta( $order_id, '_payment_method', $single = true );
+
+			if ( $mollie_payment_id !== '' && ( strpos( $order_payment_method, 'mollie' ) === false ) ) {
+				update_post_meta( $order->id, '_mollie_paid_by_other_gateway', '1' );
+			}
+
+		} else {
+
+			$mollie_payment_id    = $order->get_meta( '_mollie_payment_id', $single = true );
+			$order_payment_method = $order->get_payment_method();
+
+			if ( $mollie_payment_id !== '' && ( strpos( $order_payment_method, 'mollie' ) === false ) ) {
+
+				$order->update_meta_data( '_mollie_paid_by_other_gateway', '1' );
+				$order->save();
+			}
+		}
+
+		return true;
+
 	}
 
 }
