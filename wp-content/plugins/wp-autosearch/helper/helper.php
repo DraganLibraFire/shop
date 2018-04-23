@@ -198,9 +198,12 @@ class Wizardinfosys_autosearch_helper{
         * shortcode funtions add widget in shortcode method
 	*****************************************************/
 	
-	public function wp_auto_search_shortcode(){
+	public function wp_auto_search_shortcode( $args ){
 		global $wizardinfosys_autosearch;
+
+		extract($args);
 		ob_start();
+		
 		?>
 		<div class="wizardinfosys_autosearch_wrapper">
 				<form id="wizardinfosys_autosearch_form" full_search_url="<?php echo $wizardinfosys_autosearch->options->full_search_url; ?>" action="<?php echo esc_url(home_url('/')); ?>" method="get">

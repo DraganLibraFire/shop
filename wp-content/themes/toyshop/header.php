@@ -59,7 +59,7 @@
                     </div>
                     <div class="search-form-header-small">
 
-                        <?php echo do_shortcode('[wi_autosearch_suggest_form placeholder="Zoeken"]'); ?>
+                        <?php echo do_shortcode('[wi_autosearch_suggest_form placeholder="Geef je zoekopdracht in"]'); ?>
 
                     </div>
                 </div>

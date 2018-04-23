@@ -13,8 +13,53 @@ Text Domain: shop
 .dropdown-total .tax_label{
     display: none;
 }
+.footer-copyright a{
+	color: #ff7800;
+}
+.site-header .widget_shopping_cart .widget_shopping_cart_content .buttons a {
+    margin-right: 0;
+}
 
+@media screen and (max-width: 640px) {
+    .form-log-reg-wrapper .register{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .form-log-reg-wrapper .register .form-row-wide{
+        width: 100%;
+    }
+    .form-log-reg-wrapper .register p:first-child{
+        order: 1;
+    }
+    .form-log-reg-wrapper .register div:nth-child(5){
+        order: 3;
+    }
+    .form-log-reg-wrapper .register p:nth-child(4){
+        order: 2;
+    }
+    .form-log-reg-wrapper .register p:nth-child(2){
+        order: 4;
+    }
+    .form-log-reg-wrapper .register .woocommerce-FormRow{
+        order: 6;
+    }
+    .form-log-reg-wrapper .register p:nth-child(3){
+        order: 5;
+    }
+}
 @media screen and (max-width: 550px) {
+
+    div .shop-features .single-shop-feature{
+        font-size: 13px;
+    }
+    div .free-shipping-wrapper{
+        padding: 15px;
+    }
+    .form-log-reg-wrapper input.button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
     body .woocommerce-error a, body .woocommerce-info a, body .woocommerce-message a{
         position: static !important;
         display: block !important;

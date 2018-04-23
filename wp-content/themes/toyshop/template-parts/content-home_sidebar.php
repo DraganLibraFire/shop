@@ -12,9 +12,10 @@
             <ul class="home-sidebar-list-cayegory">
                 <?php
                     foreach($category as $item){
+                        $term_link = get_term_link( $item );
                        ?>
                         <li>
-                            <a href="<?php echo get_term_link($item->term_id) ?>"><?php echo str_replace('-',' ', $item->name) ?></a>
+                            <a href="<?php echo esc_url( $term_link ) ?>"><?php echo str_replace('-',' ', $item->name) ?></a>
                         </li>
                         <?php
                     }
