@@ -4,7 +4,7 @@
  *
  * @package Starter
  */
-
+//show_admin_bar(false);
 if ( ! function_exists( 'starter_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
